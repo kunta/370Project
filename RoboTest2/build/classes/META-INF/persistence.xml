@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+  <persistence-unit name="cmpt370group06PU" transaction-type="RESOURCE_LOCAL">
+    <provider>oracle.toplink.essentials.PersistenceProvider</provider>
+    <class>robotest2.User</class>
+    <class>robotest2.Test</class>
+    <class>robotest2.Student</class>
+    <class>robotest2.Course</class>
+    <class>robotest2.Template</class>
+    <class>robotest2.Timetable</class>
+    <class>robotest2.Transcript</class>
+    <class>robotest2.Prereq</class>
+    <properties>
+      <property name="toplink.jdbc.user" value="cmpt370group06"/>
+      <property name="toplink.jdbc.password" value="fj2317jf"/>
+      <property name="toplink.jdbc.url" value="jdbc:mysql://papyrus.usask.ca:3306/cmpt370group06"/>
+      <property name="toplink.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+    </properties>
+  </persistence-unit>
+</persistence>
