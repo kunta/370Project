@@ -1000,6 +1000,7 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
         }
         if (!Course.CourseCatalog.contains(newCourse)) {
             roboControl.AddCourseToDB(newCourse);
+            jcomboEdit.addItem((String)newCourse.getCourseName());
         } else {
             roboControl.MergeCourseToDB(newCourse);
         }

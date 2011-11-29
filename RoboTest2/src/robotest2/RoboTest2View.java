@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
@@ -23,6 +25,7 @@ import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
@@ -36,10 +39,19 @@ public class RoboTest2View extends FrameView {
 
     RoboController roboController = new RoboController();
     
+    // The List Models for the Transcript area
+    DefaultListModel scienceModel = new DefaultListModel();
+    DefaultListModel mathStatsModel = new DefaultListModel();
+    DefaultListModel compsciModel = new DefaultListModel();
+    DefaultListModel humanitiesModel = new DefaultListModel();
+    DefaultListModel socialModel = new DefaultListModel();
+    DefaultListModel mathModel = new DefaultListModel();
+    DefaultListModel generalModel = new DefaultListModel();
+    DefaultListModel electiveModel = new DefaultListModel();
         
     public RoboTest2View(SingleFrameApplication app) {
         super(app); 
-        
+
         // Retrieve courses from the database
         roboController.ImportCourseCatalog();
         initComponents();
@@ -223,6 +235,31 @@ public class RoboTest2View extends FrameView {
         jtxtStudentName = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         saveLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jlistScience = new JList(scienceModel);
+        jLabel24 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jlistMathStats = new JList(mathStatsModel);
+        jLabel25 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jlistCompsci = new JList(compsciModel);
+        jLabel26 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jlistHumanities = new JList(humanitiesModel);
+        jLabel27 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jlistSocial = new JList(socialModel);
+        jLabel28 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jlistMath = new JList(mathModel);
+        jLabel29 = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jlistGeneral = new JList(generalModel);
+        jLabel30 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jlistElectives = new JList(electiveModel);
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JSeparator();
@@ -234,7 +271,7 @@ public class RoboTest2View extends FrameView {
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
-       // list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(((javax.persistence.Query)null).getResultList());
+        //list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(((javax.persistence.Query)null).getResultList());
         jPopupMenu1 = new javax.swing.JPopupMenu();
 
         mainPanel.setMinimumSize(new java.awt.Dimension(500, 400));
@@ -320,7 +357,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jfieldPassword, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jfieldUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(345, Short.MAX_VALUE))
         );
         jpanelLoginLayout.setVerticalGroup(
             jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,7 +382,7 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnRegister)
                     .addComponent(jButton1))
-                .addContainerGap(409, Short.MAX_VALUE))
+                .addContainerGap(405, Short.MAX_VALUE))
         );
 
         mainPanel.add(jpanelLogin, "card1");
@@ -467,7 +504,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jcheckAddTranscript)))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(482, Short.MAX_VALUE))
         );
         jPanelRegisterLayout.setVerticalGroup(
             jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,7 +557,7 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnRegisterUser)
                     .addComponent(jbtnBackToLogin))
-                .addContainerGap(326, Short.MAX_VALUE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
 
         mainPanel.add(jPanelRegister, "card2");
@@ -565,7 +602,7 @@ public class RoboTest2View extends FrameView {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jbtnFinishReg)
                 .addContainerGap())
         );
@@ -947,11 +984,11 @@ public class RoboTest2View extends FrameView {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jpanelTimeBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jscrollMonday, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                .addComponent(jscrollTuesday, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                .addComponent(jscrollWednesday, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                .addComponent(jscrollThursday, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                .addComponent(jscrollFriday, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                .addComponent(jscrollMonday, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addComponent(jscrollTuesday, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                .addComponent(jscrollWednesday, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                .addComponent(jscrollThursday, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addComponent(jscrollFriday, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -960,7 +997,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                         .addComponent(jbtnDeleteCourse, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(2, 2, 2))
+                .addGap(340, 340, 340))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1042,7 +1079,7 @@ public class RoboTest2View extends FrameView {
                         .addComponent(saveLabel)
                         .addGap(110, 110, 110)
                         .addComponent(saveButton))
-                    .addComponent(persnalInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                    .addComponent(persnalInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
                     .addComponent(jLabel8)
                     .addGroup(jpanelProfileLayout.createSequentialGroup()
                         .addGroup(jpanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1086,10 +1123,175 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jpanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(saveLabel))
-                .addContainerGap(486, Short.MAX_VALUE))
+                .addContainerGap(487, Short.MAX_VALUE))
         );
 
         jtabMain.addTab("Profile", jpanelProfile);
+
+        jPanel2.setName("jPanel2"); // NOI18N
+
+        jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
+        jLabel6.setName("jLabel6"); // NOI18N
+
+        jScrollPane4.setName("jScrollPane4"); // NOI18N
+
+        jlistScience.setModel(scienceModel);
+        jlistScience.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlistScience.setName("jlistScience"); // NOI18N
+        jScrollPane4.setViewportView(jlistScience);
+
+        jLabel24.setText(resourceMap.getString("jLabel24.text")); // NOI18N
+        jLabel24.setName("jLabel24"); // NOI18N
+
+        jScrollPane5.setName("jScrollPane5"); // NOI18N
+
+        jlistMathStats.setModel(mathStatsModel);
+        jlistMathStats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlistMathStats.setName("jlistMathStats"); // NOI18N
+        jScrollPane5.setViewportView(jlistMathStats);
+
+        jLabel25.setText(resourceMap.getString("jLabel25.text")); // NOI18N
+        jLabel25.setName("jLabel25"); // NOI18N
+
+        jScrollPane6.setName("jScrollPane6"); // NOI18N
+
+        jlistCompsci.setModel(compsciModel);
+        jlistCompsci.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlistCompsci.setName("jlistCompsci"); // NOI18N
+        jScrollPane6.setViewportView(jlistCompsci);
+
+        jLabel26.setText(resourceMap.getString("jLabel26.text")); // NOI18N
+        jLabel26.setName("jLabel26"); // NOI18N
+
+        jScrollPane7.setName("jScrollPane7"); // NOI18N
+
+        jlistHumanities.setModel(humanitiesModel);
+        jlistHumanities.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlistHumanities.setName("jlistHumanities"); // NOI18N
+        jScrollPane7.setViewportView(jlistHumanities);
+
+        jLabel27.setText(resourceMap.getString("jLabel27.text")); // NOI18N
+        jLabel27.setName("jLabel27"); // NOI18N
+
+        jScrollPane8.setName("jScrollPane8"); // NOI18N
+
+        jlistSocial.setModel(socialModel);
+        jlistSocial.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlistSocial.setName("jlistSocial"); // NOI18N
+        jScrollPane8.setViewportView(jlistSocial);
+
+        jLabel28.setText(resourceMap.getString("jLabel28.text")); // NOI18N
+        jLabel28.setName("jLabel28"); // NOI18N
+
+        jScrollPane9.setName("jScrollPane9"); // NOI18N
+
+        jlistMath.setModel(mathModel);
+        jlistMath.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlistMath.setName("jlistMath"); // NOI18N
+        jScrollPane9.setViewportView(jlistMath);
+
+        jLabel29.setText(resourceMap.getString("jLabel29.text")); // NOI18N
+        jLabel29.setName("jLabel29"); // NOI18N
+
+        jScrollPane10.setName("jScrollPane10"); // NOI18N
+
+        jlistGeneral.setModel(generalModel);
+        jlistGeneral.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlistGeneral.setName("jlistGeneral"); // NOI18N
+        jScrollPane10.setViewportView(jlistGeneral);
+
+        jLabel30.setText(resourceMap.getString("jLabel30.text")); // NOI18N
+        jLabel30.setName("jLabel30"); // NOI18N
+
+        jScrollPane11.setName("jScrollPane11"); // NOI18N
+
+        jlistElectives.setModel(electiveModel);
+        jlistElectives.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jlistElectives.setName("jlistElectives"); // NOI18N
+        jScrollPane11.setViewportView(jlistElectives);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane5)
+                        .addComponent(jScrollPane4)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel24)
+                        .addComponent(jLabel25)))
+                .addGap(65, 65, 65)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel30)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel29)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel28)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel27)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(298, 298, 298))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addContainerGap(129, Short.MAX_VALUE)))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, 0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane8, 0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(246, 246, 246))
+        );
+
+        jtabMain.addTab(resourceMap.getString("jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
@@ -1100,7 +1302,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jtabMain, 0, 0, Short.MAX_VALUE))
-                    .addComponent(jOptionsBar, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+                    .addComponent(jOptionsBar, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
@@ -1152,11 +1354,11 @@ public class RoboTest2View extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 521, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 727, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -1200,7 +1402,6 @@ public class RoboTest2View extends FrameView {
         // TODO add your handling code here:
     }//GEN-LAST:event_saveButtonActionPerformed
 
-  
     /**
      *
      * @author Kevin
@@ -1261,12 +1462,18 @@ public class RoboTest2View extends FrameView {
                 // Switches to the Registration screen
                 CardLayout cl = (CardLayout) (mainPanel.getLayout());
                 cl.show(mainPanel, "card4");
+                
+                // Put values into Profile tab
                 jtxtStudentName.setText(Student.currentStudent.getName());
                 jtxtStudentNum.setText(Student.currentStudent.getStudentNo().toString());
                 jtxtProgMajor.setText(Student.currentStudent.getProgramMajor());
                 jtxtProfileEmail.setText(Student.currentStudent.getEmail());
                 saveLabel.setVisible(false);
+                
+                // Get Courses from the users transcript and then load them
+                // into the Transcript table.
                 roboController.GetUserTranscriptFromDB(Student.currentStudent);
+                LoadTranscript();
             }
 
         } catch (NoResultException e) {
@@ -1470,6 +1677,46 @@ private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
 
         return isCorrect;
     }
+    /**
+     *
+     * @author Kevin
+     */
+    void LoadTranscript(){ 
+        List<Transcript> newTranList = new LinkedList<Transcript>();
+        newTranList = roboController.GetUserTranscriptFromDB(Student.currentStudent);
+        List<Template> newTempList = new LinkedList<Template>();
+        newTempList = roboController.GetTemplatesFromDB();
+
+        // Horrible way of doing it, will change later(maybe :P )
+        for(Transcript t: newTranList){
+            for (Template te: newTempList){
+                String category = te.getCategory();
+                if (te.getTemplateName().equals("new")) {
+                    if (category.equals("Natural Science") && !scienceModel.contains((String) t.getCourseName())) {
+                        scienceModel.addElement((String) t.getCourseName());
+                    } else if (category.equals(("Math and Stats")) && !mathStatsModel.contains((String) t.getCourseName())) {
+                        mathStatsModel.addElement((String) t.getCourseName());
+                    } else if (category.equals(("Computer Science")) && !compsciModel.contains((String) t.getCourseName())) {
+                        compsciModel.addElement((String) t.getCourseName());
+                    } else if (category.equals(("Humanities")) && !humanitiesModel.contains((String) t.getCourseName())) {
+                        humanitiesModel.addElement((String) t.getCourseName());
+                    } else if (category.equals(("Social Science")) && !socialModel.contains((String) t.getCourseName())) {
+                        socialModel.addElement((String) t.getCourseName());
+                    } else if (category.equals(("Cognate Math")) && !mathModel.contains((String) t.getCourseName())) {
+                        mathModel.addElement((String) t.getCourseName());
+                    } else if (category.equals(("General")) && !generalModel.contains((String) t.getCourseName())) {
+                        generalModel.addElement((String) t.getCourseName());
+                    } else if (category.equals(("Elective")) && !electiveModel.contains((String) t.getCourseName())) {
+                        electiveModel.addElement((String) t.getCourseName());
+                    } else {
+                        electiveModel.addElement((String) t.getCourseName());
+                    }
+                }
+            }
+        }
+        
+        
+    }
 
     // Function for switching the cards (may or may not get used)
     // It switches to the next card in the order, but I've found the ordering
@@ -1497,21 +1744,38 @@ private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JToolBar jOptionsBar;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelRegister;
     private javax.swing.JPanel jPanelRegister2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbtnAddCourse;
@@ -1540,8 +1804,16 @@ private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JLabel jlblToolBar;
     private javax.swing.JLabel jlblUserPass;
     private javax.swing.JLabel jlblUsername;
+    private javax.swing.JList jlistCompsci;
     private javax.swing.JList jlistCourseList;
+    private javax.swing.JList jlistElectives;
+    private javax.swing.JList jlistGeneral;
+    private javax.swing.JList jlistHumanities;
+    private javax.swing.JList jlistMath;
+    private javax.swing.JList jlistMathStats;
     private javax.swing.JList jlistSchedule;
+    private javax.swing.JList jlistScience;
+    private javax.swing.JList jlistSocial;
     private javax.swing.JPanel jpanelLogin;
     private javax.swing.JPanel jpanelProfile;
     private javax.swing.JPanel jpanelTimeBar;
@@ -1567,7 +1839,7 @@ private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JTextField jtxtStudentName;
     private javax.swing.JTextField jtxtStudentNum;
     private javax.swing.JTextField jtxtStudentNumber;
-    private java.util.List<robotest2.Student> list;
+    private java.util.List<robotest2.Test> list;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField persnalInfo;
