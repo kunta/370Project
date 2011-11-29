@@ -35,7 +35,7 @@ import javax.swing.table.TableCellRenderer;
 public class RoboTest2View extends FrameView {
 
     RoboController roboController = new RoboController();
-    
+     DefaultListModel DeletedCourses = new DefaultListModel();   //List for deleted courses. Had to be cross functions.
         
     public RoboTest2View(SingleFrameApplication app) {
         super(app);
@@ -102,7 +102,17 @@ public class RoboTest2View extends FrameView {
             }
         });
 
-        
+           // Khaled
+        jlistSchedule.setVisible(false);                     // Hides the delete course list since timetable has no classes
+
+        DefaultListModel Courses = new DefaultListModel();
+
+
+
+        for ( Course C : Course.CourseCatalog) {        //Thanks to kevin for the help.
+                Courses.addElement(C);
+        }
+        jlistCourseList.setModel(Courses);
 
     }
 
@@ -1168,27 +1178,118 @@ public class RoboTest2View extends FrameView {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddCourseActionPerformed
+   // Khaled
     Course temp = new Course();
-
-    temp.setCourseName((String)jlistCourseList.getSelectedValue());
+    int row = 0;
     
 
-    // Inserting random test data.
-    jtblMonday.setValueAt("CMPT 370\nTHORV 205A\nProfessor Roy", 3, 0);
-    jtblTuesday.setValueAt("CMPT 352\nTHORV 205A\nProfessor Roebuck", 4, 0);
-    jtblWednesday.setValueAt("CMPT 355\nTHORV 205A\nProfessor Coupal", 2, 0);
-    jtblThursday.setValueAt("CMPT 352\nTHORV 205A\nProfessor Roebuck", 4, 0);
-    jtblFriday.setValueAt("CMPT 332\nTHORV 205A\nProfessor SomeGuy", 1, 0);
+    temp = (Course)jlistCourseList.getSelectedValue();
+    
+    if(temp.getDays().equals("MWF")){
+        if(temp.getStartTime() == 830)  row = 0;
+        else if(temp.getStartTime() == 930)  row = 1;
+        else if(temp.getStartTime() == 1030)  row = 2;
+        else if(temp.getStartTime() == 1130)  row = 3;
+        else if(temp.getStartTime() == 1230)  row = 4;
+        else if(temp.getStartTime() == 1330)  row = 5;
+        else if(temp.getStartTime() == 1430)  row = 6;
+        else if(temp.getStartTime() == 1530)  row = 7;
+        else if(temp.getStartTime() == 1630)  row = 8;
+        else if(temp.getStartTime() == 1730)  row = 9;
+        else if(temp.getStartTime() == 1830)  row = 10;
+        else if(temp.getStartTime() == 1930)  row = 11;
+        else if(temp.getStartTime() == 2030)  row = 12;
+        else if(temp.getStartTime() == 2130)  row = 13;
 
-    jlistSchedule.setVisible(true);
+    
+        
+        jtblMonday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
+        jtblWednesday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
+        jtblFriday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
+        DeletedCourses.addElement(temp);
+        
+    }
+    
+    if(temp.getDays().equals("TR")){
+        if(temp.getStartTime() == 830)  row = 0;
+        else if(temp.getStartTime() == 1000)  row = 1;
+        else if(temp.getStartTime() == 1130)  row = 2;
+        else if(temp.getStartTime() == 1300)  row = 3;
+        else if(temp.getStartTime() == 1430)  row = 4;
+        else if(temp.getStartTime() == 1600)  row = 5;
+        else if(temp.getStartTime() == 1730)  row = 6;
+        else if(temp.getStartTime() == 1900)  row = 7;
+        else if(temp.getStartTime() == 2030)  row = 8;
+        else if(temp.getStartTime() == 2200)  row = 9;
+
+    
+       
+        jtblTuesday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
+        jtblThursday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
+        DeletedCourses.addElement(temp);
+        
+    }
+
+    
+    
+
+    jlistSchedule.setVisible(true );
+    jlistSchedule.setModel(DeletedCourses);
     }//GEN-LAST:event_jbtnAddCourseActionPerformed
 
   
     
 private void jbtnClearActionPerformed(java.awt.event.ActionEvent evt) {
-    jfieldUsername.setText("");
-    jfieldPassword.setText("");
-    jlblLoginStatus.setText("");
+     // Khaled
+
+    Course temp = new Course();
+    int row = 0;
+
+
+    temp = (Course)jlistSchedule.getSelectedValue();
+
+    if(temp.getDays().equals("MWF")){
+        if(temp.getStartTime() == 830)  row = 0;
+        else if(temp.getStartTime() == 930)  row = 1;
+        else if(temp.getStartTime() == 1030)  row = 2;
+        else if(temp.getStartTime() == 1130)  row = 3;
+        else if(temp.getStartTime() == 1230)  row = 4;
+        else if(temp.getStartTime() == 1330)  row = 5;
+        else if(temp.getStartTime() == 1430)  row = 6;
+        else if(temp.getStartTime() == 1530)  row = 7;
+        else if(temp.getStartTime() == 1630)  row = 8;
+        else if(temp.getStartTime() == 1730)  row = 9;
+        else if(temp.getStartTime() == 1830)  row = 10;
+        else if(temp.getStartTime() == 1930)  row = 11;
+        else if(temp.getStartTime() == 2030)  row = 12;
+        else if(temp.getStartTime() == 2130)  row = 13;
+
+
+
+        jtblMonday.setValueAt("", row, 0);
+        jtblWednesday.setValueAt("", row, 0);
+        jtblFriday.setValueAt("", row, 0);
+        
+    }
+
+    if(temp.getDays().equals("TR")){
+        if(temp.getStartTime() == 830)  row = 0;
+        else if(temp.getStartTime() == 1000)  row = 1;
+        else if(temp.getStartTime() == 1130)  row = 2;
+        else if(temp.getStartTime() == 1300)  row = 3;
+        else if(temp.getStartTime() == 1430)  row = 4;
+        else if(temp.getStartTime() == 1600)  row = 5;
+        else if(temp.getStartTime() == 1730)  row = 6;
+        else if(temp.getStartTime() == 1900)  row = 7;
+        else if(temp.getStartTime() == 2030)  row = 8;
+        else if(temp.getStartTime() == 2200)  row = 9;
+
+
+
+        jtblTuesday.setValueAt("", row, 0);
+        jtblThursday.setValueAt("", row, 0);
+    }
+    DeletedCourses.removeElement(temp);
 }
 
 private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {
