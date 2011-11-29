@@ -17,10 +17,15 @@ import javax.persistence.*;
  * @author Kevin
  */
 public class RoboController extends Thread {
-    
-    public void RoboController(){
+
+    public void RoboController() {
         start();
     }
+
+    /**
+     *
+     * @author Kevin
+     */
     public void ImportCourseCatalog() {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 
@@ -35,7 +40,12 @@ public class RoboController extends Thread {
         eManager.close();
 
     }
-    public void AddCourseToDB(Course newCourse){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public void AddCourseToDB(Course newCourse) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 
         try {
@@ -50,7 +60,12 @@ public class RoboController extends Thread {
         eManager.close();
 
     }
-    public void AddPrereqToDB(Prereq newPrereq){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public void AddPrereqToDB(Prereq newPrereq) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 
         try {
@@ -64,7 +79,12 @@ public class RoboController extends Thread {
 
         eManager.close();
     }
-    public void AddTemplateToDB(Template newTemplate){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public void AddTemplateToDB(Template newTemplate) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 
         try {
@@ -78,7 +98,12 @@ public class RoboController extends Thread {
 
         eManager.close();
     }
-    public void AddTranscriptToDB(Transcript newTranscript){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public void AddTranscriptToDB(Transcript newTranscript) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 
         try {
@@ -92,7 +117,12 @@ public class RoboController extends Thread {
 
         eManager.close();
     }
-    public void AddStudentToDB(Student newStudent){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public void AddStudentToDB(Student newStudent) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 
         try {
@@ -107,7 +137,12 @@ public class RoboController extends Thread {
         eManager.close();
 
     }
-    public void MergeCourseToDB(Course newCourse){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public void MergeCourseToDB(Course newCourse) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 
         try {
@@ -122,7 +157,12 @@ public class RoboController extends Thread {
         eManager.close();
 
     }
-    public void MergePrereqToDB(Prereq newPrereq){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public void MergePrereqToDB(Prereq newPrereq) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 
         try {
@@ -136,10 +176,15 @@ public class RoboController extends Thread {
 
         eManager.close();
     }
-    public List<Prereq> GetPrereqsFromDB(String courseName){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public List<Prereq> GetPrereqsFromDB(String courseName) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
         List<Prereq> results = new LinkedList<Prereq>();
-        
+
         try {
             eManager.getTransaction().begin();
             Query prereqQ = (Query) eManager.createNamedQuery("Prereq.findByCourseName").setParameter("courseName", courseName);
@@ -149,29 +194,39 @@ public class RoboController extends Thread {
             System.out.println("Course doesn't exist in the database!");
             eManager.getTransaction().rollback();
         }
-        
+
         return results;
     }
-    public Course GetCourseFromDB(String courseName){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public Course GetCourseFromDB(String courseName) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
         Course newCourse = new Course();
-        
+
         try {
             eManager.getTransaction().begin();
             Query courseQ = (Query) eManager.createNamedQuery("Course.findByCourseName").setParameter("courseName", courseName);
-            newCourse = (Course)courseQ.getSingleResult();
+            newCourse = (Course) courseQ.getSingleResult();
             eManager.getTransaction().commit();
         } catch (NoResultException e) {
             System.out.println("Course doesn't exist in the database!");
             eManager.getTransaction().rollback();
         }
-        
+
         return newCourse;
     }
-    public List<Transcript> GetUserTranscriptFromDB(Student newStudent){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public List<Transcript> GetUserTranscriptFromDB(Student newStudent) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
         List<Transcript> results = new LinkedList<Transcript>();
-        
+
         try {
             eManager.getTransaction().begin();
             Query transcriptQ = (Query) eManager.createNamedQuery("Transcript.findByUserName").setParameter("userName", newStudent.getUsername());
@@ -181,13 +236,18 @@ public class RoboController extends Thread {
             System.out.println("Transcript doesn't exist in the database!");
             eManager.getTransaction().rollback();
         }
-        
+
         return results;
     }
-    public List<Template> GetTemplatesFromDB(){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public List<Template> GetTemplatesFromDB() {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
         List<Template> results = new LinkedList<Template>();
-        
+
         try {
             eManager.getTransaction().begin();
             Query templateQ = (Query) eManager.createNamedQuery("Template.findAll");
@@ -197,23 +257,28 @@ public class RoboController extends Thread {
             System.out.println("Template doesn't exist in the database!");
             eManager.getTransaction().rollback();
         }
-        
-        for(Template t:results){
-            if(!Template.templateNameList.contains(t.getTemplateName())){
+
+        for (Template t : results) {
+            if (!Template.templateNameList.contains(t.getTemplateName())) {
                 Template.templateNameList.add(t.getTemplateName());
             }
         }
-        
+
         return results;
     }
-    public Student GetStudentFromDB(String studentName){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public Student GetStudentFromDB(String studentName) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
         Student newStudent = new Student();
 
         try {
             eManager.getTransaction().begin();
             Query studentQ = eManager.createNamedQuery("Student.findByUsername").setParameter("username", studentName);
-            newStudent = (Student)studentQ.getSingleResult();
+            newStudent = (Student) studentQ.getSingleResult();
             eManager.getTransaction().commit();
         } catch (NoResultException e) {
             System.out.println("Course doesn't exist in the database!");
@@ -222,10 +287,15 @@ public class RoboController extends Thread {
 
         return newStudent;
     }
-    public void RemovePrereqFromDB(Prereq newPrereq){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public void RemovePrereqFromDB(Prereq newPrereq) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
-        
-        Prereq prereqTwo = new Prereq(newPrereq.getCourseName(),newPrereq.getPrereq());
+
+        Prereq prereqTwo = new Prereq(newPrereq.getCourseName(), newPrereq.getPrereq());
         try {
             eManager.getTransaction().begin();
             prereqTwo = eManager.merge(newPrereq);
@@ -238,7 +308,12 @@ public class RoboController extends Thread {
 
         eManager.close();
     }
-    public void RemoveCourseFromDB(Course newCourse){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public void RemoveCourseFromDB(Course newCourse) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 
         Course courseTwo = this.GetCourseFromDB(newCourse.getCourseName());
@@ -254,7 +329,12 @@ public class RoboController extends Thread {
 
         eManager.close();
     }
-        public void SetCurrentStudent(Student newStudent){
+
+    /**
+     *
+     * @author Kevin
+     */
+    public void SetCurrentStudent(Student newStudent) {
         Student.currentStudent.setName(newStudent.getName());
         Student.currentStudent.setUsername(newStudent.getUsername());
         Student.currentStudent.setPassword(newStudent.getPassword());
@@ -264,4 +344,3 @@ public class RoboController extends Thread {
         Student.currentStudent.setProgramMajor(newStudent.getProgramMajor());
     }
 }
-

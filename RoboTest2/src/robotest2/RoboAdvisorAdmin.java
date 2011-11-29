@@ -38,11 +38,12 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
     DefaultListModel mathModel = new DefaultListModel();
     DefaultListModel generalModel = new DefaultListModel();
     DefaultListModel electiveModel = new DefaultListModel();
+
     /** Creates new form RoboAdvisorAdmin */
     public RoboAdvisorAdmin() {
         initComponents();
         Template.currentTemplates = roboControl.GetTemplatesFromDB();
-        
+
         // For some reason this is the only place that
         // it will let me load the template values in.
         for (String s : Template.templateNameList) {
@@ -765,163 +766,250 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
         ClearTemplate();
     }//GEN-LAST:event_jbtnClearActionPerformed
 
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnCourseAdminActionPerformed(java.awt.event.ActionEvent evt) {
-        
+
         // Switches to the Course Admin screen
         CardLayout cl = (CardLayout) (jPanelAdmin.getLayout());
         cl.show(jPanelAdmin, "card3");
-        
+
     }
 
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnTemplateAdminActionPerformed(java.awt.event.ActionEvent evt) {
         // Switches to the Course Template screen
         CardLayout cl = (CardLayout) (jPanelAdmin.getLayout());
         cl.show(jPanelAdmin, "card4");
     }
 
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
         int CRN = Integer.parseInt(jtxtCRN.getText());
         int startTime = 830;
-        
-        if (jcomboTime.getSelectedItem().toString().equals("8:30 AM")) { startTime = 830; }
-        if (jcomboTime.getSelectedItem().toString().equals("9:30 AM")) { startTime = 930; }
-        if (jcomboTime.getSelectedItem().toString().equals("10:00 AM")) { startTime = 1000; }
-        if (jcomboTime.getSelectedItem().toString().equals("10:30 AM")) { startTime = 1030; }
-        if (jcomboTime.getSelectedItem().toString().equals("11:30 AM")) { startTime = 1130; }
-        if (jcomboTime.getSelectedItem().toString().equals("12:30 PM")) { startTime = 1230; }
-        if (jcomboTime.getSelectedItem().toString().equals("1:00 PM")) { startTime = 1300; }
-        if (jcomboTime.getSelectedItem().toString().equals("1:30 PM")) { startTime = 1330; }
-        if (jcomboTime.getSelectedItem().toString().equals("2:30 PM")) { startTime = 1430; }
-        if (jcomboTime.getSelectedItem().toString().equals("3:30 PM")) { startTime = 1530; }
-        if (jcomboTime.getSelectedItem().toString().equals("4:00 PM")) { startTime = 1600; }
-        if (jcomboTime.getSelectedItem().toString().equals("4:30 PM")) { startTime = 1630; }
-        if (jcomboTime.getSelectedItem().toString().equals("5:30 PM")) { startTime = 1730; }
-        if (jcomboTime.getSelectedItem().toString().equals("6:30 PM")) { startTime = 1830; }
-        if (jcomboTime.getSelectedItem().toString().equals("7:00 PM")) { startTime = 1900; }
-        if (jcomboTime.getSelectedItem().toString().equals("7:30 PM")) { startTime = 1930; }
-        if (jcomboTime.getSelectedItem().toString().equals("8:30 PM")) { startTime = 2030; }
-        if (jcomboTime.getSelectedItem().toString().equals("9:30 PM")) { startTime = 2130; }
-        
+
+        if (jcomboTime.getSelectedItem().toString().equals("8:30 AM")) {
+            startTime = 830;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("9:30 AM")) {
+            startTime = 930;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("10:00 AM")) {
+            startTime = 1000;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("10:30 AM")) {
+            startTime = 1030;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("11:30 AM")) {
+            startTime = 1130;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("12:30 PM")) {
+            startTime = 1230;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("1:00 PM")) {
+            startTime = 1300;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("1:30 PM")) {
+            startTime = 1330;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("2:30 PM")) {
+            startTime = 1430;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("3:30 PM")) {
+            startTime = 1530;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("4:00 PM")) {
+            startTime = 1600;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("4:30 PM")) {
+            startTime = 1630;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("5:30 PM")) {
+            startTime = 1730;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("6:30 PM")) {
+            startTime = 1830;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("7:00 PM")) {
+            startTime = 1900;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("7:30 PM")) {
+            startTime = 1930;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("8:30 PM")) {
+            startTime = 2030;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("9:30 PM")) {
+            startTime = 2130;
+        }
+
         Course newCourse = new Course();
         newCourse.setCourseName(jtxtCourseName.getText());
         newCourse.setCourseTitle(jtxtCourseTitle.getText());
         newCourse.setCrn(CRN);
-        
-        if(jradMWF.isSelected()){
+
+        if (jradMWF.isSelected()) {
             newCourse.setDays("MWF");
         } else {
             newCourse.setDays("TR");
         }
-        
-        if(jradSeptDec.isSelected()){
+
+        if (jradSeptDec.isSelected()) {
             newCourse.setSemester(1);
         } else {
             newCourse.setSemester(2);
         }
-        
+
         newCourse.setProfessor(jtxtProfessor.getText());
         newCourse.setDescription(jtxtDescription.getText());
-        newCourse.setStartTime(startTime);  
+        newCourse.setStartTime(startTime);
 
         roboControl.RemoveCourseFromDB(newCourse);
 
         List<Prereq> dbPrereqs = roboControl.GetPrereqsFromDB(newCourse.getCourseName());
 
-        for(Prereq p: dbPrereqs){
+        for (Prereq p : dbPrereqs) {
             roboControl.RemovePrereqFromDB(p);
         }
-         
-
-       
-        
     }
 
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnSaveCourseActionPerformed(java.awt.event.ActionEvent evt) {
 
         int CRN = Integer.parseInt(jtxtCRN.getText());
         int startTime = 830;
-        
-        if (jcomboTime.getSelectedItem().toString().equals("8:30 AM")) { startTime = 830; }
-        if (jcomboTime.getSelectedItem().toString().equals("9:30 AM")) { startTime = 930; }
-        if (jcomboTime.getSelectedItem().toString().equals("10:00 AM")) { startTime = 1000; }
-        if (jcomboTime.getSelectedItem().toString().equals("10:30 AM")) { startTime = 1030; }
-        if (jcomboTime.getSelectedItem().toString().equals("11:30 AM")) { startTime = 1130; }
-        if (jcomboTime.getSelectedItem().toString().equals("12:30 PM")) { startTime = 1230; }
-        if (jcomboTime.getSelectedItem().toString().equals("1:00 PM")) { startTime = 1300; }
-        if (jcomboTime.getSelectedItem().toString().equals("1:30 PM")) { startTime = 1330; }
-        if (jcomboTime.getSelectedItem().toString().equals("2:30 PM")) { startTime = 1430; }
-        if (jcomboTime.getSelectedItem().toString().equals("3:30 PM")) { startTime = 1530; }
-        if (jcomboTime.getSelectedItem().toString().equals("4:00 PM")) { startTime = 1600; }
-        if (jcomboTime.getSelectedItem().toString().equals("4:30 PM")) { startTime = 1630; }
-        if (jcomboTime.getSelectedItem().toString().equals("5:30 PM")) { startTime = 1730; }
-        if (jcomboTime.getSelectedItem().toString().equals("6:30 PM")) { startTime = 1830; }
-        if (jcomboTime.getSelectedItem().toString().equals("7:00 PM")) { startTime = 1900; }
-        if (jcomboTime.getSelectedItem().toString().equals("7:30 PM")) { startTime = 1930; }
-        if (jcomboTime.getSelectedItem().toString().equals("8:30 PM")) { startTime = 2030; }
-        if (jcomboTime.getSelectedItem().toString().equals("9:30 PM")) { startTime = 2130; }
-        
+
+        if (jcomboTime.getSelectedItem().toString().equals("8:30 AM")) {
+            startTime = 830;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("9:30 AM")) {
+            startTime = 930;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("10:00 AM")) {
+            startTime = 1000;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("10:30 AM")) {
+            startTime = 1030;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("11:30 AM")) {
+            startTime = 1130;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("12:30 PM")) {
+            startTime = 1230;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("1:00 PM")) {
+            startTime = 1300;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("1:30 PM")) {
+            startTime = 1330;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("2:30 PM")) {
+            startTime = 1430;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("3:30 PM")) {
+            startTime = 1530;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("4:00 PM")) {
+            startTime = 1600;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("4:30 PM")) {
+            startTime = 1630;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("5:30 PM")) {
+            startTime = 1730;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("6:30 PM")) {
+            startTime = 1830;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("7:00 PM")) {
+            startTime = 1900;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("7:30 PM")) {
+            startTime = 1930;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("8:30 PM")) {
+            startTime = 2030;
+        }
+        if (jcomboTime.getSelectedItem().toString().equals("9:30 PM")) {
+            startTime = 2130;
+        }
+
         Course newCourse = new Course();
         newCourse.setCourseName(jtxtCourseName.getText());
         newCourse.setCourseTitle(jtxtCourseTitle.getText());
         newCourse.setCrn(CRN);
-        
-        if(jradMWF.isSelected()){
+
+        if (jradMWF.isSelected()) {
             newCourse.setDays("MWF");
         } else {
             newCourse.setDays("TR");
         }
-        
-        if(jradSeptDec.isSelected()){
+
+        if (jradSeptDec.isSelected()) {
             newCourse.setSemester(1);
         } else {
             newCourse.setSemester(2);
         }
-        
+
         newCourse.setProfessor(jtxtProfessor.getText());
         newCourse.setDescription(jtxtDescription.getText());
-        newCourse.setStartTime(startTime);  
+        newCourse.setStartTime(startTime);
 
-        
+
         List dbPrereqs = roboControl.GetPrereqsFromDB(jtxtCourseName.getText());
         List tablePrereqs = new LinkedList();
-        
+
         // This code grabs the values from the table and inserts the corresponding
         // entries into the transcript.
         String colName = "";
-        Boolean colChecked = false; 
-        
-        for(int i = 0;i < Course.CourseCatalog.size();i++){
-            Prereq newPrereq = new Prereq(jtxtCourseName.getText(),(String)colName);
-            colChecked = (Boolean)jtblPrereq.getValueAt(i, 0);
-            colName = (String)jtblPrereq.getValueAt(i, 1);
-            
+        Boolean colChecked = false;
+
+        for (int i = 0; i < Course.CourseCatalog.size(); i++) {
+            Prereq newPrereq = new Prereq(jtxtCourseName.getText(), (String) colName);
+            colChecked = (Boolean) jtblPrereq.getValueAt(i, 0);
+            colName = (String) jtblPrereq.getValueAt(i, 1);
+
             newPrereq.setCourseName(jtxtCourseName.getText());
             newPrereq.setPrereq((String) colName);
-            
-            if(colChecked){
+
+            if (colChecked) {
                 tablePrereqs.add(newPrereq);
                 System.out.println("In colChecked = true!");
-                if(!dbPrereqs.contains(newPrereq)){
+                if (!dbPrereqs.contains(newPrereq)) {
                     System.out.println("In colChecked = true and add the prereq!");
-                    roboControl.AddPrereqToDB(new Prereq(jtxtCourseName.getText(),(String)colName));
-                }           
-            }
-            else {
+                    roboControl.AddPrereqToDB(new Prereq(jtxtCourseName.getText(), (String) colName));
+                }
+            } else {
                 System.out.println("In else statement: courseName: " + newPrereq.getCourseName() + "prereq: " + newPrereq.getPrereq());
                 roboControl.RemovePrereqFromDB(newPrereq);
                 colChecked = false;
             }
-            
+
             System.out.println("<End Iteration>");
         }
-        if(!Course.CourseCatalog.contains(newCourse)){
+        if (!Course.CourseCatalog.contains(newCourse)) {
             roboControl.AddCourseToDB(newCourse);
         } else {
             roboControl.MergeCourseToDB(newCourse);
         }
-        
+
     }
 
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnClearCourseActionPerformed(java.awt.event.ActionEvent evt) {
         jtxtCourseName.setText("");
         jtxtCourseTitle.setText("");
@@ -931,91 +1019,141 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
         jtxtProfessor.setText("");
         jtxtDescription.setText("");
         jcomboTime.setSelectedIndex(0);
-        
+
         // Resets the checkboxes in the table
         for (int i = 0; i < Course.CourseCatalog.size(); i++) {
             jtblPrereq.setValueAt(new Boolean(false), i, 0);
         }
     }
 
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnEditCourseActionPerformed(java.awt.event.ActionEvent evt) {
         Course newCourse = new Course();
         List<Prereq> results = new LinkedList<Prereq>();
-        
-        newCourse = roboControl.GetCourseFromDB((String)jcomboEdit.getSelectedItem());
-        results = roboControl.GetPrereqsFromDB((String)jcomboEdit.getSelectedItem());
-        
+
+        newCourse = roboControl.GetCourseFromDB((String) jcomboEdit.getSelectedItem());
+        results = roboControl.GetPrereqsFromDB((String) jcomboEdit.getSelectedItem());
+
         // Resets the checkboxes in the table
         for (int i = 0; i < Course.CourseCatalog.size(); i++) {
-            jtblPrereq.setValueAt(new Boolean(false), i, 0);
+            jtblPrereq.setValueAt(false, i, 0);
         }
-        
+
         for (Prereq p : results) {
             for (int i = 0; i < Course.CourseCatalog.size(); i++) {
-                if(jtblPrereq.getValueAt(i, 1).equals(p.getPrereq())){
+                if (jtblPrereq.getValueAt(i, 1).equals(p.getPrereq())) {
                     jtblPrereq.setValueAt(true, i, 0);
                 }
             }
         }
-        
+
         jtxtCourseName.setText(newCourse.getCourseName());
         jtxtCourseTitle.setText(newCourse.getCourseTitle());
         jtxtCRN.setText(newCourse.getCrn().toString());
-        if(newCourse.getDays().equals("MWF")){
+        if (newCourse.getDays().equals("MWF")) {
             jradMWF.setSelected(true);
-        }
-        else {
+        } else {
             jradTR.setSelected(true);
         }
-        if(newCourse.getSemester() == 1){
+        if (newCourse.getSemester() == 1) {
             jradSeptDec.setSelected(true);
-        }
-        else {
+        } else {
             jradJanMay.setSelected(true);
         }
         jtxtProfessor.setText(newCourse.getProfessor());
         jtxtDescription.setText(newCourse.getDescription());
-        
-        if(newCourse.getStartTime() == 830){jcomboTime.setSelectedItem("8:30 AM");}
-        if(newCourse.getStartTime() == 930){jcomboTime.setSelectedItem("9:30 AM");}
-        if(newCourse.getStartTime() == 1000){jcomboTime.setSelectedItem("10:00 AM");}
-        if(newCourse.getStartTime() == 1030){jcomboTime.setSelectedItem("10:30 AM");}
-        if(newCourse.getStartTime() == 1130){jcomboTime.setSelectedItem("11:30 AM");}
-        if(newCourse.getStartTime() == 1230){jcomboTime.setSelectedItem("12:30 PM");}
-        if(newCourse.getStartTime() == 1300){jcomboTime.setSelectedItem("1:00 PM");}
-        if(newCourse.getStartTime() == 1330){jcomboTime.setSelectedItem("1:30 PM");}
-        if(newCourse.getStartTime() == 1430){jcomboTime.setSelectedItem("2:30 PM");}
-        if(newCourse.getStartTime() == 1530){jcomboTime.setSelectedItem("3:30 PM");}
-        if(newCourse.getStartTime() == 1600){jcomboTime.setSelectedItem("4:00 PM");}
-        if(newCourse.getStartTime() == 1630){jcomboTime.setSelectedItem("4:30 PM");}
-        if(newCourse.getStartTime() == 1730){jcomboTime.setSelectedItem("5:30 PM");}
-        if(newCourse.getStartTime() == 1830){jcomboTime.setSelectedItem("6:30 PM");}
-        if(newCourse.getStartTime() == 1900){jcomboTime.setSelectedItem("7:00 PM");}
-        if(newCourse.getStartTime() == 1930){jcomboTime.setSelectedItem("7:30 PM");}
-        if(newCourse.getStartTime() == 2030){jcomboTime.setSelectedItem("8:30 PM");}
-        if(newCourse.getStartTime() == 2130){jcomboTime.setSelectedItem("9:30 PM");}
-        
+
+        if (newCourse.getStartTime() == 830) {
+            jcomboTime.setSelectedItem("8:30 AM");
+        }
+        if (newCourse.getStartTime() == 930) {
+            jcomboTime.setSelectedItem("9:30 AM");
+        }
+        if (newCourse.getStartTime() == 1000) {
+            jcomboTime.setSelectedItem("10:00 AM");
+        }
+        if (newCourse.getStartTime() == 1030) {
+            jcomboTime.setSelectedItem("10:30 AM");
+        }
+        if (newCourse.getStartTime() == 1130) {
+            jcomboTime.setSelectedItem("11:30 AM");
+        }
+        if (newCourse.getStartTime() == 1230) {
+            jcomboTime.setSelectedItem("12:30 PM");
+        }
+        if (newCourse.getStartTime() == 1300) {
+            jcomboTime.setSelectedItem("1:00 PM");
+        }
+        if (newCourse.getStartTime() == 1330) {
+            jcomboTime.setSelectedItem("1:30 PM");
+        }
+        if (newCourse.getStartTime() == 1430) {
+            jcomboTime.setSelectedItem("2:30 PM");
+        }
+        if (newCourse.getStartTime() == 1530) {
+            jcomboTime.setSelectedItem("3:30 PM");
+        }
+        if (newCourse.getStartTime() == 1600) {
+            jcomboTime.setSelectedItem("4:00 PM");
+        }
+        if (newCourse.getStartTime() == 1630) {
+            jcomboTime.setSelectedItem("4:30 PM");
+        }
+        if (newCourse.getStartTime() == 1730) {
+            jcomboTime.setSelectedItem("5:30 PM");
+        }
+        if (newCourse.getStartTime() == 1830) {
+            jcomboTime.setSelectedItem("6:30 PM");
+        }
+        if (newCourse.getStartTime() == 1900) {
+            jcomboTime.setSelectedItem("7:00 PM");
+        }
+        if (newCourse.getStartTime() == 1930) {
+            jcomboTime.setSelectedItem("7:30 PM");
+        }
+        if (newCourse.getStartTime() == 2030) {
+            jcomboTime.setSelectedItem("8:30 PM");
+        }
+        if (newCourse.getStartTime() == 2130) {
+            jcomboTime.setSelectedItem("9:30 PM");
+        }
+
 
     }
 
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnTemplateBackActionPerformed(java.awt.event.ActionEvent evt) {
         CardLayout cl = (CardLayout) (jPanelAdmin.getLayout());
         cl.show(jPanelAdmin, "card2");
     }
 
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnCourseBackActionPerformed(java.awt.event.ActionEvent evt) {
         CardLayout cl = (CardLayout) (jPanelAdmin.getLayout());
         cl.show(jPanelAdmin, "card2");
     }
-       
+
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnAddTemplateActionPerformed(java.awt.event.ActionEvent evt) {
 
         boolean exists = false;
         boolean isNewTemplate = false;
-        
+
         if (!jtxtTemplateName.getText().isEmpty()) {
             Template newTemplate = new Template();
-            
+
             newTemplate.setCategory((String) jcomboCategory.getSelectedItem());
             newTemplate.setCourseName((String) jcomboCourse.getSelectedItem());
             newTemplate.setTemplateName(jtxtTemplateName.getText());
@@ -1028,79 +1166,76 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
                 } else {
                     exists = true;
                 }
-            }
-            else if (jcomboCategory.getSelectedItem().equals("Math and Stats")) {
+            } else if (jcomboCategory.getSelectedItem().equals("Math and Stats")) {
                 if (!mathStatsModel.contains(newTemplate.getCourseName())) {
-                    mathStatsModel.add(0, (String)jcomboCourse.getSelectedItem());
+                    mathStatsModel.add(0, (String) jcomboCourse.getSelectedItem());
                 } else {
                     exists = true;
                 }
-                
-            }
-            else if (jcomboCategory.getSelectedItem().equals("Computer Science")) {
+
+            } else if (jcomboCategory.getSelectedItem().equals("Computer Science")) {
                 if (!compsciModel.contains(newTemplate.getCourseName())) {
-                    compsciModel.add(0, (String)jcomboCourse.getSelectedItem());
+                    compsciModel.add(0, (String) jcomboCourse.getSelectedItem());
                 } else {
                     exists = true;
                 }
-                
-            }
-            else if (jcomboCategory.getSelectedItem().equals("Humanities Writing")) {
+
+            } else if (jcomboCategory.getSelectedItem().equals("Humanities Writing")) {
                 if (!humanitiesModel.contains(newTemplate.getCourseName())) {
-                    humanitiesModel.add(0, (String)jcomboCourse.getSelectedItem());
+                    humanitiesModel.add(0, (String) jcomboCourse.getSelectedItem());
                 } else {
                     exists = true;
                 }
-                
-            }
-            else if (jcomboCategory.getSelectedItem().equals("Social Science")) {
+
+            } else if (jcomboCategory.getSelectedItem().equals("Social Science")) {
                 if (!socialModel.contains(newTemplate.getCourseName())) {
-                    socialModel.add(0, (String)jcomboCourse.getSelectedItem());
+                    socialModel.add(0, (String) jcomboCourse.getSelectedItem());
                 } else {
                     exists = true;
                 }
-                
-            }
-            else if (jcomboCategory.getSelectedItem().equals("Cognate Math")) {
+
+            } else if (jcomboCategory.getSelectedItem().equals("Cognate Math")) {
                 if (!mathModel.contains(newTemplate.getCourseName())) {
-                    mathModel.add(0, (String)jcomboCourse.getSelectedItem());
+                    mathModel.add(0, (String) jcomboCourse.getSelectedItem());
                 } else {
                     exists = true;
                 }
-                
-            }
-            else if (jcomboCategory.getSelectedItem().equals("General")) {
+
+            } else if (jcomboCategory.getSelectedItem().equals("General")) {
                 if (!generalModel.contains(newTemplate.getCourseName())) {
-                    generalModel.add(0, (String)jcomboCourse.getSelectedItem());
+                    generalModel.add(0, (String) jcomboCourse.getSelectedItem());
                 } else {
                     exists = true;
                 }
-                
-            }
-            else if (jcomboCategory.getSelectedItem().equals("Elective")) {
+
+            } else if (jcomboCategory.getSelectedItem().equals("Elective")) {
                 if (!electiveModel.contains(newTemplate.getCourseName())) {
-                    electiveModel.add(0, (String)jcomboCourse.getSelectedItem());
+                    electiveModel.add(0, (String) jcomboCourse.getSelectedItem());
                 } else {
                     exists = true;
                 }
-                
+
             }
-            
-            if(exists == false){
+
+            if (exists == false) {
                 roboControl.AddTemplateToDB(newTemplate);
-                
+
                 if (jcomboTemplate.getSelectedItem() != jtxtTemplateName.getText()) {
                     jcomboTemplate.setSelectedItem(jtxtTemplateName.getText());
                     isNewTemplate = true;
                 }
-                if (isNewTemplate){
-                        jcomboTemplate.addItem(jtxtTemplateName.getText());
-                }     
-            }          
-        }       
+                if (isNewTemplate) {
+                    jcomboTemplate.addItem(jtxtTemplateName.getText());
+                }
+            }
+        }
     }
-    
-    private void ClearTemplate(){       
+
+    /**
+     *
+     * @author Kevin
+     */
+    private void ClearTemplate() {
         // Clear all the existing entries
         scienceModel.clear();
         mathStatsModel.clear();
@@ -1112,43 +1247,40 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
         electiveModel.clear();
     }
 
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnTemplateSelectActionPerformed(java.awt.event.ActionEvent evt) {
-        jtxtTemplateName.setText((String)jcomboTemplate.getSelectedItem()); 
-        
+        jtxtTemplateName.setText((String) jcomboTemplate.getSelectedItem());
+
         // Clear all the existing entries so we can add new ones.
         ClearTemplate();
 
         // Add all the items into their corresponding categories
-        for(Template t:Template.currentTemplates){
-            if(t.getCategory().equals("Natural Science") && t.getTemplateName().equals(jtxtTemplateName.getText())){
+        for (Template t : Template.currentTemplates) {
+            if (t.getCategory().equals("Natural Science") && t.getTemplateName().equals(jtxtTemplateName.getText())) {
                 scienceModel.add(0, t.getCourseName());
-            }
-            else if(t.getCategory().equals("Math and Stats") && t.getTemplateName().equals(jtxtTemplateName.getText())){
+            } else if (t.getCategory().equals("Math and Stats") && t.getTemplateName().equals(jtxtTemplateName.getText())) {
                 mathStatsModel.add(0, t.getCourseName());
-            }
-            else if(t.getCategory().equals("Computer Science") && t.getTemplateName().equals(jtxtTemplateName.getText())){
+            } else if (t.getCategory().equals("Computer Science") && t.getTemplateName().equals(jtxtTemplateName.getText())) {
                 compsciModel.add(0, t.getCourseName());
-            }
-            else if(t.getCategory().equals("Humanities Writing") && t.getTemplateName().equals(jtxtTemplateName.getText())){
+            } else if (t.getCategory().equals("Humanities Writing") && t.getTemplateName().equals(jtxtTemplateName.getText())) {
                 humanitiesModel.add(0, t.getCourseName());
-            }
-            else if(t.getCategory().equals("Social Science") && t.getTemplateName().equals(jtxtTemplateName.getText())){
+            } else if (t.getCategory().equals("Social Science") && t.getTemplateName().equals(jtxtTemplateName.getText())) {
                 socialModel.add(0, t.getCourseName());
-            }
-            else if(t.getCategory().equals("Cognate Math") && t.getTemplateName().equals(jtxtTemplateName.getText())){
+            } else if (t.getCategory().equals("Cognate Math") && t.getTemplateName().equals(jtxtTemplateName.getText())) {
                 mathModel.add(0, t.getCourseName());
-            }
-            else if(t.getCategory().equals("General") && t.getTemplateName().equals(jtxtTemplateName.getText())){
+            } else if (t.getCategory().equals("General") && t.getTemplateName().equals(jtxtTemplateName.getText())) {
                 generalModel.add(0, t.getCourseName());
-            }
-            else if(t.getCategory().equals("Elective") && t.getTemplateName().equals(jtxtTemplateName.getText())){
+            } else if (t.getCategory().equals("Elective") && t.getTemplateName().equals(jtxtTemplateName.getText())) {
                 electiveModel.add(0, t.getCourseName());
             }
         }
     }
 
-
     /**
+     * @author Kevin
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -1264,28 +1396,34 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtTemplateName;
     // End of variables declaration//GEN-END:variables
 }
-class NewTableModel extends DefaultTableModel {  
-    public NewTableModel(){
+
+/**
+ *
+ * @author Kevin
+ */
+class NewTableModel extends DefaultTableModel {
+
+    public NewTableModel() {
     }
-     
-    @Override  
-      public Class getColumnClass(int col) {  
-        if (col == 0)       
-            return Boolean.class;  
-        else 
-            return String.class;  
-    }  
-  
-    @Override  
-      public boolean isCellEditable(int row, int col) {  
-        if (col == 1){
-             return false;           
-        }       
-        if (col == 2){
-            return false;  
-        } else { 
-            return true; 
+
+    @Override
+    public Class getColumnClass(int col) {
+        if (col == 0) {
+            return Boolean.class;
+        } else {
+            return String.class;
         }
-      }
-        
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int col) {
+        if (col == 1) {
+            return false;
+        }
+        if (col == 2) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

@@ -38,18 +38,12 @@ public class RoboTest2View extends FrameView {
     
         
     public RoboTest2View(SingleFrameApplication app) {
-        super(app);
-        
-        
-        
+        super(app); 
         
         // Retrieve courses from the database
         roboController.ImportCourseCatalog();
         initComponents();
-        
-        
-        
-        
+
         // This whole status bar section is a leftover from the initial code made
         // by the sample project in netbeans. I've left it here because I'm lazy...
         
@@ -101,11 +95,7 @@ public class RoboTest2View extends FrameView {
                 }
             }
         });
-
-        
-
     }
-
 
     @Action
     public void showAboutBox() {
@@ -1211,137 +1201,151 @@ public class RoboTest2View extends FrameView {
     }//GEN-LAST:event_saveButtonActionPerformed
 
   
-    
-private void jbtnClearActionPerformed(java.awt.event.ActionEvent evt) {
-    jfieldUsername.setText("");
-    jfieldPassword.setText("");
-    jlblLoginStatus.setText("");
-}
+    /**
+     *
+     * @author Kevin
+     */
+    private void jbtnClearActionPerformed(java.awt.event.ActionEvent evt) {
+        jfieldUsername.setText("");
+        jfieldPassword.setText("");
+        jlblLoginStatus.setText("");
+    }
 
-private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {
-    char[] password = jfieldPassword.getPassword();
+    /**
+     *
+     * @author Kevin
+     */
+    private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {
+        char[] password = jfieldPassword.getPassword();
 
-    // Sets up the entity manager which deals with our database.
-    EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
-    
-    try {     
-        eManager.getTransaction().begin();
+        // Sets up the entity manager which deals with our database.
+        EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 
-        // Creates a new query and uses the named query 'Student.findByUserName'
-        // which is found in the Student.java file. You can write queries beforehand
-        // and reference them by the shortname instead of writing them out everytime.
-        // Parameters that are inserted in (here the username) get filled in via
-        // the setParameter function.
-        Query studentQ = eManager.createNamedQuery("Student.findByUsername").setParameter("username", jfieldUsername.getText());
-        
-        // Puts the result (username and password) into the Student object
-        // which has userName and password fields which are accessed by
-        // user.getPassword() and user.getUsername()
-        Student loginStudent = (Student)studentQ.getSingleResult();
-        eManager.getTransaction().commit();
+        try {
+            eManager.getTransaction().begin();
 
-        // Checking if the username/password is correct
-        if (!isPasswordCorrect(password, loginStudent.getPassword())) {
+            // Creates a new query and uses the named query 'Student.findByUserName'
+            // which is found in the Student.java file. You can write queries beforehand
+            // and reference them by the shortname instead of writing them out everytime.
+            // Parameters that are inserted in (here the username) get filled in via
+            // the setParameter function.
+            Query studentQ = eManager.createNamedQuery("Student.findByUsername").setParameter("username", jfieldUsername.getText());
+
+            // Puts the result (username and password) into the Student object
+            // which has userName and password fields which are accessed by
+            // user.getPassword() and user.getUsername()
+            Student loginStudent = (Student) studentQ.getSingleResult();
+            eManager.getTransaction().commit();
+
+            // Checking if the username/password is correct
+            if (!isPasswordCorrect(password, loginStudent.getPassword())) {
+                jlblLoginStatus.setText("Username/Password are invalid. Please try again!");
+                jfieldPassword.selectAll();
+                return;
+            } else {
+                // Loads all of the Student data into the 
+                // currentStudent object which is used for further
+                // references instead of querying the database for it.
+                Student.currentStudent.setName(loginStudent.getName());
+                Student.currentStudent.setUsername(loginStudent.getUsername());
+                Student.currentStudent.setPassword(loginStudent.getPassword());
+                Student.currentStudent.setEmail(loginStudent.getEmail());
+                Student.currentStudent.setStudentNo(loginStudent.getStudentNo());
+                Student.currentStudent.setAdminUser(loginStudent.getAdminUser());
+                Student.currentStudent.setProgramMajor(loginStudent.getProgramMajor());
+
+                if (Student.currentStudent.getAdminUser() == true) {
+                    jbtnAdmin.setVisible(true);
+                }
+
+                // Switches to the Registration screen
+                CardLayout cl = (CardLayout) (mainPanel.getLayout());
+                cl.show(mainPanel, "card4");
+                jtxtStudentName.setText(Student.currentStudent.getName());
+                jtxtStudentNum.setText(Student.currentStudent.getStudentNo().toString());
+                jtxtProgMajor.setText(Student.currentStudent.getProgramMajor());
+                jtxtProfileEmail.setText(Student.currentStudent.getEmail());
+                saveLabel.setVisible(false);
+                roboController.GetUserTranscriptFromDB(Student.currentStudent);
+            }
+
+        } catch (NoResultException e) {
             jlblLoginStatus.setText("Username/Password are invalid. Please try again!");
-            jfieldPassword.selectAll();
-            return;
+            eManager.getTransaction().rollback();
+        }
+        eManager.close();
+
+    }
+
+    /**
+     *
+     * @author Kevin
+     */
+    private void jbtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {
+        CardLayout cl = (CardLayout) (mainPanel.getLayout());
+        cl.show(mainPanel, "card1");
+    }
+
+    /**
+     *
+     * @author Kevin
+     */
+    private void jbtnRegisterUserActionPerformed(java.awt.event.ActionEvent evt) {
+
+        // Creating the Entity Manager which interfaces with the database
+        EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
+
+        String str = new String(jtxtRegisterPass2.getPassword());
+        int studentNo = Integer.parseInt(jtxtStudentNumber.getText());
+
+        // Set up a try block to catch any failures. ie. User already
+        // exists in the system.
+        try {
+            eManager.getTransaction().begin();
+            // Create the global Student object which contains the values from the
+            // text fields.
+            Student.currentStudent.setName(jtxtName.getText());
+            Student.currentStudent.setUsername(jtxtRegisterName.getText());
+            Student.currentStudent.setPassword(str);
+            Student.currentStudent.setEmail(jtxtEmail.getText());
+            Student.currentStudent.setStudentNo(studentNo);
+            Student.currentStudent.setAdminUser(jcheckAdmin.isSelected());
+            Student.currentStudent.setProgramMajor(jtxtMajor.getText());
+
+            // The entity manager commands work like this
+            // persist = INSERT
+            // find = SELECT
+            // merge = UPDATE
+            // remove = DELETE
+
+            // This command inserts the 'user' object into the database(which
+            // contains the username and password fields)
+            eManager.persist(Student.currentStudent);
+
+            // Commit the transaction
+            eManager.getTransaction().commit();
+            jlblRegisterStatus.setText("Registration Success! You may now login.");
+
+        } catch (Exception e) {
+            // If something goes wrong roll back any changes
+            eManager.getTransaction().rollback();
+            jlblRegisterStatus.setText("Username already exists! Please try a different one.");
+        }
+        // Close the connection to the database.
+        eManager.close();
+
+        if (jcheckAddTranscript.isSelected()) {
+            CardLayout cl = (CardLayout) (mainPanel.getLayout());
+            cl.show(mainPanel, "card3");
         } else {
-            // Loads all of the Student data into the 
-            // currentStudent object which is used for further
-            // references instead of querying the database for it.
-            Student.currentStudent.setName(loginStudent.getName());
-            Student.currentStudent.setUsername(loginStudent.getUsername());
-            Student.currentStudent.setPassword(loginStudent.getPassword());
-            Student.currentStudent.setEmail(loginStudent.getEmail());
-            Student.currentStudent.setStudentNo(loginStudent.getStudentNo());
-            Student.currentStudent.setAdminUser(loginStudent.getAdminUser());
-            Student.currentStudent.setProgramMajor(loginStudent.getProgramMajor());
-            
             if (Student.currentStudent.getAdminUser() == true) {
                 jbtnAdmin.setVisible(true);
             }
-            
-            // Switches to the Registration screen
             CardLayout cl = (CardLayout) (mainPanel.getLayout());
-            cl.show(mainPanel, "card4");
-            jtxtStudentName.setText(Student.currentStudent.getName());
-            jtxtStudentNum.setText(Student.currentStudent.getStudentNo().toString());
-            jtxtProgMajor.setText(Student.currentStudent.getProgramMajor());
-            jtxtProfileEmail.setText(Student.currentStudent.getEmail());
-            saveLabel.setVisible(false);
-            roboController.GetUserTranscriptFromDB(Student.currentStudent);
+            cl.show(mainPanel, "card1");
         }
 
-    } catch (NoResultException e) {
-        jlblLoginStatus.setText("Username/Password are invalid. Please try again!");
-        eManager.getTransaction().rollback();
     }
-    eManager.close();
-    
-}
-
-private void jbtnRegisterActionPerformed(java.awt.event.ActionEvent evt) {
-    CardLayout cl = (CardLayout) (mainPanel.getLayout());
-    cl.show(mainPanel, "card1");
-}
-
-private void jbtnRegisterUserActionPerformed(java.awt.event.ActionEvent evt) {
-
-    // Creating the Entity Manager which interfaces with the database
-    EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
-    
-    String str = new String(jtxtRegisterPass2.getPassword());
-    int studentNo = Integer.parseInt(jtxtStudentNumber.getText());
-    
-    // Set up a try block to catch any failures. ie. User already
-    // exists in the system.
-    try {
-        eManager.getTransaction().begin();
-        // Create the global Student object which contains the values from the
-        // text fields.
-        Student.currentStudent.setName(jtxtName.getText());
-        Student.currentStudent.setUsername(jtxtRegisterName.getText());
-        Student.currentStudent.setPassword(str);
-        Student.currentStudent.setEmail(jtxtEmail.getText());
-        Student.currentStudent.setStudentNo(studentNo);
-        Student.currentStudent.setAdminUser(jcheckAdmin.isSelected());
-        Student.currentStudent.setProgramMajor(jtxtMajor.getText());
-        
-        // The entity manager commands work like this
-        // persist = INSERT
-        // find = SELECT
-        // merge = UPDATE
-        // remove = DELETE
-
-        // This command inserts the 'user' object into the database(which
-        // contains the username and password fields)
-        eManager.persist(Student.currentStudent);
-
-        // Commit the transaction
-        eManager.getTransaction().commit();
-        jlblRegisterStatus.setText("Registration Success! You may now login.");
-
-    } catch (Exception e) {
-        // If something goes wrong roll back any changes
-        eManager.getTransaction().rollback();
-        jlblRegisterStatus.setText("Username already exists! Please try a different one.");
-    }
-    // Close the connection to the database.
-    eManager.close();
-    
-    if (jcheckAddTranscript.isSelected()) {
-        CardLayout cl = (CardLayout) (mainPanel.getLayout());
-        cl.show(mainPanel, "card3");
-    }
-    else {
-        if (Student.currentStudent.getAdminUser() == true) {
-                jbtnAdmin.setVisible(true);
-        }
-        CardLayout cl = (CardLayout) (mainPanel.getLayout());
-        cl.show(mainPanel, "card1");        
-    }
-
-}
 
 private void jbutAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
 
@@ -1353,7 +1357,10 @@ private void jbutAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
     jtblFriday.setValueAt("CMPT 332\nTHORV 205A\nProfessor SomeGuy", 1, 0);
     
 }
-
+/**
+ *
+ * @author Kevin
+ */
 private void jbtnBackToLoginActionPerformed(java.awt.event.ActionEvent evt) {
     CardLayout cl = (CardLayout) (mainPanel.getLayout());
     cl.show(mainPanel, "card1");
@@ -1366,39 +1373,59 @@ private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
     jtblThursday.setValueAt("", 4, 0);
     jtblFriday.setValueAt("", 1, 0);
 }
-
+/**
+ *
+ * @author Kevin
+ */
     private void jbtnAdminActionPerformed(java.awt.event.ActionEvent evt) {
         RoboAdvisorAdmin admin = new RoboAdvisorAdmin();
         admin.setVisible(true);
     }
-
+/**
+ *
+ * @author Kevin
+ */
     private void jtblFridayFocusLost(java.awt.event.FocusEvent evt) {
         jtblFriday.clearSelection();
     }
-
+/**
+ *
+ * @author Kevin
+ */
     private void jtblThursdayFocusLost(java.awt.event.FocusEvent evt) {
         jtblThursday.clearSelection();
     }
-
+/**
+ *
+ * @author Kevin
+ */
     private void jtblWednesdayFocusLost(java.awt.event.FocusEvent evt) {
         jtblWednesday.clearSelection();
     }
-
+/**
+ *
+ * @author Kevin
+ */
     private void jtblTuesdayFocusLost(java.awt.event.FocusEvent evt) {
         jtblTuesday.clearSelection();
     }
-
+/**
+ *
+ * @author Kevin
+ */
     private void jtblMondayFocusLost(java.awt.event.FocusEvent evt) {
         jtblMonday.clearSelection();
     }
-
+/**
+ *
+ * @author Kevin
+ */
     private void jbtnFinishRegActionPerformed(java.awt.event.ActionEvent evt) {
         // This code grabs the values from the table and inserts the corresponding
-        // entries into the database.
-        
+        // entries into the database. 
                 
-        String colName = new String("");
-        Boolean colChecked = new Boolean(false); 
+        String colName = "";
+        Boolean colChecked = false; 
         
         for(int i = 0;i < Course.CourseCatalog.size();i++){
             Transcript newTranscript = new Transcript();
@@ -1420,7 +1447,10 @@ private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
         CardLayout cl = (CardLayout) (mainPanel.getLayout());
         cl.show(mainPanel, "card1");  
     }
-
+/**
+ *
+ * @author Kevin
+ */
     private static boolean isPasswordCorrect(char[] input, String correctPass) {
         // This whole method is for extracting the *** from the password field
         // and comparing it with the string which was retrieved from the 
