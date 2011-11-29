@@ -17,9 +17,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.Timer;
 import javax.swing.Icon;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -53,6 +55,15 @@ public class RoboTest2View extends FrameView {
         // Retrieve courses from the database
         roboController.ImportCourseCatalog();
         initComponents();
+        
+        Template.currentTemplates = roboController.GetTemplatesFromDB();
+        
+        // For some reason this is the only place that
+        // it will let me load the template values in.
+        for (String s : Template.templateNameList) {
+            jcomboProgram.addItem(s);
+
+        }
 
         // This whole status bar section is a leftover from the initial code made
         // by the sample project in netbeans. I've left it here because I'm lazy...
@@ -169,13 +180,14 @@ public class RoboTest2View extends FrameView {
         jtxtStudentNumber = new javax.swing.JTextField();
         jtxtName = new javax.swing.JTextField();
         jlblMajor = new javax.swing.JLabel();
-        jtxtMajor = new javax.swing.JTextField();
         jlblEmail = new javax.swing.JLabel();
         jtxtEmail = new javax.swing.JTextField();
         jcheckAdmin = new javax.swing.JCheckBox();
         jlblName = new javax.swing.JLabel();
         jlblAdmin = new javax.swing.JLabel();
         jcheckAddTranscript = new javax.swing.JCheckBox();
+        DefaultComboBoxModel programSelectModel = new DefaultComboBoxModel();
+        jcomboProgram = new JComboBox(programSelectModel);
         jPanelRegister2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         NewTableModel model = new NewTableModel();
@@ -450,8 +462,6 @@ public class RoboTest2View extends FrameView {
         jlblMajor.setText(resourceMap.getString("jlblMajor.text")); // NOI18N
         jlblMajor.setName("jlblMajor"); // NOI18N
 
-        jtxtMajor.setName("jtxtMajor"); // NOI18N
-
         jlblEmail.setText(resourceMap.getString("jlblEmail.text")); // NOI18N
         jlblEmail.setName("jlblEmail"); // NOI18N
 
@@ -468,12 +478,16 @@ public class RoboTest2View extends FrameView {
         jcheckAddTranscript.setText(resourceMap.getString("jcheckAddTranscript.text")); // NOI18N
         jcheckAddTranscript.setName("jcheckAddTranscript"); // NOI18N
 
+        jcomboProgram.setMaximumRowCount(100);
+        jcomboProgram.setModel(programSelectModel);
+        jcomboProgram.setName("jcomboProgram"); // NOI18N
+
         javax.swing.GroupLayout jPanelRegisterLayout = new javax.swing.GroupLayout(jPanelRegister);
         jPanelRegister.setLayout(jPanelRegisterLayout);
         jPanelRegisterLayout.setHorizontalGroup(
             jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRegisterLayout.createSequentialGroup()
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jlblRegisterStatus)
                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -484,7 +498,7 @@ public class RoboTest2View extends FrameView {
                         .addGap(10, 10, 10)
                         .addComponent(jlblMajor)
                         .addGap(18, 18, 18)
-                        .addComponent(jtxtMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jcomboProgram, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jlblEmail)
@@ -549,13 +563,11 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlblStudentNumber)
                     .addComponent(jtxtStudentNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelRegisterLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jlblMajor))
-                    .addComponent(jtxtMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
+                .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblMajor)
+                    .addComponent(jcomboProgram, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -573,7 +585,7 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnRegisterUser)
                     .addComponent(jbtnBackToLogin))
-                .addContainerGap(316, Short.MAX_VALUE))
+                .addContainerGap(310, Short.MAX_VALUE))
         );
 
         mainPanel.add(jPanelRegister, "card2");
@@ -1623,7 +1635,7 @@ public class RoboTest2View extends FrameView {
             Student.currentStudent.setEmail(jtxtEmail.getText());
             Student.currentStudent.setStudentNo(studentNo);
             Student.currentStudent.setAdminUser(jcheckAdmin.isSelected());
-            Student.currentStudent.setProgramMajor(jtxtMajor.getText());
+            Student.currentStudent.setProgramMajor((String)jcomboProgram.getSelectedItem());
 
             // The entity manager commands work like this
             // persist = INSERT
@@ -1987,6 +1999,7 @@ public class RoboTest2View extends FrameView {
     private javax.swing.JButton jbtnRegisterUser;
     private javax.swing.JCheckBox jcheckAddTranscript;
     private javax.swing.JCheckBox jcheckAdmin;
+    private javax.swing.JComboBox jcomboProgram;
     private javax.swing.JPasswordField jfieldPassword;
     private javax.swing.JTextField jfieldUsername;
     private javax.swing.JLabel jlblAdmin;
@@ -2028,7 +2041,6 @@ public class RoboTest2View extends FrameView {
     private javax.swing.JTable jtblTuesday;
     private javax.swing.JTable jtblWednesday;
     private javax.swing.JTextField jtxtEmail;
-    private javax.swing.JTextField jtxtMajor;
     private javax.swing.JTextField jtxtName;
     private javax.swing.JTextField jtxtProfileEmail;
     private javax.swing.JTextField jtxtProgMajor;

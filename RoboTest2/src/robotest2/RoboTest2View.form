@@ -184,7 +184,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jlblRegisterStatus" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="10" pref="10" max="10" attributes="0"/>
@@ -192,11 +192,11 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jtxtStudentNumber" min="-2" pref="167" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" attributes="1">
                               <EmptySpace min="10" pref="10" max="10" attributes="0"/>
                               <Component id="jlblMajor" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="18" pref="18" max="18" attributes="0"/>
-                              <Component id="jtxtMajor" min="-2" pref="167" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jcomboProgram" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="10" pref="10" max="10" attributes="0"/>
@@ -281,15 +281,12 @@
                           <Component id="jlblStudentNumber" min="-2" max="-2" attributes="0"/>
                           <Component id="jtxtStudentNumber" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="3" pref="3" max="3" attributes="0"/>
-                              <Component id="jlblMajor" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jtxtMajor" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jlblMajor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcomboProgram" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="18" pref="18" max="18" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="3" pref="3" max="3" attributes="0"/>
@@ -312,7 +309,7 @@
                           <Component id="jbtnRegisterUser" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbtnBackToLogin" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="316" max="32767" attributes="0"/>
+                      <EmptySpace pref="310" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -395,11 +392,6 @@
                 <Property name="name" type="java.lang.String" value="jlblMajor" noResource="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jtxtMajor">
-              <Properties>
-                <Property name="name" type="java.lang.String" value="jtxtMajor" noResource="true"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jlblEmail">
               <Properties>
                 <Property name="text" type="java.lang.String" resourceKey="jlblEmail.text"/>
@@ -433,6 +425,21 @@
                 <Property name="text" type="java.lang.String" resourceKey="jcheckAddTranscript.text"/>
                 <Property name="name" type="java.lang.String" value="jcheckAddTranscript" noResource="true"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="jcomboProgram">
+              <Properties>
+                <Property name="maximumRowCount" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="100" type="code"/>
+                </Property>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="programSelectModel" type="code"/>
+                </Property>
+                <Property name="name" type="java.lang.String" value="jcomboProgram" noResource="true"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JComboBox(programSelectModel);"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="DefaultComboBoxModel programSelectModel = new DefaultComboBoxModel();&#xa;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
