@@ -575,8 +575,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane5" pref="420" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jScrollPane5" alignment="0" pref="420" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jlblTemplateTitle" pref="366" max="32767" attributes="1"/>
                               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
@@ -608,6 +608,7 @@
                                   <Component id="jcomboTemplate" alignment="0" pref="368" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="jbtnClear" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jbtnTemplateSelect" min="-2" max="-2" attributes="0"/>
@@ -718,7 +719,10 @@
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jbtnTemplateBack" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jbtnTemplateBack" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbtnClear" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1071,6 +1075,15 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnTemplateBackActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbtnClear">
+              <Properties>
+                <Property name="text" type="java.lang.String" resourceKey="jbtnClear.text"/>
+                <Property name="name" type="java.lang.String" value="jbtnClear" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnClearActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

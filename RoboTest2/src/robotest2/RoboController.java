@@ -16,11 +16,10 @@ import javax.persistence.*;
  *
  * @author Kevin
  */
-public class RoboController {
-    
+public class RoboController extends Thread {
     
     public void RoboController(){
-        
+        start();
     }
     public void ImportCourseCatalog() {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();

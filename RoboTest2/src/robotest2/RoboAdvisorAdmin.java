@@ -148,6 +148,7 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jtxtTemplateName = new javax.swing.JTextField();
         jbtnTemplateBack = new javax.swing.JButton();
+        jbtnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(robotest2.RoboTest2App.class).getContext().getResourceMap(RoboAdvisorAdmin.class);
@@ -606,30 +607,38 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
             }
         });
 
+        jbtnClear.setText(resourceMap.getString("jbtnClear.text")); // NOI18N
+        jbtnClear.setName("jbtnClear"); // NOI18N
+        jbtnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelAdminTemplateLayout = new javax.swing.GroupLayout(jPanelAdminTemplate);
         jPanelAdminTemplate.setLayout(jPanelAdminTemplateLayout);
         jPanelAdminTemplateLayout.setHorizontalGroup(
             jPanelAdminTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAdminTemplateLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelAdminTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                    .addGroup(jPanelAdminTemplateLayout.createSequentialGroup()
+                .addGroup(jPanelAdminTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelAdminTemplateLayout.createSequentialGroup()
                         .addComponent(jlblTemplateTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                         .addGap(54, 54, 54))
-                    .addComponent(jLabel5)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAdminTemplateLayout.createSequentialGroup()
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                    .addGroup(jPanelAdminTemplateLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                         .addComponent(jbtnAddTemplate))
-                    .addGroup(jPanelAdminTemplateLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelAdminTemplateLayout.createSequentialGroup()
                         .addComponent(jlblCategory)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jcomboCategory, 0, 371, Short.MAX_VALUE))
-                    .addGroup(jPanelAdminTemplateLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelAdminTemplateLayout.createSequentialGroup()
                         .addGroup(jPanelAdminTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
                             .addComponent(jLabel12)
@@ -638,7 +647,8 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
                         .addGroup(jPanelAdminTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtxtTemplateName, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                             .addComponent(jcomboCourse, 0, 368, Short.MAX_VALUE)
-                            .addComponent(jcomboTemplate, 0, 368, Short.MAX_VALUE))))
+                            .addComponent(jcomboTemplate, 0, 368, Short.MAX_VALUE)))
+                    .addComponent(jbtnClear))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnTemplateSelect)
                 .addGap(67, 67, 67)
@@ -728,7 +738,9 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbtnTemplateBack)
+                .addGroup(jPanelAdminTemplateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnTemplateBack)
+                    .addComponent(jbtnClear))
                 .addContainerGap())
         );
 
@@ -747,6 +759,11 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnClearActionPerformed
+        jtxtTemplateName.setText("");
+        ClearTemplate();
+    }//GEN-LAST:event_jbtnClearActionPerformed
 
     private void jbtnCourseAdminActionPerformed(java.awt.event.ActionEvent evt) {
         
@@ -947,13 +964,15 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
         if(newCourse.getDays().equals("MWF")){
             jradMWF.setSelected(true);
         }
-        else
+        else {
             jradTR.setSelected(true);
+        }
         if(newCourse.getSemester() == 1){
             jradSeptDec.setSelected(true);
         }
-        else
+        else {
             jradJanMay.setSelected(true);
+        }
         jtxtProfessor.setText(newCourse.getProfessor());
         jtxtDescription.setText(newCourse.getDescription());
         
@@ -992,6 +1011,7 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
     private void jbtnAddTemplateActionPerformed(java.awt.event.ActionEvent evt) {
 
         boolean exists = false;
+        boolean isNewTemplate = false;
         
         if (!jtxtTemplateName.getText().isEmpty()) {
             Template newTemplate = new Template();
@@ -1068,16 +1088,20 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
             
             if(exists == false){
                 roboControl.AddTemplateToDB(newTemplate);
-            }
-           
-        }
-        
+                
+                if (jcomboTemplate.getSelectedItem() != jtxtTemplateName.getText()) {
+                    jcomboTemplate.setSelectedItem(jtxtTemplateName.getText());
+                    isNewTemplate = true;
+                }
+                if (isNewTemplate){
+                        jcomboTemplate.addItem(jtxtTemplateName.getText());
+                }     
+            }          
+        }       
     }
-
-    private void jbtnTemplateSelectActionPerformed(java.awt.event.ActionEvent evt) {
-        jtxtTemplateName.setText((String)jcomboTemplate.getSelectedItem()); 
-        
-        // Clear all the existing entries so we can add new ones.
+    
+    private void ClearTemplate(){       
+        // Clear all the existing entries
         scienceModel.clear();
         mathStatsModel.clear();
         compsciModel.clear();
@@ -1086,6 +1110,13 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
         mathModel.clear();
         generalModel.clear();
         electiveModel.clear();
+    }
+
+    private void jbtnTemplateSelectActionPerformed(java.awt.event.ActionEvent evt) {
+        jtxtTemplateName.setText((String)jcomboTemplate.getSelectedItem()); 
+        
+        // Clear all the existing entries so we can add new ones.
+        ClearTemplate();
 
         // Add all the items into their corresponding categories
         for(Template t:Template.currentTemplates){
@@ -1184,6 +1215,7 @@ public class RoboAdvisorAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JButton jbtnAddTemplate;
+    private javax.swing.JButton jbtnClear;
     private javax.swing.JButton jbtnClearCourse;
     private javax.swing.JButton jbtnCourseAdmin;
     private javax.swing.JButton jbtnCourseBack;

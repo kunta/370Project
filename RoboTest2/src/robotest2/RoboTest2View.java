@@ -242,7 +242,7 @@ public class RoboTest2View extends FrameView {
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
-        //list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(((javax.persistence.Query)null).getResultList());
+        list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(((javax.persistence.Query)Student).getResultList());
         jPopupMenu1 = new javax.swing.JPopupMenu();
 
         mainPanel.setMinimumSize(new java.awt.Dimension(500, 400));
@@ -1510,7 +1510,7 @@ private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JTextField jtxtStudentName;
     private javax.swing.JTextField jtxtStudentNum;
     private javax.swing.JTextField jtxtStudentNumber;
-    private java.util.List<robotest2.Test> list;
+    private java.util.List<robotest2.Student> list;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField persnalInfo;
