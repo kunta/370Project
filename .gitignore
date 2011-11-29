@@ -1,0 +1,9 @@
+# built application files
+*.jar
+
+# Java class files
+*.class
+
+# generated files
+dist/
+build/
