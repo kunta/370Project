@@ -54,7 +54,7 @@
                               <Component id="jfieldUsername" alignment="0" pref="191" max="32767" attributes="1"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="143" max="32767" attributes="0"/>
+                      <EmptySpace pref="72" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -85,7 +85,7 @@
                           <Component id="jbtnRegister" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="414" max="32767" attributes="0"/>
+                      <EmptySpace pref="409" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -243,7 +243,7 @@
                               <Component id="jcheckAddTranscript" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="280" max="32767" attributes="0"/>
+                      <EmptySpace pref="227" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -312,7 +312,7 @@
                           <Component id="jbtnRegisterUser" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbtnBackToLogin" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="325" max="32767" attributes="0"/>
+                      <EmptySpace pref="326" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -470,7 +470,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="489" max="-2" attributes="0"/>
-                      <EmptySpace pref="65" max="32767" attributes="0"/>
+                      <EmptySpace pref="61" max="32767" attributes="0"/>
                       <Component id="jbtnFinishReg" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -543,7 +543,7 @@
                               <EmptySpace min="12" pref="12" max="12" attributes="0"/>
                               <Component id="jtabMain" min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jOptionsBar" alignment="0" pref="535" max="32767" attributes="0"/>
+                          <Component id="jOptionsBar" alignment="0" pref="533" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -621,11 +621,11 @@
                           <Group type="102" attributes="0">
                               <Component id="jpanelTimeBar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jscrollMonday" pref="60" max="32767" attributes="0"/>
-                              <Component id="jscrollTuesday" pref="61" max="32767" attributes="0"/>
-                              <Component id="jscrollWednesday" pref="62" max="32767" attributes="0"/>
-                              <Component id="jscrollThursday" pref="60" max="32767" attributes="0"/>
-                              <Component id="jscrollFriday" pref="60" max="32767" attributes="0"/>
+                              <Component id="jscrollMonday" pref="50" max="32767" attributes="0"/>
+                              <Component id="jscrollTuesday" pref="51" max="32767" attributes="0"/>
+                              <Component id="jscrollWednesday" pref="49" max="32767" attributes="0"/>
+                              <Component id="jscrollThursday" pref="50" max="32767" attributes="0"/>
+                              <Component id="jscrollFriday" pref="50" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1103,10 +1103,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="persnalInfo" alignment="0" min="-2" pref="309" max="-2" attributes="1"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="saveLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                                      <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="persnalInfo" alignment="0" pref="492" max="32767" attributes="1"/>
                                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1124,7 +1129,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="199" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1157,7 +1162,12 @@
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="persnalInfo" min="-2" pref="89" max="-2" attributes="0"/>
-                              <EmptySpace pref="528" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="saveLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="486" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1220,6 +1230,21 @@
                     <Component class="javax.swing.JTextField" name="jtxtStudentName">
                       <Properties>
                         <Property name="name" type="java.lang.String" value="jtxtStudentName" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="saveButton">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" resourceKey="saveButton.text"/>
+                        <Property name="name" type="java.lang.String" value="saveButton" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="saveLabel">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" resourceKey="saveLabel.text"/>
+                        <Property name="name" type="java.lang.String" value="saveLabel" noResource="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1305,7 +1330,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="525" max="32767" attributes="0"/>
+                  <EmptySpace pref="521" max="32767" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
