@@ -1082,9 +1082,15 @@
                     </Container>
                     <Component class="javax.swing.JButton" name="jbtnDeleteCourse">
                       <Properties>
+                        <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
+                          <action class="robotest2.RoboTest2View" id="deleteCourse" methodName="deleteCourse"/>
+                        </Property>
                         <Property name="text" type="java.lang.String" resourceKey="jbtnDeleteCourse.text"/>
                         <Property name="name" type="java.lang.String" value="jbtnDeleteCourse" noResource="true"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnDeleteCourseActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

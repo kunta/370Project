@@ -165,7 +165,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "robotest2.Course[ courseName=" + courseName + " ]";
+        return courseName;
     }
     
     public boolean isSame(Course courseTwo){
