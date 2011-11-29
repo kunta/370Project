@@ -1506,6 +1506,8 @@ public class RoboTest2View extends FrameView {
                 CourseNum += 1;
             }
         }
+        jlistSchedule.setVisible(true);
+        jlistSchedule.setModel(DeletedCourses);
     }
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
