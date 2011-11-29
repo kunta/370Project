@@ -266,6 +266,28 @@ public class RoboController extends Thread {
 
         return results;
     }
+    public List<Template> GetTemplatesFromDB(String tempName) {
+        EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
+        List<Template> results = new LinkedList<Template>();
+
+        try {
+            eManager.getTransaction().begin();
+            Query templateQ = (Query) eManager.createNamedQuery("Template.findByTemplateName").setParameter("templateName", tempName);
+            results = templateQ.getResultList();
+            eManager.getTransaction().commit();
+        } catch (NoResultException e) {
+            System.out.println("Template doesn't exist in the database!");
+            eManager.getTransaction().rollback();
+        }
+
+        for (Template t : results) {
+            if (!Template.templateNameList.contains(t.getTemplateName())) {
+                Template.templateNameList.add(t.getTemplateName());
+            }
+        }
+
+        return results;
+    }
     
 
     /**

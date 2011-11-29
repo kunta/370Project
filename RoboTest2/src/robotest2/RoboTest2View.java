@@ -35,7 +35,6 @@ import javax.swing.table.TableCellRenderer;
 public class RoboTest2View extends FrameView {
 
     RoboController roboController = new RoboController();
-    
     // The List Models for the Transcript area
     DefaultListModel scienceModel = new DefaultListModel();
     DefaultListModel mathStatsModel = new DefaultListModel();
@@ -47,9 +46,9 @@ public class RoboTest2View extends FrameView {
     DefaultListModel electiveModel = new DefaultListModel();
     DefaultListModel DeletedCourses = new DefaultListModel();   //List for deleted courses. Had to be cross functions.
     int CourseNum = 0;
-        
+
     public RoboTest2View(SingleFrameApplication app) {
-        super(app); 
+        super(app);
 
         // Retrieve courses from the database
         roboController.ImportCourseCatalog();
@@ -57,7 +56,7 @@ public class RoboTest2View extends FrameView {
 
         // This whole status bar section is a leftover from the initial code made
         // by the sample project in netbeans. I've left it here because I'm lazy...
-        
+
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
@@ -106,20 +105,22 @@ public class RoboTest2View extends FrameView {
                 }
             }
         });
-           // Khaled
+        // Khaled
         jlistSchedule.setVisible(false); // Hides the delete course list since timetable has no classes
 
         DefaultListModel Courses = new DefaultListModel();
 
-        for ( Course C : Course.CourseCatalog) { //Thanks to kevin for the help.
-                Courses.addElement(C);
+        for (Course C : Course.CourseCatalog) { //Thanks to kevin for the help.
+            Courses.addElement(C);
         }
         jlistCourseList.setModel(Courses);
-        
-        
-        for(int i = 0; i < 13; i++){ //A for loop to clear timetable, so later code can check if a class is already there before adding
-        jtblMonday.setValueAt("",i,0);
-        if(i<9) jtblTuesday.setValueAt("",i,0);
+
+
+        for (int i = 0; i < 13; i++) { //A for loop to clear timetable, so later code can check if a class is already there before adding
+            jtblMonday.setValueAt("", i, 0);
+            if (i < 9) {
+                jtblTuesday.setValueAt("", i, 0);
+            }
         }
 
     }
@@ -372,7 +373,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jfieldPassword, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jfieldUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(324, Short.MAX_VALUE))
         );
         jpanelLoginLayout.setVerticalGroup(
             jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -519,7 +520,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jcheckAddTranscript)))
-                .addContainerGap(482, Short.MAX_VALUE))
+                .addContainerGap(461, Short.MAX_VALUE))
         );
         jPanelRegisterLayout.setVerticalGroup(
             jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -795,6 +796,7 @@ public class RoboTest2View extends FrameView {
             }
         });
         jtblMonday.setName("jtblMonday"); // NOI18N
+        jtblMonday.setPreferredSize(new java.awt.Dimension(500, 750));
         jtblMonday.setRowHeight(45);
         jtblMonday.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jtblMonday.setShowVerticalLines(false);
@@ -833,6 +835,7 @@ public class RoboTest2View extends FrameView {
             }
         });
         jtblTuesday.setName("jtblTuesday"); // NOI18N
+        jtblTuesday.setPreferredSize(new java.awt.Dimension(500, 750));
         jtblTuesday.setRowHeight(68);
         jtblTuesday.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jtblTuesday.setShowVerticalLines(false);
@@ -875,6 +878,7 @@ public class RoboTest2View extends FrameView {
             }
         });
         jtblWednesday.setName("jtblWednesday"); // NOI18N
+        jtblWednesday.setPreferredSize(new java.awt.Dimension(500, 750));
         jtblWednesday.setRowHeight(45);
         jtblWednesday.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jtblWednesday.setShowVerticalLines(false);
@@ -913,6 +917,7 @@ public class RoboTest2View extends FrameView {
             }
         });
         jtblThursday.setName("jtblThursday"); // NOI18N
+        jtblThursday.setPreferredSize(new java.awt.Dimension(500, 750));
         jtblThursday.setRowHeight(68);
         jtblThursday.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jtblThursday.setShowVerticalLines(false);
@@ -955,6 +960,7 @@ public class RoboTest2View extends FrameView {
             }
         });
         jtblFriday.setName("jtblFriday"); // NOI18N
+        jtblFriday.setPreferredSize(new java.awt.Dimension(500, 750));
         jtblFriday.setRowHeight(45);
         jtblFriday.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jtblFriday.setShowVerticalLines(false);
@@ -1005,45 +1011,53 @@ public class RoboTest2View extends FrameView {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jpanelTimeBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jscrollMonday, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                .addComponent(jscrollTuesday, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                .addComponent(jscrollWednesday, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                .addComponent(jscrollThursday, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                .addComponent(jscrollFriday, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                .addComponent(jscrollMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jscrollTuesday, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jscrollWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jscrollThursday, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jscrollFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jbtnAddCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-                        .addComponent(jbtnDeleteCourse, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(340, 340, 340))
+                        .addComponent(jbtnDeleteCourse, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jscrollFriday, jscrollMonday, jscrollThursday, jscrollTuesday, jscrollWednesday});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpanelTimeBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jscrollMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jscrollTuesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jscrollWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jscrollThursday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jscrollFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jpanelTimeBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollTuesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollThursday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jbtnAddCourse)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(jbtnDeleteCourse)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1031, 1031, 1031)))
+                .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jscrollFriday, jscrollMonday, jscrollThursday, jscrollTuesday, jscrollWednesday});
 
         jtabMain.addTab(resourceMap.getString("jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
 
@@ -1100,7 +1114,7 @@ public class RoboTest2View extends FrameView {
                         .addComponent(saveLabel)
                         .addGap(110, 110, 110)
                         .addComponent(saveButton))
-                    .addComponent(persnalInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+                    .addComponent(persnalInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
                     .addComponent(jLabel8)
                     .addGroup(jpanelProfileLayout.createSequentialGroup()
                         .addGroup(jpanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1270,7 +1284,7 @@ public class RoboTest2View extends FrameView {
                                 .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addContainerGap(129, Short.MAX_VALUE)))))
+                            .addContainerGap(108, Short.MAX_VALUE)))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1323,7 +1337,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jtabMain, 0, 0, Short.MAX_VALUE))
-                    .addComponent(jOptionsBar, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE))
+                    .addComponent(jOptionsBar, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
@@ -1375,11 +1389,11 @@ public class RoboTest2View extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 727, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 706, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -1400,7 +1414,7 @@ public class RoboTest2View extends FrameView {
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void jbtnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
         // Khaled
         Course temp = new Course();                                      // Decleration of local variables to use temporarly for function.
@@ -1482,26 +1496,18 @@ public class RoboTest2View extends FrameView {
         }
     }
 
-
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-       saveLabel.setVisible(true);
-           jlistSchedule.setVisible(true );                                        //Updates the delete course list and makes sure its visible/enabled
-    jlistSchedule.setModel(DeletedCourses);
+        saveLabel.setVisible(true);
+        jlistSchedule.setVisible(true);                                        //Updates the delete course list and makes sure its visible/enabled
+        jlistSchedule.setModel(DeletedCourses);
         // TODO add your handling code here:
     }
-
-    
-    
-
-
-                                                 
 
     private void jbtnDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    
     /**
      *
      * @author Kevin
@@ -1562,14 +1568,14 @@ public class RoboTest2View extends FrameView {
                 // Switches to the Registration screen
                 CardLayout cl = (CardLayout) (mainPanel.getLayout());
                 cl.show(mainPanel, "card4");
-                
+
                 // Put values into Profile tab
                 jtxtStudentName.setText(Student.currentStudent.getName());
                 jtxtStudentNum.setText(Student.currentStudent.getStudentNo().toString());
                 jtxtProgMajor.setText(Student.currentStudent.getProgramMajor());
                 jtxtProfileEmail.setText(Student.currentStudent.getEmail());
                 saveLabel.setVisible(false);
-                
+
                 // Get Courses from the users transcript and then load them
                 // into the Transcript table.
                 roboController.GetUserTranscriptFromDB(Student.currentStudent);
@@ -1654,110 +1660,121 @@ public class RoboTest2View extends FrameView {
 
     }
 
-private void jbutAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jbutAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
 
-    
-    jtblMonday.setValueAt("CMPT 370\nTHORV 205A\nProfessor Roy", 3, 0);
-    jtblTuesday.setValueAt("CMPT 352\nTHORV 205A\nProfessor Roebuck", 4, 0);
-    jtblWednesday.setValueAt("CMPT 355\nTHORV 205A\nProfessor Coupal", 2, 0);
-    jtblThursday.setValueAt("CMPT 352\nTHORV 205A\nProfessor Roebuck", 4, 0);
-    jtblFriday.setValueAt("CMPT 332\nTHORV 205A\nProfessor SomeGuy", 1, 0);
-    
-}
-/**
- *
- * @author Kevin
- */
-private void jbtnBackToLoginActionPerformed(java.awt.event.ActionEvent evt) {
-    CardLayout cl = (CardLayout) (mainPanel.getLayout());
-    cl.show(mainPanel, "card1");
-}
 
-private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
-    jtblMonday.setValueAt("", 3, 0);
-    jtblTuesday.setValueAt("", 4, 0);
-    jtblWednesday.setValueAt("", 2, 0);
-    jtblThursday.setValueAt("", 4, 0);
-    jtblFriday.setValueAt("", 1, 0);
-}
-/**
- *
- * @author Kevin
- */
+        jtblMonday.setValueAt("CMPT 370\nTHORV 205A\nProfessor Roy", 3, 0);
+        jtblTuesday.setValueAt("CMPT 352\nTHORV 205A\nProfessor Roebuck", 4, 0);
+        jtblWednesday.setValueAt("CMPT 355\nTHORV 205A\nProfessor Coupal", 2, 0);
+        jtblThursday.setValueAt("CMPT 352\nTHORV 205A\nProfessor Roebuck", 4, 0);
+        jtblFriday.setValueAt("CMPT 332\nTHORV 205A\nProfessor SomeGuy", 1, 0);
+
+    }
+
+    /**
+     *
+     * @author Kevin
+     */
+    private void jbtnBackToLoginActionPerformed(java.awt.event.ActionEvent evt) {
+        CardLayout cl = (CardLayout) (mainPanel.getLayout());
+        cl.show(mainPanel, "card1");
+    }
+
+    private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
+        jtblMonday.setValueAt("", 3, 0);
+        jtblTuesday.setValueAt("", 4, 0);
+        jtblWednesday.setValueAt("", 2, 0);
+        jtblThursday.setValueAt("", 4, 0);
+        jtblFriday.setValueAt("", 1, 0);
+    }
+
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnAdminActionPerformed(java.awt.event.ActionEvent evt) {
         RoboAdvisorAdmin admin = new RoboAdvisorAdmin();
         admin.setVisible(true);
     }
-/**
- *
- * @author Kevin
- */
+
+    /**
+     *
+     * @author Kevin
+     */
     private void jtblFridayFocusLost(java.awt.event.FocusEvent evt) {
         jtblFriday.clearSelection();
     }
-/**
- *
- * @author Kevin
- */
+
+    /**
+     *
+     * @author Kevin
+     */
     private void jtblThursdayFocusLost(java.awt.event.FocusEvent evt) {
         jtblThursday.clearSelection();
     }
-/**
- *
- * @author Kevin
- */
+
+    /**
+     *
+     * @author Kevin
+     */
     private void jtblWednesdayFocusLost(java.awt.event.FocusEvent evt) {
         jtblWednesday.clearSelection();
     }
-/**
- *
- * @author Kevin
- */
+
+    /**
+     *
+     * @author Kevin
+     */
     private void jtblTuesdayFocusLost(java.awt.event.FocusEvent evt) {
         jtblTuesday.clearSelection();
     }
-/**
- *
- * @author Kevin
- */
+
+    /**
+     *
+     * @author Kevin
+     */
     private void jtblMondayFocusLost(java.awt.event.FocusEvent evt) {
         jtblMonday.clearSelection();
     }
-/**
- *
- * @author Kevin
- */
+
+    /**
+     *
+     * @author Kevin
+     */
     private void jbtnFinishRegActionPerformed(java.awt.event.ActionEvent evt) {
         // This code grabs the values from the table and inserts the corresponding
         // entries into the database. 
-                
+
         String colName = "";
-        Boolean colChecked = false; 
-        
-        for(int i = 0;i < Course.CourseCatalog.size();i++){
+        Boolean colChecked = false;
+
+        for (int i = 0; i < Course.CourseCatalog.size(); i++) {
             Transcript newTranscript = new Transcript();
-            colChecked = (Boolean)jtblTranscript.getValueAt(i, 0);
-            colName = (String)jtblTranscript.getValueAt(i, 1);
-            if(colChecked == null){ colChecked = false;}
-            
-            if(colChecked){
+            colChecked = (Boolean) jtblTranscript.getValueAt(i, 0);
+            colName = (String) jtblTranscript.getValueAt(i, 1);
+            if (colChecked == null) {
+                colChecked = false;
+            }
+
+            if (colChecked) {
                 newTranscript.setCourseName(colName.toString());
                 newTranscript.setUserName(Student.currentStudent.getUsername());
                 roboController.AddTranscriptToDB(newTranscript);
             }
         }
-        
+
         if (Student.currentStudent.getAdminUser() == true) {
-                jbtnAdmin.setVisible(true);
+            jbtnAdmin.setVisible(true);
         }
-        
+
         CardLayout cl = (CardLayout) (mainPanel.getLayout());
-        cl.show(mainPanel, "card1");  
+        cl.show(mainPanel, "card1");
     }
-/**
- *
- * @author Kevin
- */
+
+    /**
+     *
+     * @author Kevin
+     */
     private static boolean isPasswordCorrect(char[] input, String correctPass) {
         // This whole method is for extracting the *** from the password field
         // and comparing it with the string which was retrieved from the 
@@ -1777,45 +1794,48 @@ private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
 
         return isCorrect;
     }
+
     /**
      *
      * @author Kevin
      */
-    void LoadTranscript(){ 
+    void LoadTranscript() {
         List<Transcript> newTranList = new LinkedList<Transcript>();
         newTranList = roboController.GetUserTranscriptFromDB(Student.currentStudent);
         List<Template> newTempList = new LinkedList<Template>();
-        newTempList = roboController.GetTemplatesFromDB();
+        newTempList = roboController.GetTemplatesFromDB("new");
 
         // Horrible way of doing it, will change later(maybe :P )
-        for(Transcript t: newTranList){
-            for (Template te: newTempList){
-                String category = te.getCategory();
-                if (te.getTemplateName().equals("new")) {
-                    if (category.equals("Natural Science") && !scienceModel.contains((String) t.getCourseName())) {
-                        scienceModel.addElement((String) t.getCourseName());
-                    } else if (category.equals(("Math and Stats")) && !mathStatsModel.contains((String) t.getCourseName())) {
-                        mathStatsModel.addElement((String) t.getCourseName());
-                    } else if (category.equals(("Computer Science")) && !compsciModel.contains((String) t.getCourseName())) {
-                        compsciModel.addElement((String) t.getCourseName());
-                    } else if (category.equals(("Humanities")) && !humanitiesModel.contains((String) t.getCourseName())) {
-                        humanitiesModel.addElement((String) t.getCourseName());
-                    } else if (category.equals(("Social Science")) && !socialModel.contains((String) t.getCourseName())) {
-                        socialModel.addElement((String) t.getCourseName());
-                    } else if (category.equals(("Cognate Math")) && !mathModel.contains((String) t.getCourseName())) {
-                        mathModel.addElement((String) t.getCourseName());
-                    } else if (category.equals(("General")) && !generalModel.contains((String) t.getCourseName())) {
-                        generalModel.addElement((String) t.getCourseName());
-                    } else if (category.equals(("Elective")) && !electiveModel.contains((String) t.getCourseName())) {
-                        electiveModel.addElement((String) t.getCourseName());
-                    } else {
-                        electiveModel.addElement((String) t.getCourseName());
-                    }
+        for (Transcript t : newTranList) {
+            for (Template te : newTempList) {
+                if (te.getCategory().equals("Natural Science") && !scienceModel.contains((String) te.getCourseName())) {
+                    scienceModel.addElement((String) te.getCourseName());
                 }
+                if (te.getCategory().equals(("Math and Stats")) && !mathStatsModel.contains((String) te.getCourseName())) {
+                    mathStatsModel.addElement((String) te.getCourseName());
+                } 
+                if (te.getCategory().equals(("Computer Science")) && !compsciModel.contains((String) te.getCourseName())) {
+                    compsciModel.addElement((String) te.getCourseName());
+                } 
+                if (te.getCategory().equals(("Humanities")) && !humanitiesModel.contains((String) te.getCourseName())) {
+                    humanitiesModel.addElement((String) te.getCourseName());
+                } 
+                if (te.getCategory().equals(("Social Science")) && !socialModel.contains((String) te.getCourseName())) {
+                    socialModel.addElement((String) te.getCourseName());
+                } 
+                if (te.getCategory().equals(("Cognate Math")) && !mathModel.contains((String) te.getCourseName())) {
+                    mathModel.addElement((String) te.getCourseName());
+                } 
+                if (te.getCategory().equals(("General")) && !generalModel.contains((String) te.getCourseName())) {
+                    generalModel.addElement((String) te.getCourseName());
+                } 
+                if (te.getCategory().equals(("Elective")) && !electiveModel.contains((String) te.getCourseName())) {
+                    electiveModel.addElement((String) te.getCourseName());
+                } 
             }
         }
-        
-        
+
+
     }
 
     // Function for switching the cards (may or may not get used)
@@ -1827,63 +1847,83 @@ private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
         cl.next(mainPanel);
     }
 
-    
-    
     @Action
-        public void deleteCourse() {
-    // Khaled
+    public void deleteCourse() {
+        // Khaled
 
-    Course temp2 = new Course();
-    int row = 0;
+        Course temp2 = new Course();
+        int row = 0;
 
-    
-    temp2 = (Course)jlistSchedule.getSelectedValue();
 
-    if(temp2.getDays().equals("MWF")){
-        if(temp2.getStartTime() == 830)  row = 0;
-        else if(temp2.getStartTime() == 930)  row = 1;
-        else if(temp2.getStartTime() == 1030)  row = 2;
-        else if(temp2.getStartTime() == 1130)  row = 3;
-        else if(temp2.getStartTime() == 1230)  row = 4;
-        else if(temp2.getStartTime() == 1330)  row = 5;
-        else if(temp2.getStartTime() == 1430)  row = 6;
-        else if(temp2.getStartTime() == 1530)  row = 7;
-        else if(temp2.getStartTime() == 1630)  row = 8;
-        else if(temp2.getStartTime() == 1730)  row = 9;
-        else if(temp2.getStartTime() == 1830)  row = 10;
-        else if(temp2.getStartTime() == 1930)  row = 11;
-        else if(temp2.getStartTime() == 2030)  row = 12;
-       
-        DeletedCourses.removeElement(temp2);
-        jtblMonday.setValueAt("", row, 0);
-        jtblWednesday.setValueAt("", row, 0);
-        jtblFriday.setValueAt("", row, 0);
-        CourseNum -= 1;
+        temp2 = (Course) jlistSchedule.getSelectedValue();
+
+        if (temp2.getDays().equals("MWF")) {
+            if (temp2.getStartTime() == 830) {
+                row = 0;
+            } else if (temp2.getStartTime() == 930) {
+                row = 1;
+            } else if (temp2.getStartTime() == 1030) {
+                row = 2;
+            } else if (temp2.getStartTime() == 1130) {
+                row = 3;
+            } else if (temp2.getStartTime() == 1230) {
+                row = 4;
+            } else if (temp2.getStartTime() == 1330) {
+                row = 5;
+            } else if (temp2.getStartTime() == 1430) {
+                row = 6;
+            } else if (temp2.getStartTime() == 1530) {
+                row = 7;
+            } else if (temp2.getStartTime() == 1630) {
+                row = 8;
+            } else if (temp2.getStartTime() == 1730) {
+                row = 9;
+            } else if (temp2.getStartTime() == 1830) {
+                row = 10;
+            } else if (temp2.getStartTime() == 1930) {
+                row = 11;
+            } else if (temp2.getStartTime() == 2030) {
+                row = 12;
+            }
+
+            DeletedCourses.removeElement(temp2);
+            jtblMonday.setValueAt("", row, 0);
+            jtblWednesday.setValueAt("", row, 0);
+            jtblFriday.setValueAt("", row, 0);
+            CourseNum -= 1;
+        }
+
+        if (temp2.getDays().equals("TR")) {
+            if (temp2.getStartTime() == 830) {
+                row = 0;
+            } else if (temp2.getStartTime() == 1000) {
+                row = 1;
+            } else if (temp2.getStartTime() == 1130) {
+                row = 2;
+            } else if (temp2.getStartTime() == 1300) {
+                row = 3;
+            } else if (temp2.getStartTime() == 1430) {
+                row = 4;
+            } else if (temp2.getStartTime() == 1600) {
+                row = 5;
+            } else if (temp2.getStartTime() == 1730) {
+                row = 6;
+            } else if (temp2.getStartTime() == 1900) {
+                row = 7;
+            } else if (temp2.getStartTime() == 2030) {
+                row = 8;
+            }
+
+            DeletedCourses.removeElement(temp2);
+            jtblTuesday.setValueAt("", row, 0);
+            jtblThursday.setValueAt("", row, 0);
+            CourseNum -= 1;
+
+        }
+
+
+        jlistSchedule.setModel(DeletedCourses);
     }
-
-    if(temp2.getDays().equals("TR")){
-        if(temp2.getStartTime() == 830)  row = 0;
-        else if(temp2.getStartTime() == 1000)  row = 1;
-        else if(temp2.getStartTime() == 1130)  row = 2;
-        else if(temp2.getStartTime() == 1300)  row = 3;
-        else if(temp2.getStartTime() == 1430)  row = 4;
-        else if(temp2.getStartTime() == 1600)  row = 5;
-        else if(temp2.getStartTime() == 1730)  row = 6;
-        else if(temp2.getStartTime() == 1900)  row = 7;
-        else if(temp2.getStartTime() == 2030)  row = 8;
-        
-        DeletedCourses.removeElement(temp2);
-        jtblTuesday.setValueAt("", row, 0);
-        jtblThursday.setValueAt("", row, 0);
-        CourseNum -= 1;
-        
-    }
-    
-    
-    jlistSchedule.setModel(DeletedCourses);    
-    }
-
-  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -2014,40 +2054,38 @@ private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
     private int busyIconIndex = 0;
     private JDialog aboutBox;
     private boolean saveNeeded;
-    
-   
 }
 
 // This class was borrowed from: http://www.java2s.com/Code/Java/Swing-Components/MultiLineCellExample.htm
 // so we can have multiple lines in each JTable cell.
 class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 
-  public MultiLineCellRenderer() {
-    setLineWrap(true);
-    setWrapStyleWord(true);
-    setOpaque(true);
-  }
+    public MultiLineCellRenderer() {
+        setLineWrap(true);
+        setWrapStyleWord(true);
+        setOpaque(true);
+    }
 
-  public Component getTableCellRendererComponent(JTable table, Object value,
-      boolean isSelected, boolean hasFocus, int row, int column) {
-    if (isSelected) {
-      setForeground(table.getSelectionForeground());
-      setBackground(table.getSelectionBackground());
-    } else {
-      setForeground(table.getForeground());
-      setBackground(table.getBackground());
+    public Component getTableCellRendererComponent(JTable table, Object value,
+            boolean isSelected, boolean hasFocus, int row, int column) {
+        if (isSelected) {
+            setForeground(table.getSelectionForeground());
+            setBackground(table.getSelectionBackground());
+        } else {
+            setForeground(table.getForeground());
+            setBackground(table.getBackground());
+        }
+        setFont(table.getFont());
+        if (hasFocus) {
+            setBorder(UIManager.getBorder("Table.focusCellHighlightBorder"));
+            if (table.isCellEditable(row, column)) {
+                setForeground(UIManager.getColor("Table.focusCellForeground"));
+                setBackground(UIManager.getColor("Table.focusCellBackground"));
+            }
+        } else {
+            setBorder(new EmptyBorder(1, 2, 1, 2));
+        }
+        setText((value == null) ? "" : value.toString());
+        return this;
     }
-    setFont(table.getFont());
-    if (hasFocus) {
-      setBorder(UIManager.getBorder("Table.focusCellHighlightBorder"));
-      if (table.isCellEditable(row, column)) {
-        setForeground(UIManager.getColor("Table.focusCellForeground"));
-        setBackground(UIManager.getColor("Table.focusCellBackground"));
-      }
-    } else {
-      setBorder(new EmptyBorder(1, 2, 1, 2));
-    }
-    setText((value == null) ? "" : value.toString());
-    return this;
-  }
 }
