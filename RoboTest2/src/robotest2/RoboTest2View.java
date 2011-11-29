@@ -244,10 +244,7 @@ public class RoboTest2View extends FrameView {
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
-<<<<<<< HEAD
-=======
        // list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(((javax.persistence.Query)null).getResultList());
->>>>>>> d346bfd6f2d618bc5c997fb627bdc00a3689c453
         jPopupMenu1 = new javax.swing.JPopupMenu();
 
         mainPanel.setMinimumSize(new java.awt.Dimension(500, 400));
