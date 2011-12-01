@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
@@ -202,6 +203,7 @@ public class RoboTest2View extends FrameView {
         jOptionsBar = new javax.swing.JToolBar();
         jlblToolBar = new javax.swing.JLabel();
         jbtnAdmin = new javax.swing.JButton();
+        jbtnRandom = new javax.swing.JButton();
         jtabMain = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jpanelTimeBar = new javax.swing.JPanel();
@@ -667,6 +669,18 @@ public class RoboTest2View extends FrameView {
         });
         jOptionsBar.add(jbtnAdmin);
         jbtnAdmin.setVisible(false);
+
+        jbtnRandom.setText(resourceMap.getString("jbtnRandom.text")); // NOI18N
+        jbtnRandom.setFocusable(false);
+        jbtnRandom.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnRandom.setName("jbtnRandom"); // NOI18N
+        jbtnRandom.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbtnRandom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRandomActionPerformed(evt);
+            }
+        });
+        jOptionsBar.add(jbtnRandom);
 
         jtabMain.setName("jtabMain"); // NOI18N
 
@@ -1320,7 +1334,7 @@ public class RoboTest2View extends FrameView {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane8, 0, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1335,7 +1349,7 @@ public class RoboTest2View extends FrameView {
                         .addComponent(jLabel30)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(246, 246, 246))
+                .addGap(267, 267, 267))
         );
 
         jtabMain.addTab(resourceMap.getString("jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
@@ -1426,15 +1440,47 @@ public class RoboTest2View extends FrameView {
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
+    /**
+     *
+     * @author Kevin
+     */
+    private void jbtnRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRandomActionPerformed
+        Random rGen = new Random();
+        Course newCourse = new Course();
+        boolean canAddCourse = false; // Can we add the course to the timetable?
+        int randomInt = rGen.nextInt(Course.CourseCatalog.size());
+        newCourse = Course.CourseCatalog.get(randomInt);
+        
+        // If the course isn't in the same semester find a new one
+        // Will be changed when timetable is implemented so it can go off
+        // whichever semester the user has selected.
+        while(newCourse.getSemester() != 1){
+            randomInt = rGen.nextInt(Course.CourseCatalog.size());
+            newCourse = Course.CourseCatalog.get(randomInt);
+        }
+        
+        while (!canAddCourse) {
+            if (!AddCourse(newCourse.getCourseName())) {
+                canAddCourse = false;
+                randomInt = rGen.nextInt(Course.CourseCatalog.size());
+                newCourse = Course.CourseCatalog.get(randomInt);
+            }
+        }
+
+    }//GEN-LAST:event_jbtnRandomActionPerformed
 
     private void jbtnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
+        AddCourse((String)jlistCourseList.getSelectedValue());
+    }
+
+    private boolean AddCourse(String courseName){
         // Khaled
-        Course temp = new Course();                                      // Decleration of local variables to use temporarly for function.
+        Course temp = new Course(courseName);                                      // Decleration of local variables to use temporarly for function.
         int row = 0;
+        boolean toReturn = false;
 
-
-
-        temp = (Course) jlistCourseList.getSelectedValue();
+        temp = Course.CourseCatalog.get(Course.CourseCatalog.indexOf(temp));
+        //temp = (Course) jlistCourseList.getSelectedValue();
 
         if (temp.getDays().equals("MWF")) {                               //If then statement to determine the location a course should be put in
             if (temp.getStartTime() == 830) {
@@ -1467,12 +1513,15 @@ public class RoboTest2View extends FrameView {
 
 
 
-            if (jtblMonday.getValueAt(row, 0).toString().isEmpty() && CourseNum < 5) {      //puts the course infro on the timetable. And checks the number of courses 
+            if (jtblMonday.getValueAt(row, 0).toString().isEmpty() && CourseNum < 5) {      //puts the course info on the timetable. And checks the number of courses 
                 jtblMonday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
                 jtblWednesday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
                 jtblFriday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
                 DeletedCourses.addElement(temp);                                        //Adds the course to the delete course list for future deletion
-                CourseNum += 1;                                                         // Keeps track of the number of courses
+                CourseNum += 1;
+                toReturn = true;// Keeps track of the number of courses
+            } else {
+                toReturn = false;
             }
         }
 
@@ -1504,18 +1553,21 @@ public class RoboTest2View extends FrameView {
                 jtblThursday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
                 DeletedCourses.addElement(temp);
                 CourseNum += 1;
+                toReturn = true;
+            } else {
+                toReturn = false;
             }
         }
         jlistSchedule.setVisible(true);
         jlistSchedule.setModel(DeletedCourses);
+        
+        return toReturn;
     }
-
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
         saveLabel.setVisible(true);
         jlistSchedule.setVisible(true);                                        //Updates the delete course list and makes sure its visible/enabled
         jlistSchedule.setModel(DeletedCourses);
-        // TODO add your handling code here:
     }
 
     private void jbtnDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1997,6 +2049,7 @@ public class RoboTest2View extends FrameView {
     private javax.swing.JButton jbtnDeleteCourse;
     private javax.swing.JButton jbtnFinishReg;
     private javax.swing.JButton jbtnLogin;
+    private javax.swing.JButton jbtnRandom;
     private javax.swing.JButton jbtnRegister;
     private javax.swing.JButton jbtnRegisterUser;
     private javax.swing.JCheckBox jcheckAddTranscript;
