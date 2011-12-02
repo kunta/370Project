@@ -1640,34 +1640,34 @@ public class RoboTest2View extends FrameView {
         boolean toReturn = false;
         
         //temp = Course.CourseCatalog.get(Course.CourseCatalog.indexOf(roboController.GetCourseFromDB(courseName.getCourseName())));
-        temp = (Course) jlistCourseList.getSelectedValue();
+        //temp = (Course) jlistCourseList.getSelectedValue();
         
-        if (temp.getDays().equals("MWF")) {                               //If then statement to determine the location a course should be put in
-            if (temp.getStartTime() == 830) {
+        if (courseName.getDays().equals("MWF")) {                               //If then statement to determine the location a course should be put in
+            if (courseName.getStartTime() == 830) {
                 row = 0;
-            } else if (temp.getStartTime() == 930) {
+            } else if (courseName.getStartTime() == 930) {
                 row = 1;
-            } else if (temp.getStartTime() == 1030) {
+            } else if (courseName.getStartTime() == 1030) {
                 row = 2;
-            } else if (temp.getStartTime() == 1130) {
+            } else if (courseName.getStartTime() == 1130) {
                 row = 3;
-            } else if (temp.getStartTime() == 1230) {
+            } else if (courseName.getStartTime() == 1230) {
                 row = 4;
-            } else if (temp.getStartTime() == 1330) {
+            } else if (courseName.getStartTime() == 1330) {
                 row = 5;
-            } else if (temp.getStartTime() == 1430) {
+            } else if (courseName.getStartTime() == 1430) {
                 row = 6;
-            } else if (temp.getStartTime() == 1530) {
+            } else if (courseName.getStartTime() == 1530) {
                 row = 7;
-            } else if (temp.getStartTime() == 1630) {
+            } else if (courseName.getStartTime() == 1630) {
                 row = 8;
-            } else if (temp.getStartTime() == 1730) {
+            } else if (courseName.getStartTime() == 1730) {
                 row = 9;
-            } else if (temp.getStartTime() == 1830) {
+            } else if (courseName.getStartTime() == 1830) {
                 row = 10;
-            } else if (temp.getStartTime() == 1930) {
+            } else if (courseName.getStartTime() == 1930) {
                 row = 11;
-            } else if (temp.getStartTime() == 2030) {
+            } else if (courseName.getStartTime() == 2030) {
                 row = 12;
             }
 
@@ -1685,13 +1685,13 @@ public class RoboTest2View extends FrameView {
                 
                 
                 
-                jtblMonday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
-                jtblWednesday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
-                jtblFriday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
-                DeletedCourses.addElement(temp);                                        //Adds the course to the delete course list for future deletion
+                jtblMonday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
+                jtblWednesday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
+                jtblFriday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
+                DeletedCourses.addElement(courseName);                                        //Adds the course to the delete course list for future deletion
                 CourseNum += 1;
                 
-                newTimetable.setCourseName(temp.getCourseName());
+                newTimetable.setCourseName(courseName.getCourseName());
                 newTimetable.setUsername(Student.currentStudent.getUsername());
                 newTimetable.setSem(Semester);
                 newTimetable.setTimetableID(timetableName);
@@ -1704,24 +1704,24 @@ public class RoboTest2View extends FrameView {
             }
         }
 
-        if (temp.getDays().equals("TR")) {                                        //Same as above, but for tuesday and thursday classes
-            if (temp.getStartTime() == 830) {
+        if (courseName.getDays().equals("TR")) {                                        //Same as above, but for tuesday and thursday classes
+            if (courseName.getStartTime() == 830) {
                 row = 0;
-            } else if (temp.getStartTime() == 1000) {
+            } else if (courseName.getStartTime() == 1000) {
                 row = 1;
-            } else if (temp.getStartTime() == 1130) {
+            } else if (courseName.getStartTime() == 1130) {
                 row = 2;
-            } else if (temp.getStartTime() == 1300) {
+            } else if (courseName.getStartTime() == 1300) {
                 row = 3;
-            } else if (temp.getStartTime() == 1430) {
+            } else if (courseName.getStartTime() == 1430) {
                 row = 4;
-            } else if (temp.getStartTime() == 1600) {
+            } else if (courseName.getStartTime() == 1600) {
                 row = 5;
-            } else if (temp.getStartTime() == 1730) {
+            } else if (courseName.getStartTime() == 1730) {
                 row = 6;
-            } else if (temp.getStartTime() == 1900) {
+            } else if (courseName.getStartTime() == 1900) {
                 row = 7;
-            } else if (temp.getStartTime() == 2030) {
+            } else if (courseName.getStartTime() == 2030) {
                 row = 8;
             }
 
@@ -1736,12 +1736,12 @@ public class RoboTest2View extends FrameView {
               } 
 
             if (jtblTuesday.getValueAt(row, 0).toString().isEmpty() && CourseNum < 5) {
-                jtblTuesday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
-                jtblThursday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
-                DeletedCourses.addElement(temp);
+                jtblTuesday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
+                jtblThursday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
+                DeletedCourses.addElement(courseName);
                 CourseNum += 1;
                 
-                newTimetable.setCourseName(temp.getCourseName());
+                newTimetable.setCourseName(courseName.getCourseName());
                 newTimetable.setUsername(Student.currentStudent.getUsername());
                 newTimetable.setSem(Semester);
                 newTimetable.setTimetableID(timetableName);
