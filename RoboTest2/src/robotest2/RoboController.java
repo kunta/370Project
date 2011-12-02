@@ -137,6 +137,21 @@ public class RoboController extends Thread {
         eManager.close();
 
     }
+    
+    public void AddTimetableToDB(Timetable newTimetable) {
+        EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
+
+        try {
+            eManager.getTransaction().begin();
+            eManager.persist(newTimetable);
+            eManager.getTransaction().commit();
+
+        } catch (NoResultException e) {
+            eManager.getTransaction().rollback();
+        }
+
+        eManager.close();
+    }
 
     /**
      *
@@ -177,6 +192,25 @@ public class RoboController extends Thread {
         eManager.close();
     }
 
+     /**
+     *
+     * @author Kevin
+     */
+    public void MergeStudentToDB(Student newStudent) {
+        EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
+
+        try {
+            eManager.getTransaction().begin();
+            eManager.merge(newStudent);
+            eManager.getTransaction().commit();
+
+        } catch (NoResultException e) {
+            eManager.getTransaction().rollback();
+        }
+
+        eManager.close();
+
+    }
     /**
      *
      * @author Kevin
@@ -279,7 +313,8 @@ public class RoboController extends Thread {
             System.out.println("Template doesn't exist in the database!");
             eManager.getTransaction().rollback();
         }
-
+        // Add only the unique(by template name) templates are added to the
+        // name list.
         for (Template t : results) {
             if (!Template.templateNameList.contains(t.getTemplateName())) {
                 Template.templateNameList.add(t.getTemplateName());
@@ -288,6 +323,43 @@ public class RoboController extends Thread {
 
         return results;
     }
+    public List<Timetable> GetTimetablesFromDB(String type, String info) {
+        EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
+        List<Timetable> results = new LinkedList<Timetable>();
+
+        if (type.equals("byUsername")) {
+            try {
+                eManager.getTransaction().begin();
+                Query templateQ = (Query) eManager.createNamedQuery("Timetable.findByUsername").setParameter("username", info);
+                results = templateQ.getResultList();
+                eManager.getTransaction().commit();
+            } catch (NoResultException e) {
+                System.out.println("Template doesn't exist in the database!");
+                eManager.getTransaction().rollback();
+            }
+        } else {
+            try {
+                eManager.getTransaction().begin();
+                Query templateQ = (Query) eManager.createNamedQuery("Timetable.findByTimetableID").setParameter("timetableID", info);
+                results = templateQ.getResultList();
+                eManager.getTransaction().commit();
+            } catch (NoResultException e) {
+                System.out.println("Template doesn't exist in the database!");
+                eManager.getTransaction().rollback();
+            }
+        }
+        // Add only the unique(by username) timetables are added to the
+        // name list.
+        for (Timetable t : results) {
+            if(!Timetable.timetableNameList.contains(t.getUsername())) {
+                Timetable.currentTimetables.add(t);
+            }
+        }
+
+        return results;
+    }
+    
+    
     
 
     /**

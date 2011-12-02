@@ -49,7 +49,9 @@ public class RoboTest2View extends FrameView {
     DefaultListModel generalModel = new DefaultListModel();
     DefaultListModel electiveModel = new DefaultListModel();
     DefaultListModel DeletedCourses = new DefaultListModel();   //List for deleted courses. Had to be cross functions.
+    DefaultComboBoxModel timetableSelectModel = new DefaultComboBoxModel();
     int CourseNum = 0;
+    int Semester = 1;
 
     public RoboTest2View(SingleFrameApplication app) {
         super(app);
@@ -64,11 +66,14 @@ public class RoboTest2View extends FrameView {
         // it will let me load the template values in.
         for (String s : Template.templateNameList) {
             jcomboProgram.addItem(s);
-
+        }
+        for (String s : Timetable.timetableNameList) {
+            jcomboTimetable.addItem(s);
         }
 
         // This whole status bar section is a leftover from the initial code made
-        // by the sample project in netbeans. I've left it here because I'm lazy...
+        // by the sample project in netbeans. I've left it here because I'm lazy and
+        // all sorts of things break when I try and delete it...
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -253,8 +258,9 @@ public class RoboTest2View extends FrameView {
         jlistSchedule = new javax.swing.JList();
         jlistSchedule.setVisible(false);
         jbtnDeleteCourse = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
+        jcomboTimetable = new javax.swing.JComboBox();
+        jbtnSwitchTime = new javax.swing.JButton();
+        jbtnAddTimetable = new javax.swing.JButton();
         jpanelProfile = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -266,7 +272,7 @@ public class RoboTest2View extends FrameView {
         jtxtProfileEmail = new javax.swing.JTextField();
         jtxtStudentNum = new javax.swing.JTextField();
         jtxtStudentName = new javax.swing.JTextField();
-        saveButton = new javax.swing.JButton();
+        jbtnSave = new javax.swing.JButton();
         saveLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -306,6 +312,16 @@ public class RoboTest2View extends FrameView {
         statusAnimationLabel = new javax.swing.JLabel();
         //list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(((javax.persistence.Query)null).getResultList());
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        jdialAddTimetable = new javax.swing.JDialog();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jtxtTimeName = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        jradSept = new javax.swing.JRadioButton();
+        jradJan = new javax.swing.JRadioButton();
+        jbtnSaveTimetable = new javax.swing.JButton();
+        jbtnCancel = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
 
         mainPanel.setMinimumSize(new java.awt.Dimension(500, 400));
         mainPanel.setName("mainPanel"); // NOI18N
@@ -1033,11 +1049,24 @@ public class RoboTest2View extends FrameView {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setName("jComboBox1"); // NOI18N
+        jcomboTimetable.setModel(timetableSelectModel);
+        jcomboTimetable.setName("jcomboTimetable"); // NOI18N
 
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setName("jButton2"); // NOI18N
+        jbtnSwitchTime.setText(resourceMap.getString("jbtnSwitchTime.text")); // NOI18N
+        jbtnSwitchTime.setName("jbtnSwitchTime"); // NOI18N
+        jbtnSwitchTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSwitchTimeActionPerformed(evt);
+            }
+        });
+
+        jbtnAddTimetable.setText(resourceMap.getString("jbtnAddTimetable.text")); // NOI18N
+        jbtnAddTimetable.setName("jbtnAddTimetable"); // NOI18N
+        jbtnAddTimetable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAddTimetableActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1056,48 +1085,53 @@ public class RoboTest2View extends FrameView {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jscrollFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnAddCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, 0, 0, Short.MAX_VALUE)
-                    .addComponent(jbtnDeleteCourse)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jbtnSwitchTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtnAddCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, 0, 0, Short.MAX_VALUE)
+                        .addComponent(jbtnDeleteCourse)
+                        .addComponent(jcomboTimetable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbtnAddTimetable, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jscrollFriday, jscrollMonday, jscrollThursday, jscrollTuesday, jscrollWednesday});
 
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jbtnAddTimetable, jbtnSwitchTime});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcomboTimetable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addGap(87, 87, 87)
+                        .addComponent(jbtnSwitchTime)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnAddTimetable)
+                        .addGap(67, 67, 67)
                         .addComponent(jbtnAddCourse)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(jbtnDeleteCourse)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(922, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpanelTimeBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jscrollFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jscrollMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jscrollTuesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jscrollWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jscrollThursday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jpanelTimeBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollTuesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jscrollThursday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jscrollFriday, jscrollMonday, jscrollThursday, jscrollTuesday, jscrollWednesday});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jbtnAddTimetable, jbtnSwitchTime});
 
         jtabMain.addTab(resourceMap.getString("jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
 
@@ -1132,11 +1166,11 @@ public class RoboTest2View extends FrameView {
 
         jtxtStudentName.setName("jtxtStudentName"); // NOI18N
 
-        saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
-        saveButton.setName("saveButton"); // NOI18N
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
+        jbtnSave.setText(resourceMap.getString("jbtnSave.text")); // NOI18N
+        jbtnSave.setName("jbtnSave"); // NOI18N
+        jbtnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
+                jbtnSaveActionPerformed(evt);
             }
         });
 
@@ -1153,7 +1187,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelProfileLayout.createSequentialGroup()
                         .addComponent(saveLabel)
                         .addGap(110, 110, 110)
-                        .addComponent(saveButton))
+                        .addComponent(jbtnSave))
                     .addComponent(persnalInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
                     .addComponent(jLabel8)
                     .addGroup(jpanelProfileLayout.createSequentialGroup()
@@ -1196,7 +1230,7 @@ public class RoboTest2View extends FrameView {
                 .addComponent(persnalInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jpanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveButton)
+                    .addComponent(jbtnSave)
                     .addComponent(saveLabel))
                 .addContainerGap(487, Short.MAX_VALUE))
         );
@@ -1450,6 +1484,91 @@ public class RoboTest2View extends FrameView {
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
+        jdialAddTimetable.setName("jdialAddTimetable"); // NOI18N
+
+        jLabel31.setText(resourceMap.getString("jLabel31.text")); // NOI18N
+        jLabel31.setName("jLabel31"); // NOI18N
+
+        jLabel32.setText(resourceMap.getString("jLabel32.text")); // NOI18N
+        jLabel32.setName("jLabel32"); // NOI18N
+
+        jtxtTimeName.setText(resourceMap.getString("jtxtTimeName.text")); // NOI18N
+        jtxtTimeName.setName("jtxtTimeName"); // NOI18N
+
+        jLabel33.setText(resourceMap.getString("jLabel33.text")); // NOI18N
+        jLabel33.setName("jLabel33"); // NOI18N
+
+        buttonGroup1.add(jradSept);
+        jradSept.setText(resourceMap.getString("jradSept.text")); // NOI18N
+        jradSept.setName("jradSept"); // NOI18N
+
+        buttonGroup1.add(jradJan);
+        jradJan.setText(resourceMap.getString("jradJan.text")); // NOI18N
+        jradJan.setName("jradJan"); // NOI18N
+
+        jbtnSaveTimetable.setText(resourceMap.getString("jbtnSaveTimetable.text")); // NOI18N
+        jbtnSaveTimetable.setName("jbtnSaveTimetable"); // NOI18N
+        jbtnSaveTimetable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSaveTimetableActionPerformed(evt);
+            }
+        });
+
+        jbtnCancel.setText(resourceMap.getString("jbtnCancel.text")); // NOI18N
+        jbtnCancel.setName("jbtnCancel"); // NOI18N
+        jbtnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCancelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jdialAddTimetableLayout = new javax.swing.GroupLayout(jdialAddTimetable.getContentPane());
+        jdialAddTimetable.getContentPane().setLayout(jdialAddTimetableLayout);
+        jdialAddTimetableLayout.setHorizontalGroup(
+            jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdialAddTimetableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel31)
+                    .addGroup(jdialAddTimetableLayout.createSequentialGroup()
+                        .addComponent(jLabel32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtxtTimeName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jdialAddTimetableLayout.createSequentialGroup()
+                        .addComponent(jLabel33)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jradJan)
+                            .addComponent(jradSept)
+                            .addComponent(jbtnCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jbtnSaveTimetable, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        jdialAddTimetableLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jbtnCancel, jbtnSaveTimetable});
+
+        jdialAddTimetableLayout.setVerticalGroup(
+            jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdialAddTimetableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel31)
+                .addGap(18, 18, 18)
+                .addGroup(jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel32)
+                    .addComponent(jtxtTimeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel33)
+                    .addComponent(jradSept))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jradJan)
+                .addGap(18, 18, 18)
+                .addGroup(jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnSaveTimetable)
+                    .addComponent(jbtnCancel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setComponent(mainPanel);
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
@@ -1493,6 +1612,37 @@ public class RoboTest2View extends FrameView {
 
     }//GEN-LAST:event_jbtnRandomActionPerformed
 
+    private void jbtnSaveTimetableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveTimetableActionPerformed
+        timetableSelectModel.addElement((String)jtxtTimeName.getText());
+        if (jradSept.isSelected()){
+            Semester = 1;
+        }
+        if (jradJan.isSelected()) {
+            Semester = 2;
+        }
+        jdialAddTimetable.setVisible(false);
+        jtxtTimeName.setText("");
+    }//GEN-LAST:event_jbtnSaveTimetableActionPerformed
+
+    private void jbtnAddTimetableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddTimetableActionPerformed
+        RoboTest2App.getApplication().show(jdialAddTimetable);  
+    }//GEN-LAST:event_jbtnAddTimetableActionPerformed
+
+    private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
+        jdialAddTimetable.setVisible(false);
+    }//GEN-LAST:event_jbtnCancelActionPerformed
+
+    private void jbtnSwitchTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSwitchTimeActionPerformed
+        ClearTimetable();
+        List<Timetable> results = roboController.GetTimetablesFromDB("id", (String)jcomboTimetable.getSelectedItem());
+        
+        for(Timetable t: results){
+            Course newCourse = new Course(t.getCourseName());
+            AddCourse(newCourse);
+        }
+        
+    }//GEN-LAST:event_jbtnSwitchTimeActionPerformed
+
     private void jbtnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
        // String course = (String)jlistCourseList.getSelectedValue();
         AddCourse((Course)jlistCourseList.getSelectedValue());
@@ -1501,6 +1651,8 @@ public class RoboTest2View extends FrameView {
     private boolean AddCourse(Course courseName){
         // Khaled
         Course temp;           // Decleration of local variables to use temporarly for function.
+        Timetable newTimetable = new Timetable();
+        String timetableName = (String)jcomboTimetable.getSelectedItem();
         int row = 0;
         boolean toReturn = false;
         
@@ -1537,11 +1689,19 @@ public class RoboTest2View extends FrameView {
             }
 
             if (jtblMonday.getValueAt(row, 0).toString().isEmpty() && CourseNum < 5) {      //puts the course info on the timetable. And checks the number of courses 
+                
                 jtblMonday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
                 jtblWednesday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
                 jtblFriday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
                 DeletedCourses.addElement(temp);                                        //Adds the course to the delete course list for future deletion
                 CourseNum += 1;
+                
+                newTimetable.setCourseName(temp.getCourseName());
+                newTimetable.setUsername(Student.currentStudent.getUsername());
+                newTimetable.setSem(Semester);
+                newTimetable.setTimetableID(timetableName);
+                roboController.AddTimetableToDB(newTimetable);
+                
                 toReturn = true;// Keeps track of the number of courses
             } else {
                 System.out.println("Days(MWF) else");
@@ -1577,27 +1737,55 @@ public class RoboTest2View extends FrameView {
                 jtblThursday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
                 DeletedCourses.addElement(temp);
                 CourseNum += 1;
+                
+                newTimetable.setCourseName(temp.getCourseName());
+                newTimetable.setUsername(Student.currentStudent.getUsername());
+                newTimetable.setSem(Semester);
+                newTimetable.setTimetableID(timetableName);
+                roboController.AddTimetableToDB(newTimetable);
+
                 toReturn = true;
             } else {
                 System.out.println("Days(TR) else");
                 toReturn = false;
             }
         }
+
         jlistSchedule.setVisible(true);
         jlistSchedule.setModel(DeletedCourses);
         
         return toReturn;
     }
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {
         saveLabel.setVisible(true);
-        jlistSchedule.setVisible(true);                                        //Updates the delete course list and makes sure its visible/enabled
-        jlistSchedule.setModel(DeletedCourses);
+        if (Student.currentStudent.getName().equals(jtxtStudentName.getText()) ||
+                Student.currentStudent.getEmail().equals(jtxtEmail.getText()) ||
+                Student.currentStudent.getStudentNo().equals(String.valueOf(jtxtStudentNum.getText()))) {
+            
+            Student.currentStudent.setName(jtxtStudentName.getText());
+            Student.currentStudent.setEmail(jtxtEmail.getText());
+            Student.currentStudent.setStudentNo(Integer.decode(jtxtStudentNum.getText()));
+            
+            roboController.MergeStudentToDB(Student.currentStudent);
+        }
+//        jlistSchedule.setVisible(true);                                        //Updates the delete course list and makes sure its visible/enabled
+//        jlistSchedule.setModel(DeletedCourses);
     }
 
     private void jbtnDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
-
+    private void ClearTimetable(){
+        for(int i = 0;i < jtblMonday.getRowCount();i++){
+            jtblMonday.setValueAt("", i, 0);
+            jtblWednesday.setValueAt("", i, 0);
+            jtblFriday.setValueAt("", i, 0);
+        }
+        for(int i = 0;i < jtblTuesday.getRowCount();i++){
+            jtblTuesday.setValueAt("", i, 0);
+            jtblThursday.setValueAt("", i, 0);
+        }
+    }
     /**
      *
      * @author Kevin
@@ -1669,6 +1857,7 @@ public class RoboTest2View extends FrameView {
                 // Get Courses from the users transcript and then load them
                 // into the Transcript table.
                 roboController.GetUserTranscriptFromDB(Student.currentStudent);
+                roboController.GetTimetablesFromDB("byUsername",Student.currentStudent.getUsername());
                 LoadTranscript();
             }
 
@@ -1749,18 +1938,6 @@ public class RoboTest2View extends FrameView {
         }
 
     }
-
-    private void jbutAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
-
-
-        jtblMonday.setValueAt("CMPT 370\nTHORV 205A\nProfessor Roy", 3, 0);
-        jtblTuesday.setValueAt("CMPT 352\nTHORV 205A\nProfessor Roebuck", 4, 0);
-        jtblWednesday.setValueAt("CMPT 355\nTHORV 205A\nProfessor Coupal", 2, 0);
-        jtblThursday.setValueAt("CMPT 352\nTHORV 205A\nProfessor Roebuck", 4, 0);
-        jtblFriday.setValueAt("CMPT 332\nTHORV 205A\nProfessor SomeGuy", 1, 0);
-
-    }
-
     /**
      *
      * @author Kevin
@@ -1768,14 +1945,6 @@ public class RoboTest2View extends FrameView {
     private void jbtnBackToLoginActionPerformed(java.awt.event.ActionEvent evt) {
         CardLayout cl = (CardLayout) (mainPanel.getLayout());
         cl.show(mainPanel, "card1");
-    }
-
-    private void jbutDeleteCourseActionPerformed(java.awt.event.ActionEvent evt) {
-        jtblMonday.setValueAt("", 3, 0);
-        jtblTuesday.setValueAt("", 4, 0);
-        jtblWednesday.setValueAt("", 2, 0);
-        jtblThursday.setValueAt("", 4, 0);
-        jtblFriday.setValueAt("", 1, 0);
     }
 
     /**
@@ -2015,9 +2184,8 @@ public class RoboTest2View extends FrameView {
         jlistSchedule.setModel(DeletedCourses);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2042,6 +2210,9 @@ public class RoboTest2View extends FrameView {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2069,8 +2240,10 @@ public class RoboTest2View extends FrameView {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbtnAddCourse;
+    private javax.swing.JButton jbtnAddTimetable;
     private javax.swing.JButton jbtnAdmin;
     private javax.swing.JButton jbtnBackToLogin;
+    private javax.swing.JButton jbtnCancel;
     private javax.swing.JButton jbtnClear;
     private javax.swing.JButton jbtnDeleteCourse;
     private javax.swing.JButton jbtnFinishReg;
@@ -2078,9 +2251,14 @@ public class RoboTest2View extends FrameView {
     private javax.swing.JButton jbtnRandom;
     private javax.swing.JButton jbtnRegister;
     private javax.swing.JButton jbtnRegisterUser;
+    private javax.swing.JButton jbtnSave;
+    private javax.swing.JButton jbtnSaveTimetable;
+    private javax.swing.JButton jbtnSwitchTime;
     private javax.swing.JCheckBox jcheckAddTranscript;
     private javax.swing.JCheckBox jcheckAdmin;
     private javax.swing.JComboBox jcomboProgram;
+    private javax.swing.JComboBox jcomboTimetable;
+    private javax.swing.JDialog jdialAddTimetable;
     private javax.swing.JPasswordField jfieldPassword;
     private javax.swing.JTextField jfieldUsername;
     private javax.swing.JLabel jlblAdmin;
@@ -2109,6 +2287,8 @@ public class RoboTest2View extends FrameView {
     private javax.swing.JPanel jpanelLogin;
     private javax.swing.JPanel jpanelProfile;
     private javax.swing.JPanel jpanelTimeBar;
+    private javax.swing.JRadioButton jradJan;
+    private javax.swing.JRadioButton jradSept;
     private javax.swing.JScrollPane jscrollFriday;
     private javax.swing.JScrollPane jscrollMonday;
     private javax.swing.JScrollPane jscrollThursday;
@@ -2130,11 +2310,11 @@ public class RoboTest2View extends FrameView {
     private javax.swing.JTextField jtxtStudentName;
     private javax.swing.JTextField jtxtStudentNum;
     private javax.swing.JTextField jtxtStudentNumber;
+    private javax.swing.JTextField jtxtTimeName;
     private java.util.List<robotest2.Test> list;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JTextField persnalInfo;
-    private javax.swing.JButton saveButton;
     private javax.swing.JLabel saveLabel;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;

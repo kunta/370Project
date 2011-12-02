@@ -5,10 +5,10 @@
     <class>robotest2.Student</class>
     <class>robotest2.Course</class>
     <class>robotest2.Template</class>
-    <class>robotest2.Timetable</class>
     <class>robotest2.Transcript</class>
     <class>robotest2.Prereq</class>
     <class>robotest2.Test</class>
+    <class>robotest2.Timetable</class>
     <properties>
       <property name="toplink.jdbc.user" value="cmpt370group06"/>
       <property name="toplink.jdbc.password" value="fj2317jf"/>

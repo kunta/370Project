@@ -6,9 +6,12 @@ package robotest2;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,10 +29,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Timetable.findAll", query = "SELECT t FROM Timetable t"),
     @NamedQuery(name = "Timetable.findByUsername", query = "SELECT t FROM Timetable t WHERE t.username = :username"),
     @NamedQuery(name = "Timetable.findByCourseName", query = "SELECT t FROM Timetable t WHERE t.courseName = :courseName"),
-    @NamedQuery(name = "Timetable.findByTimetableID", query = "SELECT t FROM Timetable t WHERE t.timetableID = :timetableID")})
+    @NamedQuery(name = "Timetable.findByTimetableID", query = "SELECT t FROM Timetable t WHERE t.timetableID = :timetableID"),
+    @NamedQuery(name = "Timetable.findByMajor", query = "SELECT t FROM Timetable t WHERE t.major = :major"),
+    @NamedQuery(name = "Timetable.findByMajorClasses", query = "SELECT t FROM Timetable t WHERE t.majorClasses = :majorClasses"),
+    @NamedQuery(name = "Timetable.findByCoreReqClasses", query = "SELECT t FROM Timetable t WHERE t.coreReqClasses = :coreReqClasses"),
+    @NamedQuery(name = "Timetable.findByElectiveClasses", query = "SELECT t FROM Timetable t WHERE t.electiveClasses = :electiveClasses"),
+    @NamedQuery(name = "Timetable.findById", query = "SELECT t FROM Timetable t WHERE t.id = :id"),
+    @NamedQuery(name = "Timetable.findBySem", query = "SELECT t FROM Timetable t WHERE t.sem = :sem")})
 public class Timetable implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
     @Basic(optional = false)
     @Column(name = "username")
     private String username;
@@ -37,13 +45,34 @@ public class Timetable implements Serializable {
     private String courseName;
     @Column(name = "timetableID")
     private String timetableID;
+    @Column(name = "major")
+    private String major;
+    @Column(name = "majorClasses")
+    private String majorClasses;
+    @Column(name = "coreReqClasses")
+    private String coreReqClasses;
+    @Column(name = "electiveClasses")
+    private String electiveClasses;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "SEM")
+    private Integer sem;
 
+    static List<String> timetableNameList = new LinkedList<String>();
     static LinkedList<Timetable> currentTimetables = new LinkedList<Timetable>();
     
     public Timetable() {
     }
 
-    public Timetable(String username) {
+    public Timetable(Integer id) {
+        this.id = id;
+    }
+
+    public Timetable(Integer id, String username) {
+        this.id = id;
         this.username = username;
     }
 
@@ -71,10 +100,58 @@ public class Timetable implements Serializable {
         this.timetableID = timetableID;
     }
 
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getMajorClasses() {
+        return majorClasses;
+    }
+
+    public void setMajorClasses(String majorClasses) {
+        this.majorClasses = majorClasses;
+    }
+
+    public String getCoreReqClasses() {
+        return coreReqClasses;
+    }
+
+    public void setCoreReqClasses(String coreReqClasses) {
+        this.coreReqClasses = coreReqClasses;
+    }
+
+    public String getElectiveClasses() {
+        return electiveClasses;
+    }
+
+    public void setElectiveClasses(String electiveClasses) {
+        this.electiveClasses = electiveClasses;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getSem() {
+        return sem;
+    }
+
+    public void setSem(Integer sem) {
+        this.sem = sem;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (username != null ? username.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -85,7 +162,7 @@ public class Timetable implements Serializable {
             return false;
         }
         Timetable other = (Timetable) object;
-        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -93,7 +170,7 @@ public class Timetable implements Serializable {
 
     @Override
     public String toString() {
-        return "robotest2.Timetable[ username=" + username + " ]";
+        return "robotest2.Timetable[ id=" + id + " ]";
     }
     
 }
