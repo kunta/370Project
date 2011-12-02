@@ -54,7 +54,7 @@
                               <Component id="jfieldUsername" alignment="0" pref="191" max="32767" attributes="1"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="324" max="32767" attributes="0"/>
+                      <EmptySpace pref="253" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -85,7 +85,7 @@
                           <Component id="jbtnRegister" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="405" max="32767" attributes="0"/>
+                      <EmptySpace pref="400" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -243,7 +243,7 @@
                               <Component id="jcheckAddTranscript" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="461" max="32767" attributes="0"/>
+                      <EmptySpace pref="408" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -309,7 +309,7 @@
                           <Component id="jbtnRegisterUser" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbtnBackToLogin" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="310" max="32767" attributes="0"/>
+                      <EmptySpace pref="306" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -477,7 +477,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="489" max="-2" attributes="0"/>
-                      <EmptySpace pref="56" max="32767" attributes="0"/>
+                      <EmptySpace pref="52" max="32767" attributes="0"/>
                       <Component id="jbtnFinishReg" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -550,7 +550,7 @@
                               <EmptySpace min="12" pref="12" max="12" attributes="0"/>
                               <Component id="jtabMain" min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jOptionsBar" alignment="0" pref="716" max="32767" attributes="0"/>
+                          <Component id="jOptionsBar" alignment="0" pref="714" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -650,16 +650,13 @@
                               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                               <Component id="jscrollFriday" linkSize="1" min="-2" pref="23" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jbtnSwitchTime" linkSize="4" max="32767" attributes="1"/>
-                                      <Component id="jbtnAddCourse" max="32767" attributes="1"/>
-                                      <Component id="jScrollPane1" alignment="0" pref="102" max="32767" attributes="1"/>
-                                      <Component id="jScrollPane3" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
-                                      <Component id="jbtnDeleteCourse" alignment="0" min="-2" max="-2" attributes="1"/>
-                                      <Component id="jcomboTimetable" alignment="0" max="32767" attributes="1"/>
-                                  </Group>
-                                  <Component id="jbtnAddTimetable" linkSize="4" pref="113" max="32767" attributes="1"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jbtnSwitchTime" max="32767" attributes="1"/>
+                                  <Component id="jbtnAddCourse" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane1" alignment="0" pref="102" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane3" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
+                                  <Component id="jbtnDeleteCourse" alignment="0" min="-2" max="-2" attributes="1"/>
+                                  <Component id="jcomboTimetable" alignment="0" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -672,10 +669,8 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jcomboTimetable" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jbtnSwitchTime" linkSize="5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jbtnAddTimetable" linkSize="5" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                                      <Component id="jbtnSwitchTime" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                                       <Component id="jbtnAddCourse" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -1150,15 +1145,6 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnSwitchTimeActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jbtnAddTimetable">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" resourceKey="jbtnAddTimetable.text"/>
-                        <Property name="name" type="java.lang.String" value="jbtnAddTimetable" noResource="true"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnAddTimetableActionPerformed"/>
-                      </Events>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jpanelProfile">
@@ -1184,7 +1170,7 @@
                                       <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
                                       <Component id="jbtnSave" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="persnalInfo" alignment="0" pref="679" max="32767" attributes="1"/>
+                                  <Component id="persnalInfo" alignment="0" pref="673" max="32767" attributes="1"/>
                                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1240,7 +1226,7 @@
                                   <Component id="jbtnSave" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="saveLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="487" max="32767" attributes="0"/>
+                              <EmptySpace pref="486" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1380,7 +1366,7 @@
                                               <Component id="jScrollPane8" alignment="0" max="32767" attributes="1"/>
                                               <Component id="jScrollPane10" alignment="0" max="32767" attributes="1"/>
                                           </Group>
-                                          <EmptySpace pref="108" max="32767" attributes="0"/>
+                                          <EmptySpace pref="102" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1412,7 +1398,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jScrollPane6" pref="284" max="32767" attributes="0"/>
+                                      <Component id="jScrollPane6" pref="281" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jScrollPane8" min="0" pref="0" max="32767" attributes="0"/>
@@ -1759,7 +1745,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusMessageLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="706" max="32767" attributes="0"/>
+                  <EmptySpace pref="702" max="32767" attributes="0"/>
                   <Component id="statusAnimationLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
