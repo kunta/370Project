@@ -34,6 +34,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.JOptionPane;
 
+
+// This class was borrowed from: http://www.java2s.com/Code/Java/Swing-Components/MultiLineCellExample.htm
+// so we can have multiple lines in each JTable cell.
 /**
  * The application's main frame.
  */
@@ -312,17 +315,8 @@ public class RoboTest2View extends FrameView {
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
-        //list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(((javax.persistence.Query)null).getResultList());
+        list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(((javax.persistence.Query)null).getResultList());
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        jdialAddTimetable = new javax.swing.JDialog();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jtxtTimeName = new javax.swing.JTextField();
-        jLabel33 = new javax.swing.JLabel();
-        jradSept = new javax.swing.JRadioButton();
-        jradJan = new javax.swing.JRadioButton();
-        jbtnSaveTimetable = new javax.swing.JButton();
-        jbtnCancel = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
 
         mainPanel.setMinimumSize(new java.awt.Dimension(500, 400));
@@ -413,7 +407,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jfieldPassword, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jfieldUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         jpanelLoginLayout.setVerticalGroup(
             jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,7 +432,7 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnRegister)
                     .addComponent(jButton1))
-                .addContainerGap(400, Short.MAX_VALUE))
+                .addContainerGap(372, Short.MAX_VALUE))
         );
 
         mainPanel.add(jpanelLogin, "card1");
@@ -562,7 +556,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jcheckAddTranscript)))
-                .addContainerGap(408, Short.MAX_VALUE))
+                .addContainerGap(419, Short.MAX_VALUE))
         );
         jPanelRegisterLayout.setVerticalGroup(
             jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -613,7 +607,7 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnRegisterUser)
                     .addComponent(jbtnBackToLogin))
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
 
         mainPanel.add(jPanelRegister, "card2");
@@ -658,7 +652,7 @@ public class RoboTest2View extends FrameView {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jbtnFinishReg)
                 .addContainerGap())
         );
@@ -1179,7 +1173,7 @@ public class RoboTest2View extends FrameView {
                         .addComponent(saveLabel)
                         .addGap(110, 110, 110)
                         .addComponent(jbtnSave))
-                    .addComponent(persnalInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
+                    .addComponent(persnalInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
                     .addComponent(jLabel8)
                     .addGroup(jpanelProfileLayout.createSequentialGroup()
                         .addGroup(jpanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1223,7 +1217,7 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jpanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnSave)
                     .addComponent(saveLabel))
-                .addContainerGap(486, Short.MAX_VALUE))
+                .addContainerGap(446, Short.MAX_VALUE))
         );
 
         jtabMain.addTab("Profile", jpanelProfile);
@@ -1349,7 +1343,7 @@ public class RoboTest2View extends FrameView {
                                 .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addContainerGap(102, Short.MAX_VALUE)))))
+                            .addContainerGap(97, Short.MAX_VALUE)))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1373,7 +1367,7 @@ public class RoboTest2View extends FrameView {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane8, 0, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1475,91 +1469,6 @@ public class RoboTest2View extends FrameView {
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
-        jdialAddTimetable.setName("jdialAddTimetable"); // NOI18N
-
-        jLabel31.setText(resourceMap.getString("jLabel31.text")); // NOI18N
-        jLabel31.setName("jLabel31"); // NOI18N
-
-        jLabel32.setText(resourceMap.getString("jLabel32.text")); // NOI18N
-        jLabel32.setName("jLabel32"); // NOI18N
-
-        jtxtTimeName.setText(resourceMap.getString("jtxtTimeName.text")); // NOI18N
-        jtxtTimeName.setName("jtxtTimeName"); // NOI18N
-
-        jLabel33.setText(resourceMap.getString("jLabel33.text")); // NOI18N
-        jLabel33.setName("jLabel33"); // NOI18N
-
-        buttonGroup1.add(jradSept);
-        jradSept.setText(resourceMap.getString("jradSept.text")); // NOI18N
-        jradSept.setName("jradSept"); // NOI18N
-
-        buttonGroup1.add(jradJan);
-        jradJan.setText(resourceMap.getString("jradJan.text")); // NOI18N
-        jradJan.setName("jradJan"); // NOI18N
-
-        jbtnSaveTimetable.setText(resourceMap.getString("jbtnSaveTimetable.text")); // NOI18N
-        jbtnSaveTimetable.setName("jbtnSaveTimetable"); // NOI18N
-        jbtnSaveTimetable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSaveTimetableActionPerformed(evt);
-            }
-        });
-
-        jbtnCancel.setText(resourceMap.getString("jbtnCancel.text")); // NOI18N
-        jbtnCancel.setName("jbtnCancel"); // NOI18N
-        jbtnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnCancelActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jdialAddTimetableLayout = new javax.swing.GroupLayout(jdialAddTimetable.getContentPane());
-        jdialAddTimetable.getContentPane().setLayout(jdialAddTimetableLayout);
-        jdialAddTimetableLayout.setHorizontalGroup(
-            jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jdialAddTimetableLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel31)
-                    .addGroup(jdialAddTimetableLayout.createSequentialGroup()
-                        .addComponent(jLabel32)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtTimeName, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jdialAddTimetableLayout.createSequentialGroup()
-                        .addComponent(jLabel33)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jradJan)
-                            .addComponent(jradSept)
-                            .addComponent(jbtnCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jbtnSaveTimetable, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-
-        jdialAddTimetableLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jbtnCancel, jbtnSaveTimetable});
-
-        jdialAddTimetableLayout.setVerticalGroup(
-            jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jdialAddTimetableLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel31)
-                .addGap(18, 18, 18)
-                .addGroup(jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(jtxtTimeName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel33)
-                    .addComponent(jradSept))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jradJan)
-                .addGap(18, 18, 18)
-                .addGroup(jdialAddTimetableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnSaveTimetable)
-                    .addComponent(jbtnCancel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         setComponent(mainPanel);
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
@@ -1590,11 +1499,8 @@ public class RoboTest2View extends FrameView {
             if (!AddCourse(newCourse)) {
                 randomInt = rGen.nextInt(Course.CourseCatalog.size());
                 newCourse = Course.CourseCatalog.get(randomInt);
-                System.out.println("In addCourse loop if course = " + newCourse.getCourseName());
-                System.out.println("RandomInt = " + randomInt);
                 break;
             } else {
-                System.out.println("In addCourse loop else");
                 canAddCourse = true;
                 break;
             }
@@ -1602,22 +1508,6 @@ public class RoboTest2View extends FrameView {
         
 
     }//GEN-LAST:event_jbtnRandomActionPerformed
-
-    private void jbtnSaveTimetableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveTimetableActionPerformed
-        timetableSelectModel.addElement((String)jtxtTimeName.getText());
-        if (jradSept.isSelected()){
-            Semester = 1;
-        }
-        if (jradJan.isSelected()) {
-            Semester = 2;
-        }
-        jdialAddTimetable.setVisible(false);
-        jtxtTimeName.setText("");
-    }//GEN-LAST:event_jbtnSaveTimetableActionPerformed
-
-    private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
-        jdialAddTimetable.setVisible(false);
-    }//GEN-LAST:event_jbtnCancelActionPerformed
 
     private void jbtnSwitchTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSwitchTimeActionPerformed
         ClearTimetable();
@@ -1772,7 +1662,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         saveLabel.setVisible(true);
         if (Student.currentStudent.getName().equals(jtxtStudentName.getText()) ||
                 Student.currentStudent.getEmail().equals(jtxtEmail.getText()) ||
-                Student.currentStudent.getStudentNo().equals(String.valueOf(jtxtStudentNum.getText()))) {
+                Student.currentStudent.getStudentNo().equals(Integer.decode(jtxtStudentNum.getText()))) {
             
             Student.currentStudent.setName(jtxtStudentName.getText());
             Student.currentStudent.setEmail(jtxtEmail.getText());
@@ -2228,9 +2118,6 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2260,7 +2147,6 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton jbtnAddCourse;
     private javax.swing.JButton jbtnAdmin;
     private javax.swing.JButton jbtnBackToLogin;
-    private javax.swing.JButton jbtnCancel;
     private javax.swing.JButton jbtnClear;
     private javax.swing.JButton jbtnDeleteCourse;
     private javax.swing.JButton jbtnFinishReg;
@@ -2269,13 +2155,11 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton jbtnRegister;
     private javax.swing.JButton jbtnRegisterUser;
     private javax.swing.JButton jbtnSave;
-    private javax.swing.JButton jbtnSaveTimetable;
     private javax.swing.JButton jbtnSwitchTime;
     private javax.swing.JCheckBox jcheckAddTranscript;
     private javax.swing.JCheckBox jcheckAdmin;
     private javax.swing.JComboBox jcomboProgram;
     private javax.swing.JComboBox jcomboTimetable;
-    private javax.swing.JDialog jdialAddTimetable;
     private javax.swing.JPasswordField jfieldPassword;
     private javax.swing.JTextField jfieldUsername;
     private javax.swing.JLabel jlblAdmin;
@@ -2304,8 +2188,6 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JPanel jpanelLogin;
     private javax.swing.JPanel jpanelProfile;
     private javax.swing.JPanel jpanelTimeBar;
-    private javax.swing.JRadioButton jradJan;
-    private javax.swing.JRadioButton jradSept;
     private javax.swing.JScrollPane jscrollFriday;
     private javax.swing.JScrollPane jscrollMonday;
     private javax.swing.JScrollPane jscrollThursday;
@@ -2327,7 +2209,6 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JTextField jtxtStudentName;
     private javax.swing.JTextField jtxtStudentNum;
     private javax.swing.JTextField jtxtStudentNumber;
-    private javax.swing.JTextField jtxtTimeName;
     private java.util.List<robotest2.Test> list;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
@@ -2345,9 +2226,6 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private JDialog aboutBox;
     private boolean saveNeeded;
 }
-
-// This class was borrowed from: http://www.java2s.com/Code/Java/Swing-Components/MultiLineCellExample.htm
-// so we can have multiple lines in each JTable cell.
 class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
 
     public MultiLineCellRenderer() {
