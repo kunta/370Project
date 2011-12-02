@@ -10,7 +10,7 @@
  */
 package robotest2;
 
-import java.awt.CardLayout;
+
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author PMT
+ * @author Patrick
  */
 public class TimetblView extends javax.swing.JFrame {
     
@@ -52,7 +52,6 @@ public class TimetblView extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(robotest2.RoboTest2App.class).getContext().getResourceMap(TimetblView.class);
@@ -77,6 +76,11 @@ public class TimetblView extends javax.swing.JFrame {
 
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,30 +123,33 @@ public class TimetblView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        public void jButton1ActionPerformed(java.awt.event.ActionEvent evt){
-        Timetable newTimetable = new Timetable();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
         
-        if(jRadioButton1.isSelected()){
-            newTimetable.setSem(1);
-        }
-        else {
-            newTimetable.setSem(2);
-        }
+          Timetable newTimetable = new Timetable();
+
+                if (jRadioButton1.isSelected()) {
+                    newTimetable.setSem(1);
+                } else {
+                    newTimetable.setSem(2);
+                }
+
+                if (!jTextField1.getText().isEmpty()) {
+                    newTimetable.setTimetableName(jTextField1.getText());
+                    Timetable.timetableNameList.add(jTextField1.getText());
+                    newTimetable.setUsername(Student.currentStudent.getUsername());
+                    newTimetable.setCourseName("null");
+                    newTimetable.setMajor("null");
+                    newTimetable.setMajorClasses("null");
+                    newTimetable.setCoreReqClasses("null");
+                    newTimetable.setElectiveClasses("null");
+                    roboControl.AddTimetableToDB(newTimetable);
+                    System.out.println("TEST");
+
+                }
         
-        if(!jTextField1.getText().isEmpty()){
-            newTimetable.setTimetableName(jTextField1.getText());
-            Timetable.timetableNameList.add(jTextField1.getText());
-            newTimetable.setCourseName(" ");
-            newTimetable.setMajor(" ");
-            newTimetable.setMajorClasses(" ");
-            newTimetable.setCoreReqClasses(" ");
-            newTimetable.setElectiveClasses(" ");
-            roboControl.AddTimetableToDB(newTimetable);
-            
-        }
-        
-        
-    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
         
     
     /**
