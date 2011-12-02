@@ -1586,7 +1586,7 @@ public class RoboTest2View extends FrameView {
             newCourse = Course.CourseCatalog.get(randomInt);
         }
         
-        while (!canAddCourse) {
+        while (!canAddCourse && CourseNum < 5) {
             if (!AddCourse(newCourse)) {
                 randomInt = rGen.nextInt(Course.CourseCatalog.size());
                 newCourse = Course.CourseCatalog.get(randomInt);
@@ -1637,7 +1637,9 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void jbtnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
        // String course = (String)jlistCourseList.getSelectedValue();
-        AddCourse((Course)jlistCourseList.getSelectedValue());
+        if (!AddCourse((Course)jlistCourseList.getSelectedValue())){
+            JOptionPane.showMessageDialog(frame, "The timeslot for this class is already taken or the timetable is full!");
+        }
     }
 
     private boolean AddCourse(Course courseName){
@@ -1648,9 +1650,6 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         String timetableName = (String)jcomboTimetable.getSelectedItem();
         int row = 0;
         boolean toReturn = false;
-        
-        //temp = Course.CourseCatalog.get(Course.CourseCatalog.indexOf(roboController.GetCourseFromDB(courseName.getCourseName())));
-        //temp = (Course) jlistCourseList.getSelectedValue();
         
         if (courseName.getDays().equals("MWF")) {                               //If then statement to determine the location a course should be put in
             if (courseName.getStartTime() == 830) {
@@ -1681,15 +1680,15 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 row = 12;
             }
 
-              if (!(jtblMonday.getValueAt(row, 0).toString().isEmpty())) 
-                    JOptionPane.showMessageDialog(frame, "The timeslot for this class is already taken");
-              else
-              {
-                CourseNum += 1;
-                if(CourseNum > 5) 
-                     JOptionPane.showMessageDialog(frame, "You cannot take more than 5 classes");
-                CourseNum -= 1;
-              } 
+//              if (!(jtblMonday.getValueAt(row, 0).toString().isEmpty())) 
+//                    JOptionPane.showMessageDialog(frame, "The timeslot for this class is already taken");
+//              else
+//              {
+//                CourseNum += 1;
+//                if(CourseNum > 4) 
+//                     JOptionPane.showMessageDialog(frame, "You cannot take more than 5 classes");
+//                CourseNum -= 1;
+//              } 
               
             if (jtblMonday.getValueAt(row, 0).toString().isEmpty() && CourseNum < 5) {      //puts the course info on the timetable. And checks the number of courses 
                 
@@ -1735,15 +1734,15 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 row = 8;
             }
 
-            if (!(jtblTuesday.getValueAt(row, 0).toString().isEmpty())) 
-                    JOptionPane.showMessageDialog(frame, "The timeslot for this class is already taken");
-              else
-              {
-                CourseNum += 1;
-                if(CourseNum > 5) 
-                     JOptionPane.showMessageDialog(frame, "You cannot take more than 5 classes");
-                CourseNum -= 1;
-              } 
+//            if (!(jtblTuesday.getValueAt(row, 0).toString().isEmpty())) 
+//                    JOptionPane.showMessageDialog(frame, "The timeslot for this class is already taken");
+//              else
+//              {
+//                CourseNum += 1;
+//                if(CourseNum > 5) 
+//                     JOptionPane.showMessageDialog(frame, "You cannot take more than 5 classes");
+//                CourseNum -= 1;
+//              } 
 
             if (jtblTuesday.getValueAt(row, 0).toString().isEmpty() && CourseNum < 5) {
                 jtblTuesday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
