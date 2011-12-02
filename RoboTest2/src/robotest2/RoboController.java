@@ -237,6 +237,12 @@ public class RoboController extends Thread {
             eManager.getTransaction().rollback();
         }
 
+        for (Timetable t : results) {
+            if (!Timetable.timetableNameList.contains(t.getTimetableName())) {
+                Timetable.timetableNameList.add(t.getTimetableName());
+            }
+        }
+        
         return results;
     }
     
@@ -256,7 +262,9 @@ public class RoboController extends Thread {
             eManager.getTransaction().rollback();
         }
 
+        
         eManager.close();
+        
 
     }
 

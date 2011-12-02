@@ -35,8 +35,6 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.JOptionPane;
 
 
-// This class was borrowed from: http://www.java2s.com/Code/Java/Swing-Components/MultiLineCellExample.htm
-// so we can have multiple lines in each JTable cell.
 /**
  * The application's main frame.
  */
@@ -72,9 +70,7 @@ public class RoboTest2View extends FrameView {
         for (String s : Template.templateNameList) {
             jcomboProgram.addItem(s);
         }
-        for (String s : Timetable.timetableNameList) {
-            jcomboTimetable.addItem(s);
-        }
+
 
         // This whole status bar section is a leftover from the initial code made
         // by the sample project in netbeans. I've left it here because I'm lazy and
@@ -316,7 +312,7 @@ public class RoboTest2View extends FrameView {
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
-        list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(((javax.persistence.Query)null).getResultList());
+        //list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(((javax.persistence.Query)null).getResultList());
         jPopupMenu1 = new javax.swing.JPopupMenu();
         buttonGroup1 = new javax.swing.ButtonGroup();
 
@@ -408,8 +404,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jfieldPassword, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jfieldUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)))
-                //.addContainerGap(261, Short.MAX_VALUE))
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         jpanelLoginLayout.setVerticalGroup(
             jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,8 +429,7 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jpanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnRegister)
                     .addComponent(jButton1))
-                //.addContainerGap(372, Short.MAX_VALUE))
-                .addContainerGap(405, Short.MAX_VALUE))
+                .addContainerGap(372, Short.MAX_VALUE))
         );
 
         mainPanel.add(jpanelLogin, "card1");
@@ -559,8 +553,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jPanelRegisterLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jcheckAddTranscript)))
-                //.addContainerGap(419, Short.MAX_VALUE))
-                .addContainerGap(461, Short.MAX_VALUE))
+                .addContainerGap(419, Short.MAX_VALUE))
         );
         jPanelRegisterLayout.setVerticalGroup(
             jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -611,8 +604,7 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jPanelRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnRegisterUser)
                     .addComponent(jbtnBackToLogin))
-                //.addContainerGap(259, Short.MAX_VALUE))
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
 
         mainPanel.add(jPanelRegister, "card2");
@@ -657,8 +649,7 @@ public class RoboTest2View extends FrameView {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jbtnFinishReg)
                 .addContainerGap())
         );
@@ -1064,6 +1055,7 @@ public class RoboTest2View extends FrameView {
             }
         });
 
+        jcomboTimetable.setMaximumRowCount(100);
         jcomboTimetable.setModel(timetableSelectModel);
         jcomboTimetable.setName("jcomboTimetable"); // NOI18N
 
@@ -1187,8 +1179,7 @@ public class RoboTest2View extends FrameView {
                         .addComponent(saveLabel)
                         .addGap(110, 110, 110)
                         .addComponent(jbtnSave))
-                    //.addComponent(persnalInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
-                    .addComponent(persnalInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+                    .addComponent(persnalInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
                     .addComponent(jLabel8)
                     .addGroup(jpanelProfileLayout.createSequentialGroup()
                         .addGroup(jpanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1232,8 +1223,7 @@ public class RoboTest2View extends FrameView {
                 .addGroup(jpanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnSave)
                     .addComponent(saveLabel))
-                //.addContainerGap(446, Short.MAX_VALUE))
-                .addContainerGap(487, Short.MAX_VALUE))
+                .addContainerGap(446, Short.MAX_VALUE))
         );
 
         jtabMain.addTab("Profile", jpanelProfile);
@@ -1359,8 +1349,7 @@ public class RoboTest2View extends FrameView {
                                 .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane10, javax.swing.GroupLayout.Alignment.LEADING))
-                            //.addContainerGap(97, Short.MAX_VALUE)))))
-                            .addContainerGap(108, Short.MAX_VALUE)))))
+                            .addContainerGap(97, Short.MAX_VALUE)))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1384,8 +1373,7 @@ public class RoboTest2View extends FrameView {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        //.addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE))
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane8, 0, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1414,7 +1402,7 @@ public class RoboTest2View extends FrameView {
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jtabMain, 0, 0, Short.MAX_VALUE))
-                    .addComponent(jOptionsBar, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
+                    .addComponent(jOptionsBar, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
@@ -1470,7 +1458,7 @@ public class RoboTest2View extends FrameView {
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 706, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 702, Short.MAX_VALUE)
                 .addComponent(statusAnimationLabel)
                 .addContainerGap())
         );
@@ -1529,12 +1517,14 @@ public class RoboTest2View extends FrameView {
 
     private void jbtnSwitchTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSwitchTimeActionPerformed
         ClearTimetable();
-       // List<Timetable> results = roboController.GetTimetablesFromDB("id", (String)jcomboTimetable.getSelectedItem());
-        
-//        for(Timetable t: results){
-//            Course newCourse = new Course(t.getCourseName());
-//            AddCourse(newCourse);
-//        }
+        //List<Timetable> results = roboController.GetTimetablesFromDB("id", (String) jcomboTimetable.getSelectedItem());
+
+        for (Timetable t : Timetable.currentTimetables) {
+            if ((String) jcomboTimetable.getSelectedItem() == t.getTimetableName() ) {
+                Course newCourse = new Course(t.getCourseName());
+                AddCourse(newCourse);
+            }
+        }
         
     }//GEN-LAST:event_jbtnSwitchTimeActionPerformed
 
@@ -1767,8 +1757,12 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 // Get Courses from the users transcript and then load them
                 // into the Transcript table.
                 roboController.GetUserTranscriptFromDB(Student.currentStudent);
+                
                 roboController.GetTimetablesFromDB(Student.currentStudent.getUsername());
-                //roboController.GetTimetablesFromDB("byUsername",Student.currentStudent.getUsername());
+                for (String s : Timetable.timetableNameList) {
+                    jcomboTimetable.addItem(s);
+                }
+                
                 LoadTranscript();
             }
 
