@@ -32,6 +32,7 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.JOptionPane;
 
 /**
  * The application's main frame.
@@ -49,6 +50,7 @@ public class RoboTest2View extends FrameView {
     DefaultListModel generalModel = new DefaultListModel();
     DefaultListModel electiveModel = new DefaultListModel();
     DefaultListModel DeletedCourses = new DefaultListModel();   //List for deleted courses. Had to be cross functions.
+    JFrame frame = new JFrame("Message");
     DefaultComboBoxModel timetableSelectModel = new DefaultComboBoxModel();
     int CourseNum = 0;
     int Semester = 1;
@@ -124,6 +126,7 @@ public class RoboTest2View extends FrameView {
             }
         });
         // Khaled
+       
         jlistSchedule.setVisible(false); // Hides the delete course list since timetable has no classes
 
         DefaultListModel Courses = new DefaultListModel();
@@ -381,6 +384,11 @@ public class RoboTest2View extends FrameView {
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setActionCommand(resourceMap.getString("jButton1.actionCommand")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanelLoginLayout = new javax.swing.GroupLayout(jpanelLogin);
         jpanelLogin.setLayout(jpanelLoginLayout);
@@ -1587,7 +1595,7 @@ public class RoboTest2View extends FrameView {
             newCourse = Course.CourseCatalog.get(randomInt);
         }
         
-        while (!canAddCourse) {
+        while (!canAddCourse && CourseNum < 5) {
             if (!AddCourse(newCourse)) {
                 randomInt = rGen.nextInt(Course.CourseCatalog.size());
                 newCourse = Course.CourseCatalog.get(randomInt);
@@ -1622,73 +1630,85 @@ public class RoboTest2View extends FrameView {
 
     private void jbtnSwitchTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSwitchTimeActionPerformed
         ClearTimetable();
-        List<Timetable> results = roboController.GetTimetablesFromDB(Student.currentStudent.getUsername());
+       // List<Timetable> results = roboController.GetTimetablesFromDB("id", (String)jcomboTimetable.getSelectedItem());
         
-        for(Timetable t: results){
-            Course newCourse = new Course(t.getCourseName());
-            AddCourse(newCourse);
-        }
+//        for(Timetable t: results){
+//            Course newCourse = new Course(t.getCourseName());
+//            AddCourse(newCourse);
+//        }
         
     }//GEN-LAST:event_jbtnSwitchTimeActionPerformed
 
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    Student temp = roboController.GetStudentFromDB(jfieldUsername.getText());
+    sendMail.Send(temp.getEmail());
+}//GEN-LAST:event_jButton1ActionPerformed
+
     private void jbtnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
        // String course = (String)jlistCourseList.getSelectedValue();
-        AddCourse((Course)jlistCourseList.getSelectedValue());
+        if (!AddCourse((Course)jlistCourseList.getSelectedValue())){
+            JOptionPane.showMessageDialog(frame, "The timeslot for this class is already taken or the timetable is full!");
+        }
     }
 
     private boolean AddCourse(Course courseName){
         // Khaled
+        
         Course temp;           // Decleration of local variables to use temporarly for function.
         Timetable newTimetable = new Timetable();
         String timetableName = (String)jcomboTimetable.getSelectedItem();
         int row = 0;
         boolean toReturn = false;
         
-        //temp = Course.CourseCatalog.get(Course.CourseCatalog.indexOf(roboController.GetCourseFromDB(courseName.getCourseName())));
-        temp = (Course) jlistCourseList.getSelectedValue();
-
-        if (temp.getDays().equals("MWF")) {                               //If then statement to determine the location a course should be put in
-            if (temp.getStartTime() == 830) {
+        if (courseName.getDays().equals("MWF")) {                               //If then statement to determine the location a course should be put in
+            if (courseName.getStartTime() == 830) {
                 row = 0;
-            } else if (temp.getStartTime() == 930) {
+            } else if (courseName.getStartTime() == 930) {
                 row = 1;
-            } else if (temp.getStartTime() == 1030) {
+            } else if (courseName.getStartTime() == 1030) {
                 row = 2;
-            } else if (temp.getStartTime() == 1130) {
+            } else if (courseName.getStartTime() == 1130) {
                 row = 3;
-            } else if (temp.getStartTime() == 1230) {
+            } else if (courseName.getStartTime() == 1230) {
                 row = 4;
-            } else if (temp.getStartTime() == 1330) {
+            } else if (courseName.getStartTime() == 1330) {
                 row = 5;
-            } else if (temp.getStartTime() == 1430) {
+            } else if (courseName.getStartTime() == 1430) {
                 row = 6;
-            } else if (temp.getStartTime() == 1530) {
+            } else if (courseName.getStartTime() == 1530) {
                 row = 7;
-            } else if (temp.getStartTime() == 1630) {
+            } else if (courseName.getStartTime() == 1630) {
                 row = 8;
-            } else if (temp.getStartTime() == 1730) {
+            } else if (courseName.getStartTime() == 1730) {
                 row = 9;
-            } else if (temp.getStartTime() == 1830) {
+            } else if (courseName.getStartTime() == 1830) {
                 row = 10;
-            } else if (temp.getStartTime() == 1930) {
+            } else if (courseName.getStartTime() == 1930) {
                 row = 11;
-            } else if (temp.getStartTime() == 2030) {
+            } else if (courseName.getStartTime() == 2030) {
                 row = 12;
             }
 
+//              if (!(jtblMonday.getValueAt(row, 0).toString().isEmpty())) 
+//                    JOptionPane.showMessageDialog(frame, "The timeslot for this class is already taken");
+//              else
+//              {
+//                CourseNum += 1;
+//                if(CourseNum > 4) 
+//                     JOptionPane.showMessageDialog(frame, "You cannot take more than 5 classes");
+//                CourseNum -= 1;
+//              } 
+              
             if (jtblMonday.getValueAt(row, 0).toString().isEmpty() && CourseNum < 5) {      //puts the course info on the timetable. And checks the number of courses 
                 
-                jtblMonday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
-                jtblWednesday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
-                jtblFriday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
-                DeletedCourses.addElement(temp);                                        //Adds the course to the delete course list for future deletion
+                
+                
+                jtblMonday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
+                jtblWednesday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
+                jtblFriday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
+                DeletedCourses.addElement(courseName);                                        //Adds the course to the delete course list for future deletion
                 CourseNum += 1;
                 
-                newTimetable.setCourseName(temp.getCourseName());
-                newTimetable.setUsername(Student.currentStudent.getUsername());
-                newTimetable.setSem(Semester);
-                newTimetable.setTimetableName(timetableName);
-                roboController.AddTimetableToDB(newTimetable);
                 
                 toReturn = true;// Keeps track of the number of courses
             } else {
@@ -1697,40 +1717,43 @@ public class RoboTest2View extends FrameView {
             }
         }
 
-        if (temp.getDays().equals("TR")) {                                        //Same as above, but for tuesday and thursday classes
-            if (temp.getStartTime() == 830) {
+        if (courseName.getDays().equals("TR")) {                                        //Same as above, but for tuesday and thursday classes
+            if (courseName.getStartTime() == 830) {
                 row = 0;
-            } else if (temp.getStartTime() == 1000) {
+            } else if (courseName.getStartTime() == 1000) {
                 row = 1;
-            } else if (temp.getStartTime() == 1130) {
+            } else if (courseName.getStartTime() == 1130) {
                 row = 2;
-            } else if (temp.getStartTime() == 1300) {
+            } else if (courseName.getStartTime() == 1300) {
                 row = 3;
-            } else if (temp.getStartTime() == 1430) {
+            } else if (courseName.getStartTime() == 1430) {
                 row = 4;
-            } else if (temp.getStartTime() == 1600) {
+            } else if (courseName.getStartTime() == 1600) {
                 row = 5;
-            } else if (temp.getStartTime() == 1730) {
+            } else if (courseName.getStartTime() == 1730) {
                 row = 6;
-            } else if (temp.getStartTime() == 1900) {
+            } else if (courseName.getStartTime() == 1900) {
                 row = 7;
-            } else if (temp.getStartTime() == 2030) {
+            } else if (courseName.getStartTime() == 2030) {
                 row = 8;
             }
 
-
+//            if (!(jtblTuesday.getValueAt(row, 0).toString().isEmpty())) 
+//                    JOptionPane.showMessageDialog(frame, "The timeslot for this class is already taken");
+//              else
+//              {
+//                CourseNum += 1;
+//                if(CourseNum > 5) 
+//                     JOptionPane.showMessageDialog(frame, "You cannot take more than 5 classes");
+//                CourseNum -= 1;
+//              } 
 
             if (jtblTuesday.getValueAt(row, 0).toString().isEmpty() && CourseNum < 5) {
-                jtblTuesday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
-                jtblThursday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
-                DeletedCourses.addElement(temp);
+                jtblTuesday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
+                jtblThursday.setValueAt(courseName.getCourseName() + "\n" + courseName.getCrn() + "\n" + courseName.getProfessor(), row, 0);
+                DeletedCourses.addElement(courseName);
                 CourseNum += 1;
                 
-                newTimetable.setCourseName(temp.getCourseName());
-                newTimetable.setUsername(Student.currentStudent.getUsername());
-                newTimetable.setSem(Semester);
-                newTimetable.setTimetableName(timetableName);
-                roboController.AddTimetableToDB(newTimetable);
 
                 toReturn = true;
             } else {
@@ -1846,6 +1869,7 @@ public class RoboTest2View extends FrameView {
                 // into the Transcript table.
                 roboController.GetUserTranscriptFromDB(Student.currentStudent);
                 roboController.GetTimetablesFromDB(Student.currentStudent.getUsername());
+                //roboController.GetTimetablesFromDB("byUsername",Student.currentStudent.getUsername());
                 LoadTranscript();
             }
 
@@ -2114,6 +2138,11 @@ public class RoboTest2View extends FrameView {
 
 
         temp2 = (Course) jlistSchedule.getSelectedValue();
+        int index = 0;
+            for(int i = 0; i < DeletedCourses.getSize(); i++){
+                if(DeletedCourses.get(i).toString().equals(temp2.getCourseName()))
+                    index = i;
+            }
 
         if (temp2.getDays().equals("MWF")) {
             if (temp2.getStartTime() == 830) {
@@ -2144,7 +2173,8 @@ public class RoboTest2View extends FrameView {
                 row = 12;
             }
 
-            DeletedCourses.removeElement(temp2);
+           
+            DeletedCourses.remove(index);
             jtblMonday.setValueAt("", row, 0);
             jtblWednesday.setValueAt("", row, 0);
             jtblFriday.setValueAt("", row, 0);
@@ -2172,7 +2202,7 @@ public class RoboTest2View extends FrameView {
                 row = 8;
             }
 
-            DeletedCourses.removeElement(temp2);
+            DeletedCourses.remove(index);
             jtblTuesday.setValueAt("", row, 0);
             jtblThursday.setValueAt("", row, 0);
             CourseNum -= 1;
