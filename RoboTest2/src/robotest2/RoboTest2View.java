@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -252,6 +253,8 @@ public class RoboTest2View extends FrameView {
         jlistSchedule = new javax.swing.JList();
         jlistSchedule.setVisible(false);
         jbtnDeleteCourse = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jButton2 = new javax.swing.JButton();
         jpanelProfile = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -1030,6 +1033,12 @@ public class RoboTest2View extends FrameView {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setName("jComboBox1"); // NOI18N
+
+        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
+        jButton2.setName("jButton2"); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1047,13 +1056,13 @@ public class RoboTest2View extends FrameView {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jscrollFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jbtnAddCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-                        .addComponent(jbtnDeleteCourse, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnAddCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, 0, 0, Short.MAX_VALUE)
+                    .addComponent(jbtnDeleteCourse)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1061,17 +1070,14 @@ public class RoboTest2View extends FrameView {
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jpanelTimeBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jscrollFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jscrollMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jscrollTuesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jscrollWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jscrollThursday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addGap(87, 87, 87)
                         .addComponent(jbtnAddCourse)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1079,8 +1085,16 @@ public class RoboTest2View extends FrameView {
                         .addComponent(jbtnDeleteCourse)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1031, 1031, 1031)))
-                .addContainerGap())
+                        .addContainerGap(922, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jpanelTimeBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jscrollFriday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jscrollMonday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jscrollTuesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jscrollWednesday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jscrollThursday, javax.swing.GroupLayout.PREFERRED_SIZE, 859, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jscrollFriday, jscrollMonday, jscrollThursday, jscrollTuesday, jscrollWednesday});
@@ -1445,8 +1459,11 @@ public class RoboTest2View extends FrameView {
      * @author Kevin
      */
     private void jbtnRandomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRandomActionPerformed
+        Date date = new Date();
         Random rGen = new Random();
-        Course newCourse = new Course();
+        rGen.setSeed(date.getTime());
+        
+        Course newCourse;
         boolean canAddCourse = false; // Can we add the course to the timetable?
         int randomInt = rGen.nextInt(Course.CourseCatalog.size());
         newCourse = Course.CourseCatalog.get(randomInt);
@@ -1460,27 +1477,35 @@ public class RoboTest2View extends FrameView {
         }
         
         while (!canAddCourse) {
-            if (!AddCourse(newCourse.getCourseName())) {
-                canAddCourse = false;
+            if (!AddCourse(newCourse)) {
                 randomInt = rGen.nextInt(Course.CourseCatalog.size());
                 newCourse = Course.CourseCatalog.get(randomInt);
+                System.out.println("In addCourse loop if course = " + newCourse.getCourseName());
+                System.out.println("RandomInt = " + randomInt);
+                break;
+            } else {
+                System.out.println("In addCourse loop else");
+                canAddCourse = true;
+                break;
             }
         }
+        
 
     }//GEN-LAST:event_jbtnRandomActionPerformed
 
     private void jbtnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
-        AddCourse((String)jlistCourseList.getSelectedValue());
+       // String course = (String)jlistCourseList.getSelectedValue();
+        AddCourse((Course)jlistCourseList.getSelectedValue());
     }
 
-    private boolean AddCourse(String courseName){
+    private boolean AddCourse(Course courseName){
         // Khaled
-        Course temp = new Course(courseName);                                      // Decleration of local variables to use temporarly for function.
+        Course temp;           // Decleration of local variables to use temporarly for function.
         int row = 0;
         boolean toReturn = false;
-
-        temp = Course.CourseCatalog.get(Course.CourseCatalog.indexOf(temp));
-        //temp = (Course) jlistCourseList.getSelectedValue();
+        
+        //temp = Course.CourseCatalog.get(Course.CourseCatalog.indexOf(roboController.GetCourseFromDB(courseName.getCourseName())));
+        temp = (Course) jlistCourseList.getSelectedValue();
 
         if (temp.getDays().equals("MWF")) {                               //If then statement to determine the location a course should be put in
             if (temp.getStartTime() == 830) {
@@ -1511,16 +1536,15 @@ public class RoboTest2View extends FrameView {
                 row = 12;
             }
 
-
-
             if (jtblMonday.getValueAt(row, 0).toString().isEmpty() && CourseNum < 5) {      //puts the course info on the timetable. And checks the number of courses 
-                jtblMonday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
-                jtblWednesday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
-                jtblFriday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
+                jtblMonday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
+                jtblWednesday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
+                jtblFriday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
                 DeletedCourses.addElement(temp);                                        //Adds the course to the delete course list for future deletion
                 CourseNum += 1;
                 toReturn = true;// Keeps track of the number of courses
             } else {
+                System.out.println("Days(MWF) else");
                 toReturn = false;
             }
         }
@@ -1549,12 +1573,13 @@ public class RoboTest2View extends FrameView {
 
 
             if (jtblTuesday.getValueAt(row, 0).toString().isEmpty() && CourseNum < 5) {
-                jtblTuesday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
-                jtblThursday.setValueAt(temp.getCourseName() + "\n" + temp.getProfessor(), row, 0);
+                jtblTuesday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
+                jtblThursday.setValueAt(temp.getCourseName() + "\n" + temp.getCrn() + "\n" + temp.getProfessor(), row, 0);
                 DeletedCourses.addElement(temp);
                 CourseNum += 1;
                 toReturn = true;
             } else {
+                System.out.println("Days(TR) else");
                 toReturn = false;
             }
         }
@@ -1564,7 +1589,6 @@ public class RoboTest2View extends FrameView {
         return toReturn;
     }
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
         saveLabel.setVisible(true);
         jlistSchedule.setVisible(true);                                        //Updates the delete course list and makes sure its visible/enabled
         jlistSchedule.setModel(DeletedCourses);
@@ -1992,6 +2016,8 @@ public class RoboTest2View extends FrameView {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

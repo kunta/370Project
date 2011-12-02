@@ -160,6 +160,7 @@ public class Course implements Serializable {
         if (this.isSame(other)){
             return false;
         }
+        
         return true;
     }
 

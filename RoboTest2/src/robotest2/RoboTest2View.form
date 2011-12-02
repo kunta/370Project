@@ -649,16 +649,14 @@
                               <Component id="jscrollThursday" linkSize="1" min="-2" pref="23" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                               <Component id="jscrollFriday" linkSize="1" min="-2" pref="23" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" max="-2" attributes="1"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jbtnAddCourse" max="32767" attributes="1"/>
-                                      <Component id="jScrollPane1" alignment="0" min="-2" pref="102" max="-2" attributes="1"/>
-                                  </Group>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jScrollPane3" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
-                                      <Component id="jbtnDeleteCourse" alignment="0" min="-2" max="-2" attributes="1"/>
-                                  </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jButton2" max="32767" attributes="1"/>
+                                  <Component id="jbtnAddCourse" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane1" alignment="0" pref="102" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane3" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
+                                  <Component id="jbtnDeleteCourse" alignment="0" min="-2" max="-2" attributes="1"/>
+                                  <Component id="jComboBox1" alignment="0" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -666,18 +664,14 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Component id="jpanelTimeBar" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jscrollFriday" linkSize="3" min="-2" pref="859" max="-2" attributes="0"/>
-                                      <Component id="jscrollMonday" linkSize="3" alignment="0" min="-2" pref="859" max="-2" attributes="0"/>
-                                      <Component id="jscrollTuesday" linkSize="3" alignment="0" min="-2" pref="859" max="-2" attributes="0"/>
-                                      <Component id="jscrollWednesday" linkSize="3" alignment="0" min="-2" pref="859" max="-2" attributes="0"/>
-                                      <Component id="jscrollThursday" linkSize="3" alignment="0" min="-2" pref="859" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                                       <Component id="jbtnAddCourse" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -685,10 +679,20 @@
                                       <Component id="jbtnDeleteCourse" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="1031" pref="1031" max="1031" attributes="0"/>
+                                      <EmptySpace pref="922" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jpanelTimeBar" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jscrollFriday" linkSize="3" min="-2" pref="859" max="-2" attributes="0"/>
+                                          <Component id="jscrollMonday" linkSize="3" alignment="0" min="-2" pref="859" max="-2" attributes="0"/>
+                                          <Component id="jscrollTuesday" linkSize="3" alignment="0" min="-2" pref="859" max="-2" attributes="0"/>
+                                          <Component id="jscrollWednesday" linkSize="3" alignment="0" min="-2" pref="859" max="-2" attributes="0"/>
+                                          <Component id="jscrollThursday" linkSize="3" alignment="0" min="-2" pref="859" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1127,6 +1131,25 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnDeleteCourseActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JComboBox" name="jComboBox1">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="4">
+                            <StringItem index="0" value="Item 1"/>
+                            <StringItem index="1" value="Item 2"/>
+                            <StringItem index="2" value="Item 3"/>
+                            <StringItem index="3" value="Item 4"/>
+                          </StringArray>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="jComboBox1" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton2">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" resourceKey="jButton2.text"/>
+                        <Property name="name" type="java.lang.String" value="jButton2" noResource="true"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
