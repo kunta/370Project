@@ -383,6 +383,11 @@ public class RoboTest2View extends FrameView {
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setActionCommand(resourceMap.getString("jButton1.actionCommand")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanelLoginLayout = new javax.swing.GroupLayout(jpanelLogin);
         jpanelLogin.setLayout(jpanelLoginLayout);
@@ -1624,6 +1629,11 @@ public class RoboTest2View extends FrameView {
 //        }
         
     }//GEN-LAST:event_jbtnSwitchTimeActionPerformed
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    Student temp = roboController.GetStudentFromDB(jfieldUsername.getText());
+    sendMail.Send(temp.getEmail());
+}//GEN-LAST:event_jButton1ActionPerformed
 
     private void jbtnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
        // String course = (String)jlistCourseList.getSelectedValue();
