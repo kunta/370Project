@@ -218,7 +218,49 @@ public class RoboController extends Thread {
 
         return results;
     }
+    
+       /**
+     *
+     * @author Patrick from Kevin's template
+     */
+    public List<Timetable> GetTimetablesFromDB(String username) {
+        EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
+        List<Timetable> results = new LinkedList<Timetable>();
 
+        try {
+            eManager.getTransaction().begin();
+            Query timetableQ = (Query) eManager.createNamedQuery("Timetable.findByUsername").setParameter("username", username);
+            results = timetableQ.getResultList();
+            eManager.getTransaction().commit();
+        } catch (NoResultException e) {
+            System.out.println("Timetable doesn't exist in the database!");
+            eManager.getTransaction().rollback();
+        }
+
+        return results;
+    }
+    
+     /**
+     *
+     * @author Patrick using template from Kevin
+     */
+    public void AddTimetableToDB(Timetable newTimetable) {
+        EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
+
+        try {
+            eManager.getTransaction().begin();
+            eManager.persist(newTimetable);
+            eManager.getTransaction().commit();
+
+        } catch (NoResultException e) {
+            eManager.getTransaction().rollback();
+        }
+
+        eManager.close();
+
+    }
+
+    
     /**
      *
      * @author Kevin

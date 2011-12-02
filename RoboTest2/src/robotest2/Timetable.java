@@ -29,22 +29,22 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Timetable.findAll", query = "SELECT t FROM Timetable t"),
     @NamedQuery(name = "Timetable.findByUsername", query = "SELECT t FROM Timetable t WHERE t.username = :username"),
     @NamedQuery(name = "Timetable.findByCourseName", query = "SELECT t FROM Timetable t WHERE t.courseName = :courseName"),
-    @NamedQuery(name = "Timetable.findByTimetableID", query = "SELECT t FROM Timetable t WHERE t.timetableID = :timetableID"),
+    @NamedQuery(name = "Timetable.findByTimetableName", query = "SELECT t FROM Timetable t WHERE t.timetableName = :timetableName"),
     @NamedQuery(name = "Timetable.findByMajor", query = "SELECT t FROM Timetable t WHERE t.major = :major"),
     @NamedQuery(name = "Timetable.findByMajorClasses", query = "SELECT t FROM Timetable t WHERE t.majorClasses = :majorClasses"),
     @NamedQuery(name = "Timetable.findByCoreReqClasses", query = "SELECT t FROM Timetable t WHERE t.coreReqClasses = :coreReqClasses"),
     @NamedQuery(name = "Timetable.findByElectiveClasses", query = "SELECT t FROM Timetable t WHERE t.electiveClasses = :electiveClasses"),
     @NamedQuery(name = "Timetable.findById", query = "SELECT t FROM Timetable t WHERE t.id = :id"),
     @NamedQuery(name = "Timetable.findBySem", query = "SELECT t FROM Timetable t WHERE t.sem = :sem")})
-public class Timetable implements Serializable {
+    public class Timetable implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "username")
     private String username;
     @Column(name = "courseName")
     private String courseName;
-    @Column(name = "timetableID")
-    private String timetableID;
+    @Column(name = "timetableName")
+    private String timetableName;
     @Column(name = "major")
     private String major;
     @Column(name = "majorClasses")
@@ -92,12 +92,12 @@ public class Timetable implements Serializable {
         this.courseName = courseName;
     }
 
-    public String getTimetableID() {
-        return timetableID;
+    public String getTimetableName() {
+        return timetableName;
     }
 
-    public void setTimetableID(String timetableID) {
-        this.timetableID = timetableID;
+    public void setTimetableName(String timetableName) {
+        this.timetableName = timetableName;
     }
 
     public String getMajor() {
