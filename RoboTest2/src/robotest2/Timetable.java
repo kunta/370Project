@@ -67,12 +67,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     public Timetable() {
     }
 
-    public Timetable(Integer id) {
-        this.id = id;
+    public Timetable(String name) {
+        this.courseName = name;
     }
 
-    public Timetable(Integer id, String username) {
-        this.id = id;
+    public Timetable(String courseName, String username) {
+        this.courseName = courseName;
         this.username = username;
     }
 
@@ -162,8 +162,15 @@ import javax.xml.bind.annotation.XmlRootElement;
             return false;
         }
         Timetable other = (Timetable) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
+//        
+//        if (!this.timetableName.equals(other.timetableName)){
+//            return false;
+//        }
+//        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+//            return false;
+//        }
+        if (this.courseName.equals(other.courseName) && this.username.equals(other.username)){
+            return true;
         }
         return true;
     }

@@ -148,26 +148,27 @@ public class TimetblView extends javax.swing.JFrame {
         
           Timetable newTimetable = new Timetable();
 
-                if (jRadioButton1.isSelected()) {
-                    newTimetable.setSem(1);
-                } else {
-                    newTimetable.setSem(2);
-                }
+        if (jRadioButton1.isSelected()) {
+            RoboTest2View.sem = 1;
+        } else {
+            RoboTest2View.sem = 2;
+        }
 
-                if (!jTextField1.getText().isEmpty()) {
-                    newTimetable.setTimetableName(jTextField1.getText());
-                    Timetable.timetableNameList.add(jTextField1.getText());
-                /*    newTimetable.setUsername(Student.currentStudent.getUsername());
-                    newTimetable.setCourseName("null");
-                    newTimetable.setMajor("null");
-                    newTimetable.setMajorClasses("null");
-                    newTimetable.setCoreReqClasses("null");
-                    newTimetable.setElectiveClasses("null");
-                   */ roboControl.AddTimetableToDB(newTimetable);
-                    System.out.println("TEST");
+        if (!jTextField1.getText().isEmpty()) {
+            newTimetable.setTimetableName(jTextField1.getText());
+            Timetable.timetableNameList.add(jTextField1.getText());
+            RoboTest2View.timetableSelectModel.addElement((String) jTextField1.getText());
+            newTimetable.setUsername(Student.currentStudent.getUsername());
+            newTimetable.setCourseName("null");
+            newTimetable.setMajor("null");
+            newTimetable.setMajorClasses("null");
+            newTimetable.setCoreReqClasses("null");
+            newTimetable.setElectiveClasses("null");
+            Timetable.currentTimetables.add(newTimetable);
+            System.out.println("TEST");
 
-                }
-        
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
         

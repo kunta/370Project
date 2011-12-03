@@ -410,6 +410,26 @@ public class RoboController extends Thread {
      *
      * @author Kevin
      */
+    public void RemoveTimetableFromDB(Timetable t) {
+        EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
+
+        Timetable timeTwo = new Timetable(t.getCourseName(), t.getUsername());
+        try {
+            eManager.getTransaction().begin();
+            timeTwo = eManager.merge(t);
+            eManager.remove(timeTwo);
+            eManager.getTransaction().commit();
+
+        } catch (NoResultException e) {
+            eManager.getTransaction().rollback();
+        }
+
+        eManager.close();
+    }
+    /**
+     *
+     * @author Kevin
+     */
     public void RemoveCourseFromDB(Course newCourse) {
         EntityManager eManager = Persistence.createEntityManagerFactory("cmpt370group06PU").createEntityManager();
 

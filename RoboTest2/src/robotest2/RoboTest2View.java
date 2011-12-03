@@ -52,8 +52,9 @@ public class RoboTest2View extends FrameView {
     DefaultListModel electiveModel = new DefaultListModel();
     DefaultListModel DeletedCourses = new DefaultListModel();   //List for deleted courses. Had to be cross functions.
     JFrame frame = new JFrame("Message");
-    DefaultComboBoxModel timetableSelectModel = new DefaultComboBoxModel();
+    static DefaultComboBoxModel timetableSelectModel = new DefaultComboBoxModel();
     int CourseNum = 0;
+    static int sem = 1;
     int Semester = 1;
 
     public RoboTest2View(SingleFrameApplication app) {
@@ -263,6 +264,7 @@ public class RoboTest2View extends FrameView {
         jbtnDeleteCourse = new javax.swing.JButton();
         jcomboTimetable = new javax.swing.JComboBox();
         jbtnSwitchTime = new javax.swing.JButton();
+        jbtnSaveSchedule = new javax.swing.JButton();
         jpanelProfile = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -1067,6 +1069,14 @@ public class RoboTest2View extends FrameView {
             }
         });
 
+        jbtnSaveSchedule.setText(resourceMap.getString("jbtnSaveSchedule.text")); // NOI18N
+        jbtnSaveSchedule.setName("jbtnSaveSchedule"); // NOI18N
+        jbtnSaveSchedule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSaveScheduleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1089,8 +1099,9 @@ public class RoboTest2View extends FrameView {
                     .addComponent(jbtnAddCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, 0, 0, Short.MAX_VALUE)
-                    .addComponent(jbtnDeleteCourse)
-                    .addComponent(jcomboTimetable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jcomboTimetable, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnSaveSchedule, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnDeleteCourse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1104,7 +1115,9 @@ public class RoboTest2View extends FrameView {
                         .addComponent(jcomboTimetable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnSwitchTime)
-                        .addGap(98, 98, 98)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnSaveSchedule)
+                        .addGap(63, 63, 63)
                         .addComponent(jbtnAddCourse)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1517,11 +1530,13 @@ public class RoboTest2View extends FrameView {
 
     private void jbtnSwitchTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSwitchTimeActionPerformed
         ClearTimetable();
-        //List<Timetable> results = roboController.GetTimetablesFromDB("id", (String) jcomboTimetable.getSelectedItem());
 
-        for (Timetable t : Timetable.currentTimetables) {
-            if ((String) jcomboTimetable.getSelectedItem() == t.getTimetableName() ) {
-                Course newCourse = new Course(t.getCourseName());
+        List<Timetable> results = new LinkedList<Timetable>();
+        results = roboController.GetTimetablesFromDB(Student.currentStudent.getUsername());
+        
+        for (Timetable t : results) {
+            if (jcomboTimetable.getSelectedItem().toString().equals(t.getTimetableName())) {
+                Course newCourse = roboController.GetCourseFromDB(t.getCourseName());
                 AddCourse(newCourse);
             }
         }
@@ -1533,9 +1548,58 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     sendMail.Send(temp.getEmail());
 }//GEN-LAST:event_jButton1ActionPerformed
 
+private void jbtnSaveScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveScheduleActionPerformed
+    // Remove all the timetables so we can save the new ones. Due to time
+    // constraints this is the easiest way.
+    RemoveTimetables();
+    
+    for (int i = 0; i < DeletedCourses.getSize(); i++) {
+        Timetable newTime = new Timetable();
+        int index = 0;
+        
+        System.out.println("Course: " + DeletedCourses.get(i).toString());
+
+        newTime.setUsername(Student.currentStudent.getUsername());
+        newTime.setTimetableName(jcomboTimetable.getSelectedItem().toString());
+
+        // These attributes aren't actually used for anything but due to time
+        // constraints it's easier to set them to null than delete them(which
+        // would require deleting the Timetable class and re-adding it with
+        // new attributes).
+
+            newTime.setCourseName(DeletedCourses.get(i).toString());
+            newTime.setCoreReqClasses("null");
+            newTime.setElectiveClasses("null");
+            newTime.setMajorClasses("null");
+            newTime.setMajor(Student.currentStudent.getProgramMajor());
+            newTime.setSem(RoboTest2View.sem);
+
+            System.out.println("In If timetable name = " + newTime.getTimetableName() + "\n"
+                    + newTime.getSem());
+
+
+        System.out.println("Database");
+        roboController.AddTimetableToDB(newTime);
+
+
+
+    }
+}//GEN-LAST:event_jbtnSaveScheduleActionPerformed
+
+private void RemoveTimetables() {
+    String timeName = jcomboTimetable.getSelectedItem().toString();
+    List<Timetable> results = new LinkedList<Timetable>();
+    
+    results = roboController.GetTimetablesFromDB(Student.currentStudent.getUsername());
+    for(Timetable t: results){
+        if(t.getTimetableName().equals(timeName)){
+            roboController.RemoveTimetableFromDB(t);
+        }
+    }
+}
     private void jbtnAddCourseActionPerformed(java.awt.event.ActionEvent evt) {
-       // String course = (String)jlistCourseList.getSelectedValue();
-        if (!AddCourse((Course)jlistCourseList.getSelectedValue())){
+        // String course = (String)jlistCourseList.getSelectedValue();
+        if (!AddCourse((Course) jlistCourseList.getSelectedValue())) {
             JOptionPane.showMessageDialog(frame, "The timeslot for this class is already taken or the timetable is full!");
         }
     }
@@ -2170,6 +2234,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton jbtnRegister;
     private javax.swing.JButton jbtnRegisterUser;
     private javax.swing.JButton jbtnSave;
+    private javax.swing.JButton jbtnSaveSchedule;
     private javax.swing.JButton jbtnSwitchTime;
     private javax.swing.JCheckBox jcheckAddTranscript;
     private javax.swing.JCheckBox jcheckAdmin;
